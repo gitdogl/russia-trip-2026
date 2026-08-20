@@ -3,988 +3,978 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>俄罗斯三城修正版旅行计划 · 2026-08-28</title>
+  <title>莫斯科·索契·圣彼得堡旅行计划</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root{--bg:#10151d;--panel:#18212b;--panel2:#202c37;--text:#f2f5f4;--muted:#a6b4b7;--accent:#f6b35c;--accent2:#67d3c1;--danger:#ff8f76;--line:#31414a;--shadow:0 18px 50px rgba(0,0,0,.22)}
     *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top right,#253845 0,#10151d 42%);color:var(--text);font:15px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif} a{color:inherit} .wrap{width:min(960px,calc(100% - 28px));margin:auto}.hero{position:relative;overflow:hidden;padding:42px 0 30px;border-bottom:1px solid var(--line)}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,21,29,.96) 0 52%,rgba(16,21,29,.35));pointer-events:none}.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.hero h1{font:700 clamp(30px,6vw,58px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:.02em;margin:12px 0}.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}.hero p{color:#d5dfdf;max-width:580px}.hero-image{width:100%;height:240px;object-fit:cover;display:block;border-radius:18px;box-shadow:var(--shadow);opacity:.9}.section{padding:32px 0}.section h2{font:700 28px/1.2 Georgia,serif;margin:0 0 16px}.section h3{margin:0 0 8px}.grid{display:grid;gap:14px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{background:linear-gradient(145deg,rgba(32,44,55,.98),rgba(24,33,43,.98));border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}.card p{margin:6px 0;color:var(--muted)}.label{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;background:#2b3b45;color:#d6e9e4;font-size:12px}.accent{color:var(--accent)}.danger{color:var(--danger)}.muted{color:var(--muted)}.todo-item{list-style:none;display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line)}.todo-item input{accent-color:var(--accent)}.todo-deadline{color:var(--accent);font-variant-numeric:tabular-nums}.source-note{font-size:12px;color:#91a7aa;margin-top:10px}.warning{border-left:3px solid var(--danger);padding:10px 14px;background:rgba(255,143,118,.08);color:#ffd3c7;border-radius:8px}.flight{position:relative}.flight.selected{border-color:var(--accent);box-shadow:0 0 0 1px rgba(246,179,92,.35),var(--shadow)}.flight .price{font-size:25px;font-weight:800;color:var(--accent)}.flight .route{font-weight:700}.flight .segments{margin:12px 0 0;padding-left:18px}.flight .segments li{margin:5px 0}.btn{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:8px;background:var(--accent);color:#1d1b17;text-decoration:none;font-weight:700}.hero-badges{display:flex;flex-wrap:wrap;gap:8px}.hotel-options{display:grid;gap:8px}.hotel-option{border-top:1px solid var(--line);padding-top:9px}.hotel-option strong{display:block}.photo{height:150px;border-radius:10px;overflow:hidden;background:#2c3a42;margin:-2px -2px 12px;position:relative}.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.photo span{position:absolute;inset:auto 10px 8px;color:#fff;font-weight:700;text-shadow:0 1px 4px #000}.timeline{display:grid;gap:16px}.day{border-left:2px solid var(--accent2);padding-left:18px}.day-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.day-date{color:var(--accent2);font-weight:800}.slot{margin-top:12px;display:grid;grid-template-columns:150px 1fr;gap:14px}.slot .meta{color:var(--accent);font-weight:700}.slot h3{margin:0}.slot p{margin:3px 0;color:var(--muted)}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.alternative{background:rgba(103,211,193,.08);border:1px solid rgba(103,211,193,.3);border-radius:10px;padding:10px;margin-top:10px}.meal{padding:10px 0;border-top:1px solid var(--line)}.meal:first-child{border-top:0}.meal strong{color:#f2d39c}.meal ul{margin:4px 0 0 20px;color:var(--muted)}#map{height:420px;border-radius:14px;border:1px solid var(--line);overflow:hidden;background:#25333a}.map-fallback{padding:20px;color:var(--muted)}.disclaimer{font-size:13px;color:#c3cdce}.footer{padding:28px 0 50px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
     @media (max-width:767px){.wrap{width:min(480px,calc(100% - 22px))}.hero{padding-top:28px}.hero-inner{grid-template-columns:1fr}.hero-image{height:180px}.grid-2,.grid-3{grid-template-columns:1fr}.section{padding:24px 0}.slot{grid-template-columns:1fr;gap:4px}.slot .meta{font-size:13px}.day-head{display:block}.card{padding:15px}#map{height:330px}}
     @media (min-width:768px){.section:nth-of-type(even){background:rgba(255,255,255,.015);margin-left:calc((960px - 100vw)/2);margin-right:calc((960px - 100vw)/2);padding-left:max(14px,calc((100vw - 960px)/2));padding-right:max(14px,calc((100vw - 960px)/2))}}
+    .transport-status{color:var(--muted);font-size:13px;margin:-4px 0 14px}.transport-option{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}.transport-option:first-child{border-top:0;padding-top:0;margin-top:0}
   </style>
 </head>
 <body>
-  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">Russia / reviewed itinerary</div><h1>莫斯科 · 索契 · 圣彼得堡</h1><p>2026 年 8 月 28 日出发的修正版。按飞猪实时结果重排：先解决航班可行性，再安排城市节奏。</p><div class="hero-badges"><span class="label">3 人同行</span><span class="label">10 个自然日</span><span class="label">9 晚住宿（含北京中转）</span><span class="label">文字行程离线可读</span></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
+  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">Russia · 2026</div><h1>莫斯科 · 索契 · 圣彼得堡</h1><p>8 月 28 日从合肥出发，10 天俄罗斯三城自由行。</p><div class="hero-badges"><span class="label">3 人同行</span><span class="label">10 个自然日</span><span class="label">北京一晚中转</span></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
   <main>
-    <section class="section"><div class="wrap"><h2>出发前待办</h2><div class="card" id="checklist"></div><p class="source-note">提醒日期按 2026-08-28 倒推；已过期项目会保留显示，方便判断是否需要马上处理。</p></div></section>
-    <section class="section"><div class="wrap"><h2>先看结论</h2><div class="grid grid-3"><div class="card"><span class="label">最低票价组合 · 查询快照</span><h3 class="accent">¥2,281 / 人起</h3><p>8/28 合肥南高铁到北京南，次日从大兴经叶卡捷琳堡到莫斯科；另加中转住宿与转场。</p></div><div class="card"><span class="label">飞猪查询快照 · 返程</span><h3 class="accent">¥3,095 / 人</h3><p>9/6 圣彼得堡 → 叶卡捷琳堡 → 北京大兴 → 合肥，9/7 到达。</p></div><div class="card"><span class="label">复核结论</span><h3 class="danger">不可照搬原稿</h3><p>日期星期写错；原 CA 往返未检出；索契到圣彼得堡没有 9/4 直飞。</p></div></div><p class="source-note">航班查询快照：2026-07-27（北京时间）。飞猪链接是带航班筛选条件的动态结果页，打开后会重新查库存和价格，不是锁价订单。</p></div></section>
+    <section class="section"><div class="wrap"><h2>出发前待办</h2><div class="card" id="checklist"></div></div></section>
+    
     <section class="section"><div class="wrap"><h2>行前须知</h2><div class="grid grid-2"><div class="card"><h3>天气与穿搭</h3><p>8 月末至 9 月初：莫斯科、圣彼得堡偏凉，昼夜温差明显；索契仍偏暖。按“短袖 + 薄外套 + 防雨层”准备，舒适鞋优先。</p><p class="muted">出发前 72 小时重新查三城预报；雨具、充电宝、护照复印件放随身包。</p></div><div class="card"><h3>支付与 App</h3><p>俄罗斯银行卡受限情况可能变化，不能只依赖单一支付方式。准备少量现金、确认可用银行卡与境外支付能力。</p><p class="muted">建议：离线翻译、地图、航司 App、打车/叫车工具；提前下载俄语地址截图。</p></div><div class="card"><h3>签证与入境</h3><p>是否免签、停留天数、转机入境及保险要求，以出发时中国外交/俄方官方渠道为准。莫斯科落地后按俄罗斯入境要求办理，不把北京中转当作入境。</p></div><div class="card"><h3>最关键的购票规则</h3><p>去程三段和返程三段都要在付款页确认是否同一票号、是否行李直挂、错失衔接由谁负责。最低价不等于联程保障。</p></div></div></div></section>
-    <section class="section"><div class="wrap"><h2>航班复核与候选</h2><div id="flights" class="grid"></div><div class="warning"><strong>价格与链接说明：</strong>本页金额是飞猪 FlyAI 在 2026-07-27 查询到的价格快照。按钮会打开飞猪动态结果页，价格、库存、税费和可售舱位可能立即变化；你截图中的 ¥13,665 就是重新查询后的结果，不能用旧快照下单。请以付款页为准。<br><strong>原稿修正：</strong>“周五 8.29”不适用于 2026 年；CA1820/CA753、CA754/CA1813 也没有在本次飞猪查询中得到确认。不能按原稿直接下单。</div><div class="card disclaimer"><strong>航班免责声明：</strong>票价、库存、航班时刻、行李规则和联程保障均可能变化。链接来自飞猪实时返回结果，请在付款页重新核对。</div></div></section>
+    <section class="section"><div class="wrap"><h2>交通规划</h2><p class="transport-status" id="transport-status">尚未生成 Go-home 交通快照。</p><div id="flights" class="grid"></div><p class="source-note">数据由本地脚本调用 Go-home 的携程机票 MCP 与 12306 MCP 后生成。网页不会自动查询；需要更新时运行“更新交通并同步GitHub.ps1”。</p></div></section>
     <section class="section"><div class="wrap"><h2>路线地图</h2><div id="map"><div class="map-fallback">地图需要联网加载；下方时间轴和核对清单可离线阅读。</div></div></div></section>
-    <section class="section"><div class="wrap"><h2>住宿片区</h2><div id="hotels" class="grid grid-2"></div><div class="card disclaimer"><strong>住宿免责声明：</strong>房价为飞猪候选或公开资料参考，不是锁定价；入住人数、税费、取消政策和付款限制请在详情页确认。</div></div></section>
-    <section class="section"><div class="wrap"><h2>每日时间轴</h2><div id="timeline" class="timeline"></div></div></section>
-    <section class="section"><div class="wrap"><h2>全程贴士</h2><div class="card"><ul id="tips"></ul></div></div></section>
+    <section class="section"><div class="wrap"><h2>住宿片区</h2><div id="hotels" class="grid grid-2"></div></div></section>
+    <section class="section"><div class="wrap"><h2>每日时间轴</h2><p class="source-note">时间轴只保留城市游玩顺序。车次、航班、价格和抵离时刻请以“实时交通规划”的 Go-home 查询结果为准。</p><div id="timeline" class="timeline"></div></div></section>
+    <section class="section"><div class="wrap"><h2>出行提醒</h2><div class="card"><ul id="tips"></ul></div></div></section>
   </main>
-  <footer class="footer"><div class="wrap"><p class="disclaimer" id="disclaimer">本页所有天气、航班、酒店、餐厅、景点、门票、价格、营业时间、评分和交通安排，均为 AI 基于豆包初版规划、飞猪 FlyAI 实时返回及公开资料整理的参考信息，可能不准确、变动或已过时；飞猪来源数据的实时性与真实性由其官方服务负责，本页只做复核与呈现。请务必在航司、飞猪、酒店、俄罗斯及中国官方渠道、地图 App 中核实后再付款或前往，特别确认联程票号、行李直挂、转机入境、签证、取消改签和机场变更规则。</p><p>这份页面是修正版参考计划，不是代订凭证。之后可把 HTML 文件丢回来，直接说“把第三天的 X 挪到第四天”，我会从内嵌的 trip-data 继续修改。</p></div></footer>
+  <footer class="footer"><div class="wrap"><p class="disclaimer" id="disclaimer">价格、库存、开放时间和交通以航空公司、购票平台、酒店与景点官方信息为准。</p></div></footer>
 
   <script id="trip-data" type="application/json">
-  {
-    "title":  "莫斯科·索契·圣彼得堡 2026-08-28 修正版",
-    "startDate":  "2026-08-28",
-    "colorScheme":  "midnight-copper",
-    "preTrip":  {
-                    "weather":  {
-                                    "summary":  "8 月末至 9 月初三城温差明显：莫斯科与圣彼得堡偏凉，索契仍偏暖；天气为季节参考，出发前 72 小时重查。",
-                                    "typhoon":  "俄罗斯不按中国台风季逻辑安排；重点关注降雨、低温、航班延误与机场运行。"
-                                },
-                    "packing":  "短袖、薄外套、防雨层、舒适鞋；护照及复印件、充电宝、常用药随身携带。",
-                    "payment":  "不要只依赖单一银行卡；准备少量现金，确认境外支付、取现和退款渠道。",
-                    "apps":  [
-                                 "离线翻译",
-                                 "地图与离线地址",
-                                 "航司 App",
-                                 "打车/叫车工具"
-                             ],
-                    "ticketTip":  "去程采取“高铁 + 两段机票”分票：高铁 G58 与 U6776/U6270 均须单独确认。没有行李直挂、误机保障或自动改签；付款页显示价格为准。"
-                },
-    "flights":  {
-                    "booked":  [
-
-                               ],
-                    "candidates":  [
-                                       {
-                                           "label":  "去程｜最低票价组合：高铁到北京后起飞",
-                                           "code":  "G58 + U6776 + U6270",
-                                           "time":  "8/28 19:58 合肥南→23:35 北京南；8/29 10:55 PKX→14:30 SVX；20:30 SVX→21:00 DME",
-                                           "note":  "查询快照：G58 二等座 ¥442.5 + U6776/U6270 机票 ¥1,838 = ¥2,280.5/人（2026-07-27），不含北京南→大兴转场和过夜住宿。票面比合肥联程飞快照低约 ¥347.5；这是分票方案，无行李直挂和误机保障。",
-                                           "actionLinks":  [
-                                                               {
-                                                                   "label":  "打开高铁 G58 实时复核",
-                                                                   "url":  "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1lJwv1"
-                                                               },
-                                                               {
-                                                                   "label":  "打开机票实时复核",
-                                                                   "url":  "https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4O1sgd"
-                                                               }
-                                                           ],
-                                           "selected":  true
-                                       },
-                                       {
-                                           "label":  "莫斯科→索契｜直飞",
-                                           "code":  "DP113",
-                                           "time":  "9/1 13:15 VKO→16:55 AER",
-                                           "note":  "飞猪查询快照约 ¥965（2026-07-27）；直飞约 3小时40分。需要从莫斯科住宿区前往伏努科沃机场，链接会实时刷新。",
-                                           "actionLink":  {
-                                                              "label":  "打开飞猪实时复核",
-                                                              "url":  "https://a.feizhu.com/1FYdVN"
-                                                          }
-                                       },
-                                       {
-                                           "label":  "索契→圣彼得堡｜修正版可行方案",
-                                           "code":  "U6186 + S71005",
-                                           "time":  "9/4 03:30 AER→07:05 DME；12:10 DME→13:45 LED",
-                                           "note":  "飞猪查询快照约 ¥1,705（2026-07-27）；同一莫斯科机场 DME 转机，凌晨出发、等待约 5 小时；原稿的“午间直飞”未检出，链接会实时刷新。",
-                                           "actionLink":  {
-                                                              "label":  "打开飞猪实时复核",
-                                                              "url":  "https://a.feizhu.com/12uzCI"
-                                                          }
-                                       },
-                                       {
-                                           "label":  "返程｜修正版",
-                                           "code":  "U6173 + U6775 + CZ8955",
-                                           "time":  "9/6 17:15 LED→22:00 SVX；9/7 00:40 SVX→09:55 PKX；13:00 PKX→14:45 HFE",
-                                           "note":  "飞猪查询快照约 ¥3,095（2026-07-27）；9/7 下午抵达合肥。原稿 CA754 + CA1813 未检出，链接会实时刷新。",
-                                           "actionLink":  {
-                                                              "label":  "打开飞猪实时复核",
-                                                              "url":  "https://a.feizhu.com/3Zqeha"
-                                                          }
-                                       },
-                                       {
-                                           "label":  "去程备选｜青岛转机",
-                                           "code":  "JD5390 + JD495",
-                                           "time":  "8/28 16:00 HFE→17:20 TAO；8/29 14:00 TAO→18:35 SVO",
-                                           "note":  "飞猪查询快照约 ¥3,770（2026-07-27）；少一次国际转机，但青岛过夜，需确认行李与联程保障，链接会实时刷新。",
-                                           "actionLink":  {
-                                                              "label":  "打开飞猪实时复核",
-                                                              "url":  "https://a.feizhu.com/4AboVr"
-                                                          }
-                                       }
-                                   ]
-                },
-    "hotelAreas":  [
-                       {
-                           "area":  "北京南站｜一晚中转",
-                           "reason":  "G58 23:35 抵达北京南，次日 10:55 从大兴起飞。为最低票价方案，住北京南周边更实惠；次日建议 07:15 前出发前往 PKX。",
-                           "options":  [
-                                           {
-                                               "tier":  "经济",
-                                               "name":  "北京南站周边快捷酒店",
-                                               "priceRange":  "参考 ¥200–350/晚",
-                                               "note":  "晚到方便，次日早起转大兴。"
-                                           },
-                                           {
-                                               "tier":  "中档",
-                                               "name":  "北京南站周边商务酒店",
-                                               "priceRange":  "参考 ¥350–550/晚",
-                                               "note":  "三人可优先找三人房或可加床房。"
-                                           },
-                                           {
-                                               "tier":  "高端",
-                                               "name":  "大兴机场周边酒店",
-                                               "priceRange":  "参考 ¥500+/晚",
-                                               "note":  "仅在晚间转场顺利时考虑，通常不利于压低总价。"
-                                           }
-                                       ]
-                       },
-                       {
-                           "area":  "莫斯科｜红场—特列季亚科夫区",
-                           "reason":  "红场、克里姆林宫和河岸集中，适合两天步行与地铁；晚到 DME 不建议住太偏。",
-                           "options":  [
-                                           {
-                                               "tier":  "经济",
-                                               "name":  "特雷特雅科夫斯卡娅 InterQUBE 胶囊酒店",
-                                               "priceRange":  "飞猪候选约 ¥220/晚",
-                                               "note":  "近红场，适合压预算。",
-                                               "actionLink":  {
-                                                                  "label":  "查看酒店",
-                                                                  "url":  "https://a.feizhu.com/2qDug0"
-                                                              }
-                                           },
-                                           {
-                                               "tier":  "中档",
-                                               "name":  "市中心公寓/商务酒店",
-                                               "priceRange":  "参考 ¥450–800/晚",
-                                               "note":  "三人同行优先找可加床或整套公寓。"
-                                           },
-                                           {
-                                               "tier":  "高端",
-                                               "name":  "红场周边高端酒店",
-                                               "priceRange":  "参考 ¥1,200+/晚",
-                                               "note":  "步行便利，但不作为省钱方案。"
-                                           }
-                                       ]
-                       },
-                       {
-                           "area":  "索契｜中央滨海区",
-                           "reason":  "去斯大林别墅、植物园、海岸线和奥林匹克公园都较方便，统一打车更适合三人。",
-                           "options":  [
-                                           {
-                                               "tier":  "经济",
-                                               "name":  "中央区公寓/民宿",
-                                               "priceRange":  "参考 ¥350–650/晚",
-                                               "note":  "重点看空调、洗衣和晚到入住。"
-                                           },
-                                           {
-                                               "tier":  "中档",
-                                               "name":  "中央滨海商务酒店",
-                                               "priceRange":  "参考 ¥650–1,000/晚",
-                                               "note":  "适合三人分摊，减少跨区移动。"
-                                           },
-                                           {
-                                               "tier":  "高端",
-                                               "name":  "海滨度假酒店",
-                                               "priceRange":  "参考 ¥1,200+/晚",
-                                               "note":  "适合把预算放在海景和度假设施。"
-                                           }
-                                       ]
-                       },
-                       {
-                           "area":  "圣彼得堡｜涅瓦大街—海军部区",
-                           "reason":  "冬宫、喀山大教堂、滴血教堂和购物动线集中，返程去 LED 也较顺。",
-                           "options":  [
-                                           {
-                                               "tier":  "经济",
-                                               "name":  "涅瓦大街周边公寓/胶囊酒店",
-                                               "priceRange":  "参考 ¥350–650/晚",
-                                               "note":  "确认电梯、行李寄存和晚间入住。"
-                                           },
-                                           {
-                                               "tier":  "中档",
-                                               "name":  "海军部区商务酒店",
-                                               "priceRange":  "参考 ¥650–1,000/晚",
-                                               "note":  "适合把景点压缩在步行范围。"
-                                           },
-                                           {
-                                               "tier":  "高端",
-                                               "name":  "冬宫周边高端酒店",
-                                               "priceRange":  "参考 ¥1,200+/晚",
-                                               "note":  "位置优先，房价不作为实时承诺。"
-                                           }
-                                       ]
-                       }
-                   ],
-    "disclaimer":  "本页所有天气、航班、酒店、餐厅、景点、门票、价格、营业时间、评分和交通安排，均为 AI 基于豆包初版规划、飞猪 FlyAI 查询快照及公开资料整理的参考信息，可能不准确、变动或已过时；飞猪 jumpUrl 是动态结果页，打开后会重新查询库存与价格，不是锁价订单；飞猪来源数据的实时性与真实性由其官方服务负责，本页只做复核与呈现。请务必在航司、飞猪、酒店、俄罗斯及中国官方渠道、地图 App 中核实后再付款或前往，特别确认联程票号、行李直挂、转机入境、签证、取消改签和机场变更规则。",
-    "dataSources":  [
-                        {
-                            "name":  "飞猪 FlyAI",
-                            "scope":  "航班查询快照、部分景点与酒店候选、官方动态跳转链接（查询日 2026-07-27）",
-                            "realtime":  true
-                        },
-                        {
-                            "name":  "豆包初版规划",
-                            "scope":  "原始城市偏好、年假框架和预算方向",
-                            "realtime":  false
-                        }
-                    ],
-    "tips":  [
-                 "2026-08-29 是周六，不是周五；本页面按你之前明确的 8/28 下午出发重排。",
-                 "最低票价去程为高铁 G58 到北京南后，次日从北京大兴飞莫斯科。它是分票方案，需自行安排北京南住宿和次日转场，误车/误机不受联程保护。",
-                 "索契到圣彼得堡没有检出的 9/4 直飞；修正版凌晨经 DME，若不接受凌晨航班，应删掉一个城市，不要硬塞。",
-                 "三人同行优先整套公寓或三人房；机场、阿洪山、彼得宫城等长距离点统一打车更省事。",
-                 "按 2026-07-27 查询快照：去程高铁+机票 ¥2,280.5、莫斯科到索契 ¥965、索契到圣彼得堡 ¥1,705、返程 ¥3,095，合计约 ¥8,045.5/人；另加北京住宿与北京南到大兴转场。"
-             ],
-    "reminders":  [
-                      {
-                          "item":  "确认 G58、U6776、U6270 三张分票及北京南住宿/次日转大兴路线",
-                          "leadDays":  45
-                      },
-                      {
-                          "item":  "确认返程三段是否联程、行李直挂及 9/7 到达合肥",
-                          "leadDays":  45
-                      },
-                      {
-                          "item":  "确认莫斯科→索契 DP113 与机场交通",
-                          "leadDays":  30
-                      },
-                      {
-                          "item":  "确认索契→圣彼得堡凌晨经 DME 的同机场转机规则",
-                          "leadDays":  30
-                      },
-                      {
-                          "item":  "锁定北京、莫斯科、索契、圣彼得堡住宿",
-                          "leadDays":  30
-                      },
-                      {
-                          "item":  "预订/核实冬宫、彼得宫城与射击体验",
-                          "leadDays":  7
-                      }
-                  ],
-    "days":  [
-                 {
-                     "date":  "2026-08-28",
-                     "weekday":  "周五",
-                     "theme":  "出发日 · 高铁到北京南过夜",
-                     "tips":  [
-                                  "最低票价组合需 8/28 晚抵达北京南，住一晚后次日去大兴机场；不要把高铁和机票当作联程。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "evening",
-                                       "name":  "合肥南站 → 北京南站 · G58",
-                                       "time":  "19:58–23:35",
-                                       "lat":  31.85,
-                                       "lng":  117.219,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "最低票价组合的第一段，高铁二等座查询快照 ¥442.5。",
-                                       "openingHours":  "按车站检票时间",
-                                       "ticketPrice":  "高铁二等座查询快照 ¥442.5（2026-07-27）",
-                                       "transport":  {
-                                                         "mode":  "高铁",
-                                                         "fare":  "¥442.5/人",
-                                                         "duration":  "217 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  45
-                                   },
-                                   {
-                                       "period":  "late night",
-                                       "name":  "北京南站周边 · 中转住宿",
-                                       "time":  "23:35 后",
-                                       "lat":  39.865,
-                                       "lng":  116.379,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "深夜抵达后就近入住；次日建议 07:15 前出发前往大兴机场。",
-                                       "openingHours":  "按酒店政策",
-                                       "ticketPrice":  "酒店参考 ¥200–550/晚",
-                                       "transport":  {
-                                                         "mode":  "步行/短途打车",
-                                                         "fare":  "参考 ¥20–60/车",
-                                                         "duration":  "约 5–20 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  30
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "合肥南站或北京南站周边",
-                                        "hours":  "以当天营业为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "简单热食",
-                                                           "price":  "参考 ¥40–80/人"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-08-29",
-                     "weekday":  "周六",
-                     "theme":  "抵达日 · 叶卡捷琳堡转机后到莫斯科",
-                     "tips":  [
-                                  "不要安排阿尔巴特大街；21:00 到 DME 后还要入境、取行李和进城。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "北京大兴 PKX → 叶卡捷琳堡 SVX · U6776",
-                                       "time":  "10:55–14:30",
-                                       "lat":  56.743,
-                                       "lng":  60.803,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "分票国际段；从北京南站周边住宿出发，建议 07:15 前抵达大兴。高铁和机票无联程保护。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "机票查询快照 ¥1,838；与 G58 合计 ¥2,280.5（2026-07-27）",
-                                       "transport":  {
-                                                         "mode":  "地铁 + 大兴机场线",
-                                                         "fare":  "参考 ¥40–80/人",
-                                                         "duration":  "约 60–90 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  45
-                                   },
-                                   {
-                                       "period":  "evening",
-                                       "name":  "叶卡捷琳堡 SVX → 莫斯科 DME · U6270",
-                                       "time":  "20:30–21:00",
-                                       "lat":  55.409,
-                                       "lng":  37.907,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "到达莫斯科已晚，入住后休息。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "机票查询快照已纳入 ¥1,838",
-                                       "transport":  {
-                                                         "mode":  "机场到市区",
-                                                         "fare":  "参考 ¥150–300/车",
-                                                         "duration":  "约 60–90 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  45
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "DME 或住宿附近",
-                                        "hours":  "以到达时间为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "热汤/烤肉类简餐",
-                                                           "price":  "参考 ¥80–150/人"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-08-30",
-                     "weekday":  "周日",
-                     "theme":  "莫斯科核心 · 红场与克里姆林宫",
-                     "tips":  [
-                                  "把户外集中在上午和傍晚，博物馆/商场作为午后缓冲。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "红场",
-                                       "time":  "09:30–12:00",
-                                       "lat":  55.753932,
-                                       "lng":  37.620792,
-                                       "photo":  "https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa",
-                                       "rating":  4.7,
-                                       "review":  "城市地标密集，适合与圣瓦西里主教座堂、国家历史博物馆连走。",
-                                       "openingHours":  "广场全天可到",
-                                       "ticketPrice":  "免费；周边馆票价另计",
-                                       "transport":  {
-                                                         "mode":  "地铁 + 步行",
-                                                         "fare":  "参考 ¥10–30",
-                                                         "duration":  "约 30–60 分钟"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   },
-                                   {
-                                       "period":  "noon",
-                                       "name":  "克里姆林宫",
-                                       "time":  "13:30–17:00",
-                                       "lat":  55.750954,
-                                       "lng":  37.617576,
-                                       "photo":  "https://img.alicdn.com/imgextra/i1/O1CN017jBlOt1zblGHiUUrn_!!0-alitrip.jpg",
-                                       "rating":  4.7,
-                                       "review":  "政治与历史建筑群，需预留安检和预约时间。",
-                                       "openingHours":  "以官方当日场次为准",
-                                       "ticketPrice":  "门票参考，非实时",
-                                       "transport":  {
-                                                         "mode":  "红场步行",
-                                                         "fare":  "免费",
-                                                         "duration":  "约 10 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  7
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "午餐",
-                                        "place":  "红场周边俄式餐厅",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "罗宋汤",
-                                                           "price":  "参考 ¥50–90"
-                                                       },
-                                                       {
-                                                           "name":  "俄式饺子",
-                                                           "price":  "参考 ¥60–100"
-                                                       }
-                                                   ]
-                                    },
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "阿尔巴特/市中心",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "格鲁吉亚烤肉拼盘",
-                                                           "price":  "参考 ¥100–180"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-08-31",
-                     "weekday":  "周一",
-                     "theme":  "莫斯科 → 索契 · 黑海日落",
-                     "tips":  [
-                                  "下午飞行，抵达后只安排海岸线散步，不再塞景点。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "noon",
-                                       "name":  "伏努科沃 VKO → 索契 AER · DP113",
-                                       "time":  "13:15–16:55",
-                                       "lat":  43.449,
-                                       "lng":  39.957,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "飞猪实时候选直飞，需从市区提前出发前往 VKO。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "飞猪候选约 ¥965",
-                                       "transport":  {
-                                                         "mode":  "机场值机",
-                                                         "fare":  "以订单为准",
-                                                         "duration":  "220 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  30
-                                   },
-                                   {
-                                       "period":  "evening",
-                                       "name":  "索契中央滨海区",
-                                       "time":  "18:30–21:00",
-                                       "lat":  43.585,
-                                       "lng":  39.723,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "抵达首晚轻量散步，给后续山景留体力。",
-                                       "openingHours":  "海岸线全天",
-                                       "ticketPrice":  "免费",
-                                       "transport":  {
-                                                         "mode":  "机场打车",
-                                                         "fare":  "参考 ¥100–200/车",
-                                                         "duration":  "约 40–60 分钟"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "索契中央滨海区",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "黑海鱼类",
-                                                           "price":  "参考 ¥100–180"
-                                                       },
-                                                       {
-                                                           "name":  "高加索烤肉",
-                                                           "price":  "参考 ¥120–220"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-09-01",
-                     "weekday":  "周二",
-                     "theme":  "索契市区 · 斯大林别墅与阿洪山",
-                     "tips":  [
-                                  "别把斯大林别墅、植物园和阿洪山排得过满；统一打车并预留堵车缓冲。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "斯大林别墅",
-                                       "time":  "09:30–12:00",
-                                       "lat":  43.542446,
-                                       "lng":  39.800793,
-                                       "photo":  "https://img.alicdn.com/tfscom/TB12H__lBDH8KJjy1zeSutjepXa",
-                                       "rating":  4.5,
-                                       "review":  "规模不大但历史感强，适合安静参观。",
-                                       "openingHours":  "以官方当日为准",
-                                       "ticketPrice":  "门票参考，非实时",
-                                       "transport":  {
-                                                         "mode":  "打车",
-                                                         "fare":  "参考 ¥150–250/车",
-                                                         "duration":  "约 35–50 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  7
-                                   },
-                                   {
-                                       "period":  "noon",
-                                       "name":  "索契植物园",
-                                       "time":  "13:00–16:00",
-                                       "lat":  43.566,
-                                       "lng":  39.742,
-                                       "photo":  "",
-                                       "rating":  4.5,
-                                       "review":  "树荫和园林适合午后缓冲，注意缆车运营状态。",
-                                       "openingHours":  "以官方当日为准",
-                                       "ticketPrice":  "门票/缆车参考，非实时",
-                                       "transport":  {
-                                                         "mode":  "打车 + 缆车",
-                                                         "fare":  "参考 ¥100–200/人",
-                                                         "duration":  "半天"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   },
-                                   {
-                                       "period":  "evening",
-                                       "name":  "阿洪山观景点",
-                                       "time":  "17:00–日落",
-                                       "lat":  43.562,
-                                       "lng":  39.843,
-                                       "photo":  "",
-                                       "rating":  4.6,
-                                       "review":  "天气晴朗时安排日落；雨雾天取消，不要硬上山。",
-                                       "openingHours":  "按天气与道路情况",
-                                       "ticketPrice":  "交通参考，非实时",
-                                       "transport":  {
-                                                         "mode":  "包车/打车往返",
-                                                         "fare":  "参考 ¥300–500/车",
-                                                         "duration":  "半天"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "午餐",
-                                        "place":  "索契市区",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "高加索汤",
-                                                           "price":  "参考 ¥50–90"
-                                                       },
-                                                       {
-                                                           "name":  "烤肉拼盘",
-                                                           "price":  "参考 ¥120–220"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-09-02",
-                     "weekday":  "周三",
-                     "theme":  "索契奥林匹克公园 · 海岸休闲",
-                     "tips":  [
-                                  "园区很大，提前规划接驳；午后安排室内/咖啡休息。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "奥林匹克公园",
-                                       "time":  "09:30–16:00",
-                                       "lat":  43.403,
-                                       "lng":  39.954,
-                                       "photo":  "",
-                                       "rating":  4.4,
-                                       "review":  "适合慢游和拍摄，作为索契重点日比堆多个山景更稳。",
-                                       "openingHours":  "以园区当日为准",
-                                       "ticketPrice":  "部分场馆可能收费，非实时",
-                                       "transport":  {
-                                                         "mode":  "打车/园区接驳",
-                                                         "fare":  "参考 ¥150–300/车",
-                                                         "duration":  "往返约 1 小时"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   },
-                                   {
-                                       "period":  "evening",
-                                       "name":  "伊梅列季海岸线",
-                                       "time":  "17:00–20:00",
-                                       "lat":  43.410,
-                                       "lng":  39.960,
-                                       "photo":  "",
-                                       "rating":  4.4,
-                                       "review":  "沿海散步收尾，避免再安排长距离移动。",
-                                       "openingHours":  "全天",
-                                       "ticketPrice":  "免费",
-                                       "transport":  {
-                                                         "mode":  "步行",
-                                                         "fare":  "免费",
-                                                         "duration":  "按体力"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "奥林匹克公园附近",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "海鲜/鱼类",
-                                                           "price":  "参考 ¥120–240"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-09-03",
-                     "weekday":  "周四",
-                     "theme":  "索契缓冲日 · 为凌晨转机准备",
-                     "tips":  [
-                                  "这是修正版新增缓冲日；下午不安排远郊，晚上尽早休息。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "索契中央市场与海岸",
-                                       "time":  "09:30–13:00",
-                                       "lat":  43.585,
-                                       "lng":  39.723,
-                                       "photo":  "",
-                                       "rating":  4.2,
-                                       "review":  "轻量采购与海岸散步，给凌晨航班留体力。",
-                                       "openingHours":  "以市场当日为准",
-                                       "ticketPrice":  "免费进入",
-                                       "transport":  {
-                                                         "mode":  "步行/短途打车",
-                                                         "fare":  "参考 ¥50–150/车",
-                                                         "duration":  "半天"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "住宿附近",
-                                        "hours":  "尽量 18:00 前",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "简单热食",
-                                                           "price":  "参考 ¥80–150/人"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-09-04",
-                     "weekday":  "周五",
-                     "theme":  "凌晨转机 · 抵达圣彼得堡",
-                     "tips":  [
-                                  "03:30 出发是整段行程的最大体力风险；若无法接受，应删掉一个城市，不要改成跨 DME/VKO 的夜间转机。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "索契 AER → 莫斯科 DME · U6186",
-                                       "time":  "03:30–07:05",
-                                       "lat":  55.409,
-                                       "lng":  37.907,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "修正版可行但辛苦；同一机场 DME 衔接。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "与下一段合计约 ¥1,705",
-                                       "transport":  {
-                                                         "mode":  "机场转机",
-                                                         "fare":  "以订单为准",
-                                                         "duration":  "215 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  30
-                                   },
-                                   {
-                                       "period":  "noon",
-                                       "name":  "莫斯科 DME → 圣彼得堡 LED · S71005",
-                                       "time":  "12:10–13:45",
-                                       "lat":  59.800,
-                                       "lng":  30.262,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "到达后只安排轻量城市散步，避免首日硬塞博物馆。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "与上一段合计约 ¥1,705",
-                                       "transport":  {
-                                                         "mode":  "DME 到市区",
-                                                         "fare":  "参考 ¥150–300/车",
-                                                         "duration":  "约 60–90 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  30
-                                   },
-                                   {
-                                       "period":  "evening",
-                                       "name":  "涅瓦河与宫殿广场",
-                                       "time":  "17:00–20:00",
-                                       "lat":  59.938,
-                                       "lng":  30.315,
-                                       "photo":  "",
-                                       "rating":  4.5,
-                                       "review":  "抵达首晚轻量散步，给第二天冬宫留体力。",
-                                       "openingHours":  "户外全天",
-                                       "ticketPrice":  "免费",
-                                       "transport":  {
-                                                         "mode":  "步行/地铁",
-                                                         "fare":  "参考 ¥10–30",
-                                                         "duration":  "按体力"
-                                                     },
-                                       "needsBooking":  false,
-                                       "leadDays":  0
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "涅瓦大街附近",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "俄式炖菜",
-                                                           "price":  "参考 ¥80–160/人"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-09-05",
-                     "weekday":  "周六",
-                     "theme":  "圣彼得堡重点 · 冬宫与射击体验",
-                     "tips":  [
-                                  "把冬宫预约放在上午；射击体验仅在确认合法经营、年龄/证件要求和接送安排后预订。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "艾尔米塔什博物馆（冬宫）",
-                                       "time":  "10:00–14:00",
-                                       "lat":  59.9403958,
-                                       "lng":  30.3137962,
-                                       "photo":  "https://img.alicdn.com/tfscom/TB1AUvcicrI8KJjy0FhSuvfnpXa",
-                                       "rating":  4.8,
-                                       "review":  "馆藏密度极高，四小时只能选重点展厅。",
-                                       "openingHours":  "以官方当日为准",
-                                       "closedDays":  "闭馆日需出发前核实",
-                                       "ticketPrice":  "门票参考，非实时",
-                                       "transport":  {
-                                                         "mode":  "步行/地铁",
-                                                         "fare":  "参考 ¥10–30",
-                                                         "duration":  "半天"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  7
-                                   },
-                                   {
-                                       "period":  "afternoon",
-                                       "name":  "射击体验（待确认场馆）",
-                                       "time":  "16:00–18:00",
-                                       "lat":  59.934,
-                                       "lng":  30.335,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "原计划项目；必须先核实合法场馆、证件、语言服务与接送。",
-                                       "openingHours":  "以场馆确认时间为准",
-                                       "ticketPrice":  "非实时参考，先询价",
-                                       "transport":  {
-                                                         "mode":  "以场馆接送为准",
-                                                         "fare":  "以场馆报价为准",
-                                                         "duration":  "约 2 小时"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  7
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "午餐",
-                                        "place":  "宫殿广场周边",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "俄式薄饼",
-                                                           "price":  "参考 ¥50–100"
-                                                       }
-                                                   ]
-                                    },
-                                    {
-                                        "meal":  "晚餐",
-                                        "place":  "涅瓦大街",
-                                        "hours":  "以现场为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "腌鱼/烤肉",
-                                                           "price":  "参考 ¥100–200"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-09-06",
-                     "weekday":  "周日",
-                     "theme":  "彼得宫城可选 · 晚间返程",
-                     "tips":  [
-                                  "17:15 从 LED 起飞，彼得宫城只能早出早回；若门票/交通不稳，直接取消，不要冒险赶飞机。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "彼得宫城（夏宫）· 可选短线",
-                                       "time":  "08:00–12:30",
-                                       "lat":  59.884,
-                                       "lng":  29.908,
-                                       "photo":  "",
-                                       "rating":  4.7,
-                                       "review":  "距离市区较远，只建议选择短线参观并预留返程缓冲。",
-                                       "openingHours":  "以官方当日为准",
-                                       "ticketPrice":  "宫殿与花园票价需现场核实",
-                                       "transport":  {
-                                                         "mode":  "地铁/巴士或水翼船",
-                                                         "fare":  "参考 ¥100–300/人",
-                                                         "duration":  "单程约 60–90 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  7
-                                   },
-                                   {
-                                       "period":  "afternoon",
-                                       "name":  "圣彼得堡 LED → 叶卡捷琳堡 SVX · U6173",
-                                       "time":  "17:15–22:00",
-                                       "lat":  56.743,
-                                       "lng":  60.803,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "返程第一段；抵达 SVX 后等待 U6775。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "返程查询快照约 ¥3,095（2026-07-27）",
-                                       "transport":  {
-                                                         "mode":  "机场值机",
-                                                         "fare":  "以订单为准",
-                                                         "duration":  "285 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  45
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "午餐",
-                                        "place":  "市区或机场前",
-                                        "hours":  "建议提前解决",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "简餐",
-                                                           "price":  "参考 ¥60–120/人"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 },
-                 {
-                     "date":  "2026-09-07",
-                     "weekday":  "周一",
-                     "theme":  "返程到达 · 北京大兴转合肥",
-                     "tips":  [
-                                  "这是返程实际到达日，不能把 9/6 写成抵达合肥。"
-                              ],
-                     "slots":  [
-                                   {
-                                       "period":  "morning",
-                                       "name":  "叶卡捷琳堡 SVX → 北京大兴 PKX · U6775",
-                                       "time":  "00:40–09:55",
-                                       "lat":  39.509,
-                                       "lng":  116.410,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "返程第二段，需确认国际到达后的行李与转机流程。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "纳入返程候选",
-                                       "transport":  {
-                                                         "mode":  "机场转机",
-                                                         "fare":  "以订单为准",
-                                                         "duration":  "555 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  45
-                                   },
-                                   {
-                                       "period":  "afternoon",
-                                       "name":  "北京大兴 PKX → 合肥 HFE · CZ8955",
-                                       "time":  "13:00–14:45",
-                                       "lat":  31.780,
-                                       "lng":  117.298,
-                                       "photo":  "",
-                                       "rating":  null,
-                                       "review":  "返程最后一段，预计 9/7 下午抵达合肥。",
-                                       "openingHours":  "按航班值机时间",
-                                       "ticketPrice":  "纳入返程候选",
-                                       "transport":  {
-                                                         "mode":  "机场转机",
-                                                         "fare":  "以订单为准",
-                                                         "duration":  "105 分钟"
-                                                     },
-                                       "needsBooking":  true,
-                                       "leadDays":  45
-                                   }
-                               ],
-                     "dining":  [
-                                    {
-                                        "meal":  "机场餐",
-                                        "place":  "PKX 转机区",
-                                        "hours":  "以当天为准",
-                                        "dishes":  [
-                                                       {
-                                                           "name":  "热食简餐",
-                                                           "price":  "参考 ¥40–80/人"
-                                                       }
-                                                   ]
-                                    }
-                                ]
-                 }
-             ]
+{
+  "title": "莫斯科·索契·圣彼得堡 2026-08-28",
+  "startDate": "2026-08-28",
+  "colorScheme": "midnight-copper",
+  "transportSnapshot": {
+    "source": "Go-home（携程机票 + 12306）",
+    "generatedAt": "2026-08-20T13:09:13+08:00",
+    "summary": "已完成 1/4 段自动规划。结果已按价格、时长和换乘可行性筛选。",
+    "plans": [
+      {
+        "id": "outbound",
+        "label": "去程｜合肥 → 莫斯科",
+        "recommendations": [],
+        "error": ""
+      },
+      {
+        "id": "moscow-sochi",
+        "label": "莫斯科 → 索契",
+        "recommendations": [],
+        "error": ""
+      },
+      {
+        "id": "sochi-spb",
+        "label": "索契 → 圣彼得堡",
+        "recommendations": [],
+        "error": ""
+      },
+      {
+        "id": "return",
+        "label": "返程｜圣彼得堡 → 合肥",
+        "recommendations": [
+          {
+            "description": "圣彼得堡→✈️→合肥",
+            "type": "直达航班",
+            "totalPrice": 2217,
+            "totalDurationMinutes": 325,
+            "accommodationFee": 0,
+            "transferWaitMinutes": [],
+            "segments": [
+              {
+                "type": "flight",
+                "carrier": "四川航空",
+                "number": "3U3816/3U8927",
+                "departure": "22:30",
+                "arrival": "08:55",
+                "from": "圣彼得堡",
+                "to": "合肥",
+                "price": 2217
+              }
+            ],
+            "label": "省钱优先"
+          }
+        ],
+        "error": ""
+      }
+    ],
+    "diagnostics": [
+      "合肥南 → 北京南: 8 candidates",
+      "合肥 → 莫斯科直飞/中转: 0 candidates",
+      "北京 → 莫斯科: 0 candidates",
+      "莫斯科 → 索契: 无效的目的地: 索契",
+      "索契 → 圣彼得堡: 无效的出发地: 索契",
+      "圣彼得堡 → 合肥: 4 candidates"
+    ]
+  },
+  "preTrip": {
+    "weather": {
+      "summary": "8 月末至 9 月初三城温差明显：莫斯科与圣彼得堡偏凉，索契仍偏暖；天气为季节参考，出发前 72 小时重查。",
+      "typhoon": "俄罗斯不按中国台风季逻辑安排；重点关注降雨、低温、航班延误与机场运行。"
+    },
+    "packing": "短袖、薄外套、防雨层、舒适鞋；护照及复印件、充电宝、常用药随身携带。",
+    "payment": "不要只依赖单一银行卡；准备少量现金，确认境外支付、取现和退款渠道。",
+    "apps": [
+      "离线翻译",
+      "地图与离线地址",
+      "航司 App",
+      "打车/叫车工具"
+    ],
+    "ticketTip": "高铁、机票、酒店请分别确认；出行前再核对机场、行李和转机安排。"
+  },
+  "flights": {
+    "booked": [],
+    "candidates": []
+  },
+  "hotelAreas": [
+    {
+      "area": "北京南站｜一晚中转",
+      "reason": "G58 23:35 抵达北京南，次日 10:55 从大兴起飞。为最低票价方案，住北京南周边更实惠；次日建议 07:15 前出发前往 PKX。",
+      "options": [
+        {
+          "tier": "经济",
+          "name": "北京南站周边快捷酒店",
+          "priceRange": "参考 ¥200–350/晚",
+          "note": "晚到方便，次日早起转大兴。"
+        },
+        {
+          "tier": "中档",
+          "name": "北京南站周边商务酒店",
+          "priceRange": "参考 ¥350–550/晚",
+          "note": "三人可优先找三人房或可加床房。"
+        },
+        {
+          "tier": "高端",
+          "name": "大兴机场周边酒店",
+          "priceRange": "参考 ¥500+/晚",
+          "note": "仅在晚间转场顺利时考虑，通常不利于压低总价。"
+        }
+      ]
+    },
+    {
+      "area": "莫斯科｜红场—特列季亚科夫区",
+      "reason": "红场、克里姆林宫和河岸集中，适合两天步行与地铁；晚到 DME 不建议住太偏。",
+      "options": [
+        {
+          "tier": "经济",
+          "name": "特雷特雅科夫斯卡娅 InterQUBE 胶囊酒店",
+          "priceRange": "飞猪候选约 ¥220/晚",
+          "note": "近红场，适合压预算。",
+          "actionLink": {
+            "label": "查看酒店",
+            "url": "https://a.feizhu.com/2qDug0"
+          }
+        },
+        {
+          "tier": "中档",
+          "name": "市中心公寓/商务酒店",
+          "priceRange": "参考 ¥450–800/晚",
+          "note": "三人同行优先找可加床或整套公寓。"
+        },
+        {
+          "tier": "高端",
+          "name": "红场周边高端酒店",
+          "priceRange": "参考 ¥1,200+/晚",
+          "note": "步行便利，但不作为省钱方案。"
+        }
+      ]
+    },
+    {
+      "area": "索契｜中央滨海区",
+      "reason": "去斯大林别墅、植物园、海岸线和奥林匹克公园都较方便，统一打车更适合三人。",
+      "options": [
+        {
+          "tier": "经济",
+          "name": "中央区公寓/民宿",
+          "priceRange": "参考 ¥350–650/晚",
+          "note": "重点看空调、洗衣和晚到入住。"
+        },
+        {
+          "tier": "中档",
+          "name": "中央滨海商务酒店",
+          "priceRange": "参考 ¥650–1,000/晚",
+          "note": "适合三人分摊，减少跨区移动。"
+        },
+        {
+          "tier": "高端",
+          "name": "海滨度假酒店",
+          "priceRange": "参考 ¥1,200+/晚",
+          "note": "适合把预算放在海景和度假设施。"
+        }
+      ]
+    },
+    {
+      "area": "圣彼得堡｜涅瓦大街—海军部区",
+      "reason": "冬宫、喀山大教堂、滴血教堂和购物动线集中，返程去 LED 也较顺。",
+      "options": [
+        {
+          "tier": "经济",
+          "name": "涅瓦大街周边公寓/胶囊酒店",
+          "priceRange": "参考 ¥350–650/晚",
+          "note": "确认电梯、行李寄存和晚间入住。"
+        },
+        {
+          "tier": "中档",
+          "name": "海军部区商务酒店",
+          "priceRange": "参考 ¥650–1,000/晚",
+          "note": "适合把景点压缩在步行范围。"
+        },
+        {
+          "tier": "高端",
+          "name": "冬宫周边高端酒店",
+          "priceRange": "参考 ¥1,200+/晚",
+          "note": "位置优先，房价不作为实时承诺。"
+        }
+      ]
+    }
+  ],
+  "disclaimer": "价格、库存、开放时间和交通以航空公司、购票平台、酒店与景点官方信息为准。",
+  "dataSources": [],
+  "tips": [
+    "高铁、机票和北京住宿需分别预订；从北京南到大兴请至少预留 2 小时。",
+    "索契到圣彼得堡为凌晨航班，经 DME 转机，当天只安排轻松活动。",
+    "三人同行优先整套公寓或三人房；机场、阿洪山、彼得宫城等长距离点可统一打车。",
+    "付款前确认行李额度、转机机场、签证与入境要求。"
+  ],
+  "reminders": [
+    {
+      "item": "确认 G58、U6776、U6270 三张分票及北京南住宿/次日转大兴路线",
+      "leadDays": 45
+    },
+    {
+      "item": "确认返程三段是否联程、行李直挂及 9/7 到达合肥",
+      "leadDays": 45
+    },
+    {
+      "item": "确认莫斯科→索契 DP113 与机场交通",
+      "leadDays": 30
+    },
+    {
+      "item": "确认索契→圣彼得堡凌晨经 DME 的同机场转机规则",
+      "leadDays": 30
+    },
+    {
+      "item": "锁定北京、莫斯科、索契、圣彼得堡住宿",
+      "leadDays": 30
+    },
+    {
+      "item": "预订/核实冬宫、彼得宫城与射击体验",
+      "leadDays": 7
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-08-28",
+      "weekday": "周五",
+      "theme": "出发日 · 高铁到北京南过夜",
+      "tips": [
+        "深夜抵达北京南后就近休息，次日早起前往大兴机场。"
+      ],
+      "slots": [
+        {
+          "period": "evening",
+          "name": "合肥南站 → 北京南站 · G58",
+          "time": "19:58–23:35",
+          "lat": 31.85,
+          "lng": 117.219,
+          "photo": "",
+          "rating": null,
+          "review": "晚间高铁抵达北京南。",
+          "openingHours": "按车站检票时间",
+          "ticketPrice": "二等座约 ¥442.5",
+          "transport": {
+            "mode": "高铁",
+            "fare": "¥442.5/人",
+            "duration": "217 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 45
+        },
+        {
+          "period": "late night",
+          "name": "北京南站周边 · 中转住宿",
+          "time": "23:35 后",
+          "lat": 39.865,
+          "lng": 116.379,
+          "photo": "",
+          "rating": null,
+          "review": "深夜抵达后就近入住；次日建议 07:15 前出发前往大兴机场。",
+          "openingHours": "按酒店政策",
+          "ticketPrice": "酒店参考 ¥200–550/晚",
+          "transport": {
+            "mode": "步行/短途打车",
+            "fare": "参考 ¥20–60/车",
+            "duration": "约 5–20 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 30
+        }
+      ],
+      "dining": [
+        {
+          "meal": "晚餐",
+          "place": "合肥南站或北京南站周边",
+          "hours": "以当天营业为准",
+          "dishes": [
+            {
+              "name": "简单热食",
+              "price": "参考 ¥40–80/人"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-29",
+      "weekday": "周六",
+      "theme": "抵达日 · 叶卡捷琳堡转机后到莫斯科",
+      "tips": [
+        "不要安排阿尔巴特大街；21:00 到 DME 后还要入境、取行李和进城。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "北京大兴 PKX → 叶卡捷琳堡 SVX · U6776",
+          "time": "10:55–14:30",
+          "lat": 56.743,
+          "lng": 60.803,
+          "photo": "",
+          "rating": null,
+          "review": "从北京南站周边住宿出发，建议 07:15 前抵达大兴机场。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "机票约 ¥1,838；高铁加机票约 ¥2,281",
+          "transport": {
+            "mode": "地铁 + 大兴机场线",
+            "fare": "参考 ¥40–80/人",
+            "duration": "约 60–90 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 45
+        },
+        {
+          "period": "evening",
+          "name": "叶卡捷琳堡 SVX → 莫斯科 DME · U6270",
+          "time": "20:30–21:00",
+          "lat": 55.409,
+          "lng": 37.907,
+          "photo": "",
+          "rating": null,
+          "review": "到达莫斯科已晚，入住后休息。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "已纳入机票约 ¥1,838",
+          "transport": {
+            "mode": "机场到市区",
+            "fare": "参考 ¥150–300/车",
+            "duration": "约 60–90 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 45
+        }
+      ],
+      "dining": [
+        {
+          "meal": "晚餐",
+          "place": "DME 或住宿附近",
+          "hours": "以到达时间为准",
+          "dishes": [
+            {
+              "name": "热汤/烤肉类简餐",
+              "price": "参考 ¥80–150/人"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-30",
+      "weekday": "周日",
+      "theme": "莫斯科核心 · 红场与克里姆林宫",
+      "tips": [
+        "把户外集中在上午和傍晚，博物馆/商场作为午后缓冲。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "红场",
+          "time": "09:30–12:00",
+          "lat": 55.753932,
+          "lng": 37.620792,
+          "photo": "https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa",
+          "rating": 4.7,
+          "review": "城市地标密集，适合与圣瓦西里主教座堂、国家历史博物馆连走。",
+          "openingHours": "广场全天可到",
+          "ticketPrice": "免费；周边馆票价另计",
+          "transport": {
+            "mode": "地铁 + 步行",
+            "fare": "参考 ¥10–30",
+            "duration": "约 30–60 分钟"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        },
+        {
+          "period": "noon",
+          "name": "克里姆林宫",
+          "time": "13:30–17:00",
+          "lat": 55.750954,
+          "lng": 37.617576,
+          "photo": "https://img.alicdn.com/imgextra/i1/O1CN017jBlOt1zblGHiUUrn_!!0-alitrip.jpg",
+          "rating": 4.7,
+          "review": "政治与历史建筑群，需预留安检和预约时间。",
+          "openingHours": "以官方当日场次为准",
+          "ticketPrice": "门票参考，非实时",
+          "transport": {
+            "mode": "红场步行",
+            "fare": "免费",
+            "duration": "约 10 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 7
+        }
+      ],
+      "dining": [
+        {
+          "meal": "午餐",
+          "place": "红场周边俄式餐厅",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "罗宋汤",
+              "price": "参考 ¥50–90"
+            },
+            {
+              "name": "俄式饺子",
+              "price": "参考 ¥60–100"
+            }
+          ]
+        },
+        {
+          "meal": "晚餐",
+          "place": "阿尔巴特/市中心",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "格鲁吉亚烤肉拼盘",
+              "price": "参考 ¥100–180"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-08-31",
+      "weekday": "周一",
+      "theme": "莫斯科 → 索契 · 黑海日落",
+      "tips": [
+        "下午飞行，抵达后只安排海岸线散步，不再塞景点。"
+      ],
+      "slots": [
+        {
+          "period": "noon",
+          "name": "伏努科沃 VKO → 索契 AER · DP113",
+          "time": "13:15–16:55",
+          "lat": 43.449,
+          "lng": 39.957,
+          "photo": "",
+          "rating": null,
+          "review": "请以实时交通规划返回的航班和机场为准，并从市区提前出发。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "以实时交通规划为准",
+          "transport": {
+            "mode": "机场值机",
+            "fare": "以订单为准",
+            "duration": "220 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 30
+        },
+        {
+          "period": "evening",
+          "name": "索契中央滨海区",
+          "time": "18:30–21:00",
+          "lat": 43.585,
+          "lng": 39.723,
+          "photo": "",
+          "rating": null,
+          "review": "抵达首晚轻量散步，给后续山景留体力。",
+          "openingHours": "海岸线全天",
+          "ticketPrice": "免费",
+          "transport": {
+            "mode": "机场打车",
+            "fare": "参考 ¥100–200/车",
+            "duration": "约 40–60 分钟"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        }
+      ],
+      "dining": [
+        {
+          "meal": "晚餐",
+          "place": "索契中央滨海区",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "黑海鱼类",
+              "price": "参考 ¥100–180"
+            },
+            {
+              "name": "高加索烤肉",
+              "price": "参考 ¥120–220"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "weekday": "周二",
+      "theme": "索契市区 · 斯大林别墅与阿洪山",
+      "tips": [
+        "别把斯大林别墅、植物园和阿洪山排得过满；统一打车并预留堵车缓冲。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "斯大林别墅",
+          "time": "09:30–12:00",
+          "lat": 43.542446,
+          "lng": 39.800793,
+          "photo": "https://img.alicdn.com/tfscom/TB12H__lBDH8KJjy1zeSutjepXa",
+          "rating": 4.5,
+          "review": "规模不大但历史感强，适合安静参观。",
+          "openingHours": "以官方当日为准",
+          "ticketPrice": "门票参考，非实时",
+          "transport": {
+            "mode": "打车",
+            "fare": "参考 ¥150–250/车",
+            "duration": "约 35–50 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 7
+        },
+        {
+          "period": "noon",
+          "name": "索契植物园",
+          "time": "13:00–16:00",
+          "lat": 43.566,
+          "lng": 39.742,
+          "photo": "",
+          "rating": 4.5,
+          "review": "树荫和园林适合午后缓冲，注意缆车运营状态。",
+          "openingHours": "以官方当日为准",
+          "ticketPrice": "门票/缆车参考，非实时",
+          "transport": {
+            "mode": "打车 + 缆车",
+            "fare": "参考 ¥100–200/人",
+            "duration": "半天"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        },
+        {
+          "period": "evening",
+          "name": "阿洪山观景点",
+          "time": "17:00–日落",
+          "lat": 43.562,
+          "lng": 39.843,
+          "photo": "",
+          "rating": 4.6,
+          "review": "天气晴朗时安排日落；雨雾天取消，不要硬上山。",
+          "openingHours": "按天气与道路情况",
+          "ticketPrice": "交通参考，非实时",
+          "transport": {
+            "mode": "包车/打车往返",
+            "fare": "参考 ¥300–500/车",
+            "duration": "半天"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        }
+      ],
+      "dining": [
+        {
+          "meal": "午餐",
+          "place": "索契市区",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "高加索汤",
+              "price": "参考 ¥50–90"
+            },
+            {
+              "name": "烤肉拼盘",
+              "price": "参考 ¥120–220"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-02",
+      "weekday": "周三",
+      "theme": "索契奥林匹克公园 · 海岸休闲",
+      "tips": [
+        "园区很大，提前规划接驳；午后安排室内/咖啡休息。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "奥林匹克公园",
+          "time": "09:30–16:00",
+          "lat": 43.403,
+          "lng": 39.954,
+          "photo": "",
+          "rating": 4.4,
+          "review": "适合慢游和拍摄，作为索契重点日比堆多个山景更稳。",
+          "openingHours": "以园区当日为准",
+          "ticketPrice": "部分场馆可能收费，非实时",
+          "transport": {
+            "mode": "打车/园区接驳",
+            "fare": "参考 ¥150–300/车",
+            "duration": "往返约 1 小时"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        },
+        {
+          "period": "evening",
+          "name": "伊梅列季海岸线",
+          "time": "17:00–20:00",
+          "lat": 43.41,
+          "lng": 39.96,
+          "photo": "",
+          "rating": 4.4,
+          "review": "沿海散步收尾，避免再安排长距离移动。",
+          "openingHours": "全天",
+          "ticketPrice": "免费",
+          "transport": {
+            "mode": "步行",
+            "fare": "免费",
+            "duration": "按体力"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        }
+      ],
+      "dining": [
+        {
+          "meal": "晚餐",
+          "place": "奥林匹克公园附近",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "海鲜/鱼类",
+              "price": "参考 ¥120–240"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "weekday": "周四",
+      "theme": "索契缓冲日 · 为凌晨转机准备",
+      "tips": [
+        "下午不安排远郊，晚上尽早休息。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "索契中央市场与海岸",
+          "time": "09:30–13:00",
+          "lat": 43.585,
+          "lng": 39.723,
+          "photo": "",
+          "rating": 4.2,
+          "review": "轻量采购与海岸散步，给凌晨航班留体力。",
+          "openingHours": "以市场当日为准",
+          "ticketPrice": "免费进入",
+          "transport": {
+            "mode": "步行/短途打车",
+            "fare": "参考 ¥50–150/车",
+            "duration": "半天"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        }
+      ],
+      "dining": [
+        {
+          "meal": "晚餐",
+          "place": "住宿附近",
+          "hours": "尽量 18:00 前",
+          "dishes": [
+            {
+              "name": "简单热食",
+              "price": "参考 ¥80–150/人"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-04",
+      "weekday": "周五",
+      "theme": "凌晨转机 · 抵达圣彼得堡",
+      "tips": [
+        "凌晨出发，经 DME 转机；抵达后只安排轻松活动。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "索契 AER → 莫斯科 DME · U6186",
+          "time": "03:30–07:05",
+          "lat": 55.409,
+          "lng": 37.907,
+          "photo": "",
+          "rating": null,
+          "review": "同一机场 DME 转机。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "与下一段合计约 ¥1,705",
+          "transport": {
+            "mode": "机场转机",
+            "fare": "以订单为准",
+            "duration": "215 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 30
+        },
+        {
+          "period": "noon",
+          "name": "莫斯科 DME → 圣彼得堡 LED · S71005",
+          "time": "12:10–13:45",
+          "lat": 59.8,
+          "lng": 30.262,
+          "photo": "",
+          "rating": null,
+          "review": "到达后只安排轻量城市散步，避免首日硬塞博物馆。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "与上一段合计约 ¥1,705",
+          "transport": {
+            "mode": "DME 到市区",
+            "fare": "参考 ¥150–300/车",
+            "duration": "约 60–90 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 30
+        },
+        {
+          "period": "evening",
+          "name": "涅瓦河与宫殿广场",
+          "time": "17:00–20:00",
+          "lat": 59.938,
+          "lng": 30.315,
+          "photo": "",
+          "rating": 4.5,
+          "review": "抵达首晚轻量散步，给第二天冬宫留体力。",
+          "openingHours": "户外全天",
+          "ticketPrice": "免费",
+          "transport": {
+            "mode": "步行/地铁",
+            "fare": "参考 ¥10–30",
+            "duration": "按体力"
+          },
+          "needsBooking": false,
+          "leadDays": 0
+        }
+      ],
+      "dining": [
+        {
+          "meal": "晚餐",
+          "place": "涅瓦大街附近",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "俄式炖菜",
+              "price": "参考 ¥80–160/人"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-05",
+      "weekday": "周六",
+      "theme": "圣彼得堡重点 · 冬宫与射击体验",
+      "tips": [
+        "把冬宫预约放在上午；射击体验仅在确认合法经营、年龄/证件要求和接送安排后预订。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "艾尔米塔什博物馆（冬宫）",
+          "time": "10:00–14:00",
+          "lat": 59.9403958,
+          "lng": 30.3137962,
+          "photo": "https://img.alicdn.com/tfscom/TB1AUvcicrI8KJjy0FhSuvfnpXa",
+          "rating": 4.8,
+          "review": "馆藏密度极高，四小时只能选重点展厅。",
+          "openingHours": "以官方当日为准",
+          "closedDays": "闭馆日需出发前核实",
+          "ticketPrice": "门票参考，非实时",
+          "transport": {
+            "mode": "步行/地铁",
+            "fare": "参考 ¥10–30",
+            "duration": "半天"
+          },
+          "needsBooking": true,
+          "leadDays": 7
+        },
+        {
+          "period": "afternoon",
+          "name": "射击体验（待确认场馆）",
+          "time": "16:00–18:00",
+          "lat": 59.934,
+          "lng": 30.335,
+          "photo": "",
+          "rating": null,
+          "review": "原计划项目；必须先核实合法场馆、证件、语言服务与接送。",
+          "openingHours": "以场馆确认时间为准",
+          "ticketPrice": "非实时参考，先询价",
+          "transport": {
+            "mode": "以场馆接送为准",
+            "fare": "以场馆报价为准",
+            "duration": "约 2 小时"
+          },
+          "needsBooking": true,
+          "leadDays": 7
+        }
+      ],
+      "dining": [
+        {
+          "meal": "午餐",
+          "place": "宫殿广场周边",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "俄式薄饼",
+              "price": "参考 ¥50–100"
+            }
+          ]
+        },
+        {
+          "meal": "晚餐",
+          "place": "涅瓦大街",
+          "hours": "以现场为准",
+          "dishes": [
+            {
+              "name": "腌鱼/烤肉",
+              "price": "参考 ¥100–200"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-06",
+      "weekday": "周日",
+      "theme": "彼得宫城可选 · 晚间返程",
+      "tips": [
+        "17:15 从 LED 起飞，彼得宫城只能早出早回。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "彼得宫城（夏宫）· 可选短线",
+          "time": "08:00–12:30",
+          "lat": 59.884,
+          "lng": 29.908,
+          "photo": "",
+          "rating": 4.7,
+          "review": "距离市区较远，只建议选择短线参观并预留返程缓冲。",
+          "openingHours": "以官方当日为准",
+          "ticketPrice": "宫殿与花园票价需现场核实",
+          "transport": {
+            "mode": "地铁/巴士或水翼船",
+            "fare": "参考 ¥100–300/人",
+            "duration": "单程约 60–90 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 7
+        },
+        {
+          "period": "afternoon",
+          "name": "圣彼得堡 LED → 叶卡捷琳堡 SVX · U6173",
+          "time": "17:15–22:00",
+          "lat": 56.743,
+          "lng": 60.803,
+          "photo": "",
+          "rating": null,
+          "review": "返程第一段；抵达 SVX 后等待 U6775。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "返程机票约 ¥3,095",
+          "transport": {
+            "mode": "机场值机",
+            "fare": "以订单为准",
+            "duration": "285 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 45
+        }
+      ],
+      "dining": [
+        {
+          "meal": "午餐",
+          "place": "市区或机场前",
+          "hours": "建议提前解决",
+          "dishes": [
+            {
+              "name": "简餐",
+              "price": "参考 ¥60–120/人"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-07",
+      "weekday": "周一",
+      "theme": "返程到达 · 北京大兴转合肥",
+      "tips": [
+        "经北京大兴转机，下午抵达合肥。"
+      ],
+      "slots": [
+        {
+          "period": "morning",
+          "name": "叶卡捷琳堡 SVX → 北京大兴 PKX · U6775",
+          "time": "00:40–09:55",
+          "lat": 39.509,
+          "lng": 116.41,
+          "photo": "",
+          "rating": null,
+          "review": "返程第二段，需确认国际到达后的行李与转机流程。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "纳入返程候选",
+          "transport": {
+            "mode": "机场转机",
+            "fare": "以订单为准",
+            "duration": "555 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 45
+        },
+        {
+          "period": "afternoon",
+          "name": "北京大兴 PKX → 合肥 HFE · CZ8955",
+          "time": "13:00–14:45",
+          "lat": 31.78,
+          "lng": 117.298,
+          "photo": "",
+          "rating": null,
+          "review": "返程最后一段，预计 9/7 下午抵达合肥。",
+          "openingHours": "按航班值机时间",
+          "ticketPrice": "纳入返程候选",
+          "transport": {
+            "mode": "机场转机",
+            "fare": "以订单为准",
+            "duration": "105 分钟"
+          },
+          "needsBooking": true,
+          "leadDays": 45
+        }
+      ],
+      "dining": [
+        {
+          "meal": "机场餐",
+          "place": "PKX 转机区",
+          "hours": "以当天为准",
+          "dishes": [
+            {
+              "name": "热食简餐",
+              "price": "参考 ¥40–80/人"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
   </script>
 
@@ -1005,7 +995,27 @@
     document.getElementById('disclaimer').textContent=trip.disclaimer;
     document.getElementById('tips').innerHTML=trip.tips.map(t=>'<li>'+esc(t)+'</li>').join('');
     const link=o=>o&&o.url?'<a class="btn" target="_blank" rel="noopener" href="'+o.url+'">'+esc(o.label||'查看')+'</a>':'';
-    document.getElementById('flights').innerHTML=trip.flights.candidates.map(f=>'<article class="card flight '+(f.selected?'selected':'')+'"><div class="hero-badges"><span class="label">'+(f.selected?'推荐候选':'待选 · 请自行核实')+'</span><span class="label">'+esc(f.code)+'</span></div><h3>'+esc(f.label)+'</h3><p class="route">'+esc(f.time)+'</p><p>'+esc(f.note)+'</p>'+((f.actionLinks||[]).map(link).join('')+(f.actionLink?link(f.actionLink):''))+'</article>').join('');
+    const flightsElement=document.getElementById('flights');
+    const statusElement=document.getElementById('transport-status');
+    function durationText(minutes){return Math.floor(minutes/60)+'小时'+(minutes%60)+'分'}
+    function recommendationHTML(route){
+      const segments=(route.segments||[]).map(segment=>{
+        const icon=segment.type==='train'?'🚄':'✈️';
+        return '<li>'+icon+' '+esc([segment.carrier,segment.number].filter(Boolean).join(' '))+' · '+esc(segment.departure)+'→'+esc(segment.arrival)+' · ¥'+esc(segment.price)+'</li>';
+      }).join('');
+      const transfer=(route.transferWaitMinutes||[]).length?' · 换乘等待 '+esc(route.transferWaitMinutes.map(durationText).join('、')):'';
+      const accommodation=route.accommodationFee?' · 过夜成本 ¥'+esc(route.accommodationFee):'';
+      return '<div class="transport-option"><div class="hero-badges"><span class="label">'+esc(route.label)+'</span><span class="label">'+esc(route.type)+'</span></div><p class="route">'+esc(route.description)+' · 总价 ¥'+esc(route.totalPrice)+' · '+esc(durationText(route.totalDurationMinutes))+transfer+accommodation+'</p><ul class="segments">'+segments+'</ul></div>';
+    }
+    function planHTML(plan){
+      const recommendations=plan.recommendations||[];
+      const body=recommendations.length?recommendations.map(recommendationHTML).join(''):'<p class="muted">未找到满足价格、时间和换乘规则的方案。请检查日期、验证码与服务日志。</p>';
+      const error=plan.error?'<p class="muted">部分数据未返回：'+esc(plan.error)+'</p>':'';
+      return '<article class="card flight '+(recommendations.length?'selected':'')+'"><div class="hero-badges"><span class="label">Go-home 自动规划</span></div><h3>'+esc(plan.label)+'</h3>'+body+error+'</article>';
+    }
+    const snapshot=trip.transportSnapshot||{};
+    flightsElement.innerHTML=(snapshot.plans||[]).map(planHTML).join('')||'<article class="card"><span class="label">等待手动更新</span><h3>还没有交通快照</h3><p>在项目目录执行“更新交通并同步GitHub.ps1”，脚本会查询、自动规划并发布网页。</p></article>';
+    statusElement.textContent=(snapshot.source||'Go-home')+' · '+(snapshot.summary||'尚未生成交通快照')+(snapshot.generatedAt?' · '+snapshot.generatedAt:'');
     document.getElementById('hotels').innerHTML=trip.hotelAreas.map(a=>'<article class="card"><span class="label">'+esc(a.area)+'</span><h3>'+esc(a.area)+'</h3><p>'+esc(a.reason)+'</p><div class="hotel-options">'+a.options.map(o=>'<div class="hotel-option"><strong>'+esc(o.tier)+' · '+esc(o.name)+'</strong><span class="accent">'+esc(o.priceRange)+'</span><p>'+esc(o.note)+'</p>'+(o.actionLink?link(o.actionLink):'')+'</div>').join('')+'</div></article>').join('');
     function renderSlot(s){return '<article class="slot"><div class="photo"><img src="'+esc(s.photo||'')+'" alt="'+esc(s.name)+'" onerror="this.style.display=\'none\'"><span>'+esc(s.name)+'</span></div><div><div class="meta">'+esc(s.period)+' · '+esc(s.time)+'</div><h3>'+esc(s.name)+'</h3><p>'+esc(s.review||'')+'</p><div class="chips">'+(s.openingHours?'<span class="label">营业：'+esc(s.openingHours)+'</span>':'')+(s.closedDays?'<span class="label">闭馆：'+esc(s.closedDays)+'</span>':'')+(s.ticketPrice?'<span class="label">门票：'+esc(s.ticketPrice)+'</span>':'')+(s.rating?'<span class="label">概览评分 '+esc(s.rating)+'</span>':'')+(s.needsBooking?reminderBadgeHTML(s.leadDays):'')+'</div>'+(s.transport?'<p>交通：'+esc(s.transport.mode)+' · '+esc(s.transport.fare)+' · '+esc(s.transport.duration)+'</p>':'')+(s.seasonal?'<p class="accent">时令：'+esc(s.seasonal)+'</p>':'')+'</div></article>'}
     document.getElementById('timeline').innerHTML=trip.days.map(d=>'<article class="day"><div class="day-head"><div><div class="day-date">'+esc(d.date)+' · '+esc(d.weekday)+'</div><h3>'+esc(d.theme)+'</h3></div></div>'+(d.tips||[]).map(t=>'<div class="warning">'+esc(t)+'</div>').join('')+d.slots.map(renderSlot).join('')+(d.alternatives||[]).map(a=>'<div class="alternative"><strong>'+esc(a.label)+'</strong><div>'+esc(a.summary)+'</div></div>').join('')+(d.dining&&d.dining.length?'<div class="card" style="margin-top:14px"><h3>当天吃什么</h3>'+d.dining.map(m=>'<div class="meal"><strong>'+esc(m.meal)+' · '+esc(m.place)+'</strong><p>'+esc(m.hours)+'</p><ul>'+m.dishes.map(x=>'<li>'+esc(x.name)+' · '+esc(x.price)+'</li>').join('')+'</ul></div>').join('')+'</div>':'')+'</article>').join('');
