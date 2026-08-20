@@ -34,19 +34,150 @@
   "colorScheme": "midnight-copper",
   "transportSnapshot": {
     "source": "Go-home（携程机票 + 12306）",
-    "generatedAt": "2026-08-20T13:09:13+08:00",
-    "summary": "已完成 1/4 段自动规划。结果已按价格、时长和换乘可行性筛选。",
+    "generatedAt": "2026-08-20T14:24:47+08:00",
+    "summary": "已完成 2/4 段自动规划。结果已按价格、时长和换乘可行性筛选。",
     "plans": [
       {
         "id": "outbound",
         "label": "去程｜合肥 → 莫斯科",
-        "recommendations": [],
+        "recommendations": [
+          {
+            "description": "合肥→🚄→北京→✈️→莫斯科",
+            "type": "火车 → 飞机",
+            "totalPrice": 5699,
+            "totalDurationMinutes": 1003,
+            "accommodationFee": 0,
+            "transferWaitMinutes": [
+              273
+            ],
+            "segments": [
+              {
+                "type": "train",
+                "carrier": "高铁",
+                "number": "G2566",
+                "departure": "18:15",
+                "arrival": "22:57",
+                "from": "合肥",
+                "to": "北京",
+                "price": 442
+              },
+              {
+                "type": "flight",
+                "carrier": "俄罗斯航空",
+                "number": "SU6622/SU1485",
+                "departure": "03:30",
+                "arrival": "10:40",
+                "from": "北京",
+                "to": "莫斯科",
+                "price": 5257
+              }
+            ],
+            "label": "省钱优先"
+          },
+          {
+            "description": "合肥→🚄→北京→✈️→莫斯科",
+            "type": "火车 → 飞机",
+            "totalPrice": 6061,
+            "totalDurationMinutes": 880,
+            "accommodationFee": 0,
+            "transferWaitMinutes": [
+              235
+            ],
+            "segments": [
+              {
+                "type": "train",
+                "carrier": "高铁",
+                "number": "G58",
+                "departure": "19:58",
+                "arrival": "23:35",
+                "from": "合肥",
+                "to": "北京",
+                "price": 473
+              },
+              {
+                "type": "flight",
+                "carrier": "俄罗斯航空",
+                "number": "SU6622/SU1495",
+                "departure": "03:30",
+                "arrival": "09:15",
+                "from": "北京",
+                "to": "莫斯科",
+                "price": 5588
+              }
+            ],
+            "label": "时间优先"
+          }
+        ],
         "error": ""
       },
       {
         "id": "moscow-sochi",
         "label": "莫斯科 → 索契",
-        "recommendations": [],
+        "recommendations": [
+          {
+            "description": "莫斯科→✈️→索契",
+            "type": "直达航班",
+            "totalPrice": 977,
+            "totalDurationMinutes": 230,
+            "accommodationFee": 0,
+            "transferWaitMinutes": [],
+            "segments": [
+              {
+                "type": "flight",
+                "carrier": "UTair航空",
+                "number": "UT275",
+                "departure": "18:35",
+                "arrival": "22:25",
+                "from": "莫斯科",
+                "to": "索契",
+                "price": 977
+              }
+            ],
+            "label": "省钱优先"
+          },
+          {
+            "description": "莫斯科→✈️→索契",
+            "type": "直达航班",
+            "totalPrice": 1727,
+            "totalDurationMinutes": 210,
+            "accommodationFee": 0,
+            "transferWaitMinutes": [],
+            "segments": [
+              {
+                "type": "flight",
+                "carrier": "俄罗斯航空",
+                "number": "SU1074",
+                "departure": "02:25",
+                "arrival": "05:55",
+                "from": "莫斯科",
+                "to": "索契",
+                "price": 1727
+              }
+            ],
+            "label": "时间优先"
+          },
+          {
+            "description": "莫斯科→✈️→索契",
+            "type": "直达航班",
+            "totalPrice": 1073,
+            "totalDurationMinutes": 220,
+            "accommodationFee": 0,
+            "transferWaitMinutes": [],
+            "segments": [
+              {
+                "type": "flight",
+                "carrier": "乌拉尔航空",
+                "number": "U6279",
+                "departure": "12:35",
+                "arrival": "16:15",
+                "from": "莫斯科",
+                "to": "索契",
+                "price": 1073
+              }
+            ],
+            "label": "均衡推荐"
+          }
+        ],
         "error": ""
       },
       {
@@ -58,39 +189,17 @@
       {
         "id": "return",
         "label": "返程｜圣彼得堡 → 合肥",
-        "recommendations": [
-          {
-            "description": "圣彼得堡→✈️→合肥",
-            "type": "直达航班",
-            "totalPrice": 2217,
-            "totalDurationMinutes": 325,
-            "accommodationFee": 0,
-            "transferWaitMinutes": [],
-            "segments": [
-              {
-                "type": "flight",
-                "carrier": "四川航空",
-                "number": "3U3816/3U8927",
-                "departure": "22:30",
-                "arrival": "08:55",
-                "from": "圣彼得堡",
-                "to": "合肥",
-                "price": 2217
-              }
-            ],
-            "label": "省钱优先"
-          }
-        ],
+        "recommendations": [],
         "error": ""
       }
     ],
     "diagnostics": [
       "合肥南 → 北京南: 8 candidates",
       "合肥 → 莫斯科直飞/中转: 0 candidates",
-      "北京 → 莫斯科: 0 candidates",
-      "莫斯科 → 索契: 无效的目的地: 索契",
-      "索契 → 圣彼得堡: 无效的出发地: 索契",
-      "圣彼得堡 → 合肥: 4 candidates"
+      "北京 → 莫斯科: 10 candidates",
+      "莫斯科 → 索契: 10 candidates",
+      "索契 → 圣彼得堡: 0 candidates",
+      "圣彼得堡 → 合肥: 0 candidates"
     ]
   },
   "preTrip": {
