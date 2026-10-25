@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>莫斯科 · 圣彼得堡 · 摩尔曼斯克旅行计划</title>
+  <link rel="icon" href="data:,">
+  <title>2027年1月俄罗斯行程与订票清单</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root{--bg:#10151d;--panel:#18212b;--panel2:#202c37;--text:#f2f5f4;--muted:#a6b4b7;--accent:#f6b35c;--accent2:#67d3c1;--danger:#ff8f76;--line:#31414a;--shadow:0 18px 50px rgba(0,0,0,.22)}
@@ -12,246 +13,276 @@
     @media (min-width:768px){.section:nth-of-type(even){background:rgba(255,255,255,.015);margin-left:calc((960px - 100vw)/2);margin-right:calc((960px - 100vw)/2);padding-left:max(14px,calc((100vw - 960px)/2));padding-right:max(14px,calc((100vw - 960px)/2))}}
     .transport-status{color:var(--muted);font-size:13px;margin:-4px 0 14px}.transport-option{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}.transport-option:first-child{border-top:0;padding-top:0;margin-top:0}
   .date-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.date-grid label{display:grid;gap:6px}.date-grid input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font:inherit;color-scheme:dark}.btn{border:0;cursor:pointer}.source-note{overflow-wrap:anywhere}@media(max-width:600px){.date-grid{grid-template-columns:1fr}}
+
+    /* 最新行程按已出票去程与待定跨城窗口展示；空白单元格保留供后续补票面信息。 */
+    .hero-links{display:flex;gap:12px;flex-wrap:wrap}.hero-links a{font-size:14px}.table-scroll{max-width:100%;overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:12px;background:var(--panel)}table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}th,td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--panel2);color:var(--accent);font-weight:700}tbody tr:last-child td{border-bottom:0}.booking-table{min-width:1320px}.booking-table td{min-width:90px}.booking-table td:nth-child(1){width:175px}.booking-table td:nth-child(2){min-width:180px}.booking-table td:nth-child(6),.booking-table td:nth-child(7){min-width:135px}.booking-table td:empty,.extra-table td:empty{background:rgba(255,255,255,.025)}.extra-table{min-width:680px}.extra-table th:first-child{width:40%}.booked{background:rgba(103,211,193,.13);color:var(--accent2)}.pending{background:rgba(246,179,92,.12);color:var(--accent)}.day .card{box-shadow:none}.day .stay{color:var(--accent2);font-size:13px}#tips li{margin:10px 0}.hotel-blank{display:inline-block;min-width:100px;border-bottom:1px solid var(--muted)}
+    @media print{body{background:#fff;color:#222;font-size:11px}.hero{padding:12px 0}.hero:after,.hero-image,.hero-links,#map{display:none}.hero p,.card p,.muted,.source-note{color:#444}.wrap{width:100%}.section{padding:14px 0!important;margin:0!important}.card,.table-scroll{background:#fff;box-shadow:none;border-color:#bbb}.booking-table{min-width:0;font-size:8px}.booking-table td,.booking-table td:nth-child(2),.booking-table td:nth-child(6),.booking-table td:nth-child(7){min-width:0}.extra-table{min-width:0}th,td{padding:5px;border-color:#bbb}th{background:#eee;color:#222}.hero h1{font-size:26px}.day{break-inside:avoid}.btn{display:none}.warning{color:#333}.footer{padding:12px 0}}
   </style>
 </head>
 <body>
-  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">Russia / three cities</div><h1>莫斯科 · 圣彼得堡 · 摩尔曼斯克</h1><p id="hero-dates">选择出行日期，安排三城行程。</p><div class="hero-badges"><span class="label">3 人同行</span><span class="label" id="trip-length">日期待选</span><span class="label">手动更新票务</span></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
+  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">Russia / January 2027</div><h1>莫斯科 · 圣彼得堡 · 摩尔曼斯克</h1><p>1月1日抵达莫斯科，3日早上乘高铁前往圣彼得堡；4日下午至5日早上前往摩尔曼斯克，8日或9日返回圣彼得堡，再乘飞机回国。</p><div class="hero-badges"><span class="label booked">去程 2 段已出票</span><span class="label pending">跨城 / 回国 4 段待订</span><span class="label">未订票的具体信息留空</span></div><div class="hero-links"><a class="btn" href="#booking">查看订票清单</a></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
   <main>
-    <section class="section"><div class="wrap"><h2>选择行程日期</h2><form id="date-form" class="card"><div class="grid date-grid"><label>合肥出发<input required type="date" name="startDate" id="startDate"></label><label>莫斯科 → 圣彼得堡<input required type="date" name="spbDate" id="spbDate"></label><label>圣彼得堡 → 摩尔曼斯克<input required type="date" name="murmanskDate" id="murmanskDate"></label><label>摩尔曼斯克返程<input required type="date" name="returnDate" id="returnDate"></label></div><button type="submit" class="btn">应用日期</button> <button type="button" id="export-settings" class="btn">导出查票日期</button><p id="date-status" role="status" aria-live="polite" class="source-note">先选出发日，其余日期默认间隔 3 天，可分别调整。</p><p class="source-note">选择日期会重排本页行程。要更新机票和国内接驳高铁，请将导出的 trip-settings.json 放进本地项目目录，再运行 update-trip.cmd。</p></form></div></section>
-    <section class="section"><div class="wrap"><h2>出发前待办</h2><div class="card" id="checklist"></div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>行前须知</h2><div class="grid grid-2"><div class="card"><h3>天气与穿搭</h3><p>根据所选月份核对三城天气，摩尔曼斯克单独准备保暖和防风衣物。</p><p class="muted">出发前 72 小时重新查三城预报；雨具、充电宝、护照复印件放随身包。</p></div><div class="card"><h3>支付与 App</h3><p>俄罗斯银行卡受限情况可能变化，不能只依赖单一支付方式。准备少量现金、确认可用银行卡与境外支付能力。</p><p class="muted">建议：离线翻译、地图、航司 App、打车/叫车工具；提前下载俄语地址截图。</p></div><div class="card"><h3>签证与入境</h3><p>是否免签、停留天数、转机入境及保险要求，以出发时中国外交/俄方官方渠道为准。莫斯科落地后按俄罗斯入境要求办理，不把北京中转当作入境。</p></div><div class="card"><h3>最关键的购票规则</h3><p>涉及转机或分票时，在付款页确认是否同一票号、是否行李直挂、错失衔接由谁负责。最低价不等于联程保障。</p></div></div></div></section>
-    <section class="section"><div class="wrap"><h2>交通规划</h2><p class="transport-status" id="transport-status">尚未生成 Go-home 交通快照。</p><div id="flights" class="grid"></div><p class="source-note">数据由本地脚本调用 Go-home 的携程机票 MCP 与 12306 MCP 后生成。网页不会自动查询；需要更新时运行 update-trip.cmd。</p></div></section>
-    <section class="section"><div class="wrap"><h2>路线地图</h2><div id="map"><div class="map-fallback">地图需要联网加载；下方时间轴和核对清单可离线阅读。</div></div></div></section>
-    <section class="section"><div class="wrap"><h2>住宿片区</h2><div id="hotels" class="grid grid-2"></div></div></section>
-    <section class="section"><div class="wrap"><h2>每日时间轴</h2><p class="source-note">每日行程随所选日期重排；跨城日的实际活动时间需结合票面时刻确认。</p><div id="timeline" class="timeline"></div></div></section>
-    <section class="section"><div class="wrap"><h2>出行提醒</h2><div class="card"><ul id="tips"></ul></div></div></section>
+    <section class="section"><div class="wrap"><h2>每日行程表</h2><p class="source-note" id="date-note"></p><div id="timeline" class="timeline"></div></div></section>
+    <section class="section" id="booking"><div class="wrap"><h2>需要订哪些票</h2><p id="booking-summary"></p><p class="source-note">已出票依据为你提供的截图。其余跨城票暂列“待订”，表示目前没有提供出票凭据；如果已经购买，可补充订单后更新。空白格表示尚未提供具体信息。</p><div class="warning">MU591 的截图有“起飞时间推迟”提示。下表按截图记录为 11:50 → 17:05，以最新航司通知为准。</div><p class="source-note">表格可左右滑动；“计划日期”与“票面出发 / 到达”分开记录。</p><div class="table-scroll" role="region" aria-label="交通订票清单，可左右滑动" tabindex="0"><table class="booking-table"><thead><tr><th scope="col">计划日期</th><th scope="col">路段</th><th scope="col">方式</th><th scope="col">状态</th><th scope="col">航班 / 车次</th><th scope="col">出发机场 / 车站</th><th scope="col">到达机场 / 车站</th><th scope="col">票面出发</th><th scope="col">票面到达</th><th scope="col">票价</th></tr></thead><tbody id="ticket-rows"></tbody></table></div><p class="source-note">机票截图未显示价格，因此已出票航段的票价也留空。未订票的班次、机场或车站、票面日期和时间、价格全部留空；已确定的路线与计划窗口保留。</p><a class="btn" href="行程与订票清单.md" download>下载行程与订票清单</a></div></section>
+    <section class="section"><div class="wrap"><h2>其他可能需要预订的项目</h2><p class="source-note">以下按实际活动选择，没有提供已预订信息。</p><div class="table-scroll" role="region" aria-label="可选预订项目，可左右滑动" tabindex="0"><table class="extra-table"><thead><tr><th scope="col">项目</th><th scope="col">状态</th><th scope="col">具体日期 / 场次</th><th scope="col">项目 / 订单信息</th><th scope="col">价格</th></tr></thead><tbody id="extra-rows"></tbody></table></div></div></section>
+    <section class="section"><div class="wrap"><h2>住宿日期核对</h2><p class="source-note">住宿是否已订尚未确认。先按下面的晚数范围核对，酒店名称与订单信息留空待补。</p><div id="hotels" class="grid grid-2"></div></div></section>
+    <section class="section"><div class="wrap"><h2>先订哪几段</h2><div class="card"><ol id="tips"></ol></div></div></section>
+    <section class="section"><div class="wrap"><h2>路线地图</h2><p class="source-note">路线：合肥 → 上海 → 莫斯科 → 圣彼得堡 → 摩尔曼斯克 → 圣彼得堡 → 回国。地图展示俄罗斯三城，摩尔曼斯克游玩后返回圣彼得堡。</p><div id="map"><div class="map-fallback">地图需要联网加载，行程表和订票清单可离线阅读。</div></div></div></section>
   </main>
-  <footer class="footer"><div class="wrap"><p class="disclaimer" id="disclaimer">价格、库存、开放时间和交通以航空公司、购票平台、酒店与景点官方信息为准。</p></div></footer>
-
+  <footer class="footer"><div class="wrap"><p class="disclaimer">更新于2026年10月26日。已出票信息来自用户截图，未查询实时票价、余票或景点开放安排。</p></div></footer>
   <script id="trip-data" type="application/json">
 {
-  "title": "莫斯科 · 圣彼得堡 · 摩尔曼斯克旅行计划",
-  "startDate": "",
-  "tripSettings": {
-    "route": [
-      "莫斯科",
-      "圣彼得堡",
-      "摩尔曼斯克"
-    ],
-    "startDate": "",
-    "spbDate": "",
-    "murmanskDate": "",
-    "returnDate": ""
-  },
-  "transportSnapshot": {
-    "source": "Go-home",
-    "summary": "请选择日期后手动更新票务快照。",
-    "plans": []
-  },
-  "reminders": [
+  "title": "2027年1月俄罗斯行程与订票清单",
+  "dateNote": "按截图“1月1日 周五”整理为2027年1月。俄罗斯境内行程按当地日期安排；航班时刻按各出发地、到达地当地时间记录。",
+  "route": [
+    "合肥",
+    "上海",
+    "莫斯科",
+    "圣彼得堡",
+    "摩尔曼斯克",
+    "圣彼得堡",
+    "回国"
+  ],
+  "days": [
     {
-      "item": "确认跨城交通、行李与转机规则",
-      "leadDays": 30
+      "date": "1月1日 · 周五",
+      "city": "合肥 → 上海 → 莫斯科",
+      "plan": "07:30 合肥起飞，08:50 抵达上海浦东；11:50 从浦东起飞，17:05 抵达莫斯科谢列梅捷沃机场 C 航站楼。",
+      "note": "去程两段已出票。落地后安排入境、取行李、进城和入住，晚上以休息为主。",
+      "stay": "莫斯科"
     },
     {
-      "item": "确认三城住宿及晚到入住",
-      "leadDays": 30
+      "date": "1月2日 · 周六",
+      "city": "莫斯科",
+      "plan": "莫斯科游玩一天。",
+      "note": "具体景点与入内预约另行安排。",
+      "stay": "莫斯科"
     },
     {
-      "item": "核实博物馆预约及营业安排",
-      "leadDays": 7
+      "date": "1月3日 · 周日",
+      "city": "莫斯科 → 圣彼得堡",
+      "plan": "早上乘高铁前往圣彼得堡，抵达后在市区游玩。",
+      "note": "高铁未提供订单，车次、车站与时刻留空。当天可游玩多久取决于列车抵达时间。",
+      "stay": "圣彼得堡"
     },
     {
-      "item": "核对天气、接送与保暖装备",
-      "leadDays": 3
+      "date": "1月4日 · 周一",
+      "city": "圣彼得堡 / 前往摩尔曼斯克",
+      "plan": "前往摩尔曼斯克的计划窗口为4日下午至5日早上，具体安排未定。",
+      "note": "如果4日出发，白天按剩余时间活动；交通方式、出发及抵达时刻均待确定。",
+      "stay": "按实际跨城时间确定"
+    },
+    {
+      "date": "1月5日 · 周二",
+      "city": "摩尔曼斯克 / 抵达日",
+      "plan": "如果5日早上抵达，先入住或寄存行李，再安排活动；如果4日已到，则继续游玩。",
+      "note": "抵达当天根据交通与休息情况安排活动。",
+      "stay": "摩尔曼斯克"
+    },
+    {
+      "date": "1月6日 · 周三",
+      "city": "摩尔曼斯克",
+      "plan": "摩尔曼斯克游玩。",
+      "note": "具体活动、接送与预约另行安排。",
+      "stay": "摩尔曼斯克"
+    },
+    {
+      "date": "1月7日 · 周四",
+      "city": "摩尔曼斯克",
+      "plan": "摩尔曼斯克游玩。",
+      "note": "保留自由活动与休息时间。",
+      "stay": "摩尔曼斯克"
+    },
+    {
+      "date": "1月8日 · 周五",
+      "city": "摩尔曼斯克 / 返回圣彼得堡",
+      "plan": "方案一：今天返回圣彼得堡；方案二：继续在摩尔曼斯克游玩，9日再返回。",
+      "note": "返回日期确定后，再安排圣彼得堡停留和回国衔接。",
+      "stay": "按返回日期及回国航班确定"
+    },
+    {
+      "date": "1月9日 · 周六",
+      "city": "返回圣彼得堡 / 衔接回国",
+      "plan": "如果8日未返回，今天从摩尔曼斯克前往圣彼得堡；之后从圣彼得堡乘飞机回国。",
+      "note": "回国起飞日期、航班及到家日期均未确认，暂不限定为9日回国。",
+      "stay": "按回国航班确定"
     }
   ],
-  "tips": [
-    "城市顺序：莫斯科 → 圣彼得堡 → 摩尔曼斯克。",
-    "出发与返程仍以合肥为起终点；北京高铁接驳作为去程候选。",
-    "俄罗斯境内火车不在 12306 查询范围内；当前脚本仅查询境内航班候选。",
-    "跨城日保留接送和休息时间，按实际票面抵离时刻调整活动。"
+  "tickets": [
+    {
+      "window": "1月1日",
+      "route": "合肥 → 上海",
+      "mode": "飞机",
+      "status": "已出票",
+      "number": "MU6582",
+      "from": "合肥新桥",
+      "to": "上海浦东 T1",
+      "departure": "1月1日 07:30",
+      "arrival": "1月1日 08:50",
+      "price": "",
+      "note": "来源：用户提供的出票截图。"
+    },
+    {
+      "window": "1月1日",
+      "route": "上海 → 莫斯科",
+      "mode": "飞机",
+      "status": "已出票",
+      "number": "MU591",
+      "from": "上海浦东 T1",
+      "to": "莫斯科谢列梅捷沃 C",
+      "departure": "1月1日 11:50",
+      "arrival": "1月1日 17:05",
+      "price": "",
+      "note": "截图有起飞时间推迟提示，以上时刻按截图记录，以最新航司通知为准。"
+    },
+    {
+      "window": "1月3日早上",
+      "route": "莫斯科 → 圣彼得堡",
+      "mode": "高铁",
+      "status": "待订",
+      "number": "",
+      "from": "",
+      "to": "",
+      "departure": "",
+      "arrival": "",
+      "price": "",
+      "note": "早上出发是行程计划，具体车次与车站尚未提供。"
+    },
+    {
+      "window": "1月4日下午—5日早上（未定）",
+      "route": "圣彼得堡 → 摩尔曼斯克",
+      "mode": "",
+      "status": "待订",
+      "number": "",
+      "from": "",
+      "to": "",
+      "departure": "",
+      "arrival": "",
+      "price": "",
+      "note": "交通方式及具体出行时间未定。"
+    },
+    {
+      "window": "1月8日或9日（未定）",
+      "route": "摩尔曼斯克 → 圣彼得堡",
+      "mode": "",
+      "status": "待订",
+      "number": "",
+      "from": "",
+      "to": "",
+      "departure": "",
+      "arrival": "",
+      "price": "",
+      "note": "先确定返回哪一天，再填写实际票面信息。"
+    },
+    {
+      "window": "返回圣彼得堡后，日期未定",
+      "route": "圣彼得堡 → 回国",
+      "mode": "飞机",
+      "status": "待订",
+      "number": "",
+      "from": "",
+      "to": "",
+      "departure": "",
+      "arrival": "",
+      "price": "",
+      "note": "回国目的机场、中转方案与到家日期均留待确认。"
+    }
   ],
-  "disclaimer": "游玩顺序是行程草案；票价、余票和时刻以手动生成快照及购票页为准。景点营业和预约安排请在出发前核对。",
-  "hotelAreas": [
+  "extras": [
     {
-      "area": "莫斯科｜市中心",
-      "reason": "沿用市中心住宿思路，按实际抵达机场安排接送。",
-      "options": [
-        {
-          "tier": "住宿方向",
-          "name": "市中心公寓或商务酒店",
-          "priceRange": "按所选日期询价",
-          "note": "三人同行核对房型、晚到入住与取消规则。"
-        }
-      ]
+      "name": "景点门票 / 活动预约（如安排）",
+      "status": "未确认",
+      "date": "",
+      "number": "",
+      "price": ""
     },
     {
-      "area": "圣彼得堡｜涅瓦大街—海军部区",
-      "reason": "沿用原有市区游玩动线，减少换酒店。",
-      "options": [
-        {
-          "tier": "住宿方向",
-          "name": "市区公寓或商务酒店",
-          "priceRange": "按所选日期询价",
-          "note": "核对电梯、行李寄存和跨城接送。"
-        }
-      ]
+      "name": "机场接送 / 市内接驳（如需提前预订）",
+      "status": "未确认",
+      "date": "",
+      "number": "",
+      "price": ""
     },
     {
-      "area": "摩尔曼斯克｜市区",
-      "reason": "以市区为住宿基地，周边活动按季节、天气和交通另行确认。",
-      "options": [
-        {
-          "tier": "住宿方向",
-          "name": "市区酒店或公寓",
-          "priceRange": "按所选日期询价",
-          "note": "核对供暖、接送、晚到入住及取消规则。"
-        }
-      ]
+      "name": "回国后的国内接驳票（如需）",
+      "status": "未确认",
+      "date": "",
+      "number": "",
+      "price": ""
+    }
+  ],
+  "hotels": [
+    {
+      "city": "莫斯科",
+      "nights": "1月1日、2日",
+      "note": "1日抵达后入住，3日早上离开。"
+    },
+    {
+      "city": "圣彼得堡",
+      "nights": "1月3日；4日晚是否住宿待定",
+      "note": "4日晚住宿取决于前往摩尔曼斯克的实际时间。"
+    },
+    {
+      "city": "摩尔曼斯克",
+      "nights": "4日或5日起，住至8日或9日离开前",
+      "note": "入住和离店日期均需与跨城票对应。"
+    },
+    {
+      "city": "圣彼得堡返程停留",
+      "nights": "是否过夜待定",
+      "note": "按摩尔曼斯克返回时间与回国航班确定。"
     }
   ],
   "cities": [
     {
       "name": "莫斯科",
       "lat": 55.7558,
-      "lng": 37.6173,
-      "activities": [
-        "市中心步行与休息",
-        "红场与克里姆林宫（预约另核）",
-        "阿尔巴特街区与自由活动"
-      ]
+      "lng": 37.6173
     },
     {
-      "name": "圣彼得堡",
+      "name": "圣彼得堡（游玩与回国出发）",
       "lat": 59.9343,
-      "lng": 30.3351,
-      "activities": [
-        "涅瓦大街与宫殿广场",
-        "冬宫（预约另核）",
-        "市区自由活动，夏宫按开放情况另选"
-      ]
+      "lng": 30.3351
     },
     {
       "name": "摩尔曼斯克",
       "lat": 68.9707,
-      "lng": 33.0749,
-      "activities": [
-        "市区散步与休息",
-        "市区参观与自由活动",
-        "周边活动候选，按季节和天气确认"
-      ]
+      "lng": 33.0749
     }
+  ],
+  "tips": [
+    "优先把“摩尔曼斯克 → 圣彼得堡”和“圣彼得堡 → 回国”两段衔接好，再确定摩尔曼斯克的住宿晚数。",
+    "1月3日是早上乘车、抵达后游玩；不要把这一天按圣彼得堡完整全天计算。",
+    "4日下午至5日早上、8日或9日都是计划窗口，尚未代表实际票面时间。",
+    "若返程两段分开出票，先核对行李、改签和误机责任，并给换乘留出余量。"
   ]
 }
   </script>
-
   <script>
   function escapeHTML(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
   function isInChinaBBox(lat,lng){return lng>=72.004&&lng<=137.8347&&lat>=0.8293&&lat<=55.8271}
   function gcj02ToWgs84(lat,lng){if(!isInChinaBBox(lat,lng))return{lat:lat,lng:lng};return{lat:lat,lng:lng}}
   function buildNavLink(lat,lng,label){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(lat+','+lng)}
   function initTravelMap(id,points,opts){if(typeof L==='undefined')return null;var map=L.map(id);L.tileLayer((opts&&opts.tileUrl)||'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:(opts&&opts.attribution)||'© OpenStreetMap contributors'}).addTo(map);var coords=[];points.forEach(function(p,i){coords.push([p.lat,p.lng]);var icon=L.divIcon({className:'route-pin',html:'<span style="background:#f6b35c;color:#18212b;border-radius:50%;display:grid;place-items:center;width:28px;height:28px;font-weight:800">'+(i+1)+'</span>',iconSize:[28,28],iconAnchor:[14,14]});L.marker([p.lat,p.lng],{icon:icon}).addTo(map).bindPopup('<b>'+escapeHTML(p.name)+'</b><br>'+escapeHTML(p.time||'')+'<br><a target="_blank" href="'+buildNavLink(p.lat,p.lng,p.name)+'">打开地图</a>')});if(coords.length>1)L.polyline(coords,{dashArray:'6 8',color:'#67d3c1',weight:2}).addTo(map);map.fitBounds(coords,{padding:[24,24]});return map}
-  function computeReminders(startDateISO,items){return items.map(function(it){var d=new Date(startDateISO+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-it.leadDays);return{item:it.item,leadDays:it.leadDays,deadline:d.toISOString().slice(0,10)}}).sort(function(a,b){return a.deadline.localeCompare(b.deadline)})}
-  function renderChecklistHTML(items){return '<ul>'+items.map(function(r){return '<li class="todo-item"><input type="checkbox"><span class="todo-deadline">'+r.deadline+' 前</span><span>'+escapeHTML(r.item)+'（建议提前 '+r.leadDays+' 天）</span></li>'}).join('')+'</ul>'}
-  function reminderBadgeHTML(days){return '<span class="label danger">⚠ 建议提前 '+days+' 天订</span>'}
   </script>
+
   <script>
-    // 日期只控制行程展示；票务使用相同设置的手动快照，绝不重用旧日期价格。
+    // 最新逻辑：去程票面取自用户截图；4—5日和8—9日保留为计划窗口，不生成虚构班次与时刻。
+    // 采用固定行程，避免旧版浏览器保存的日期覆盖已确认的去程，也不自动查询或覆盖订票状态。
     const trip=JSON.parse(document.getElementById('trip-data').textContent);
     const esc=escapeHTML;
-    const keys=['startDate','spbDate','murmanskDate','returnDate'];
-    const form=document.getElementById('date-form');
-    const status=document.getElementById('date-status');
-    const storageKey='russia-trip-moscow-spb-murmansk-v1';
-    const route=['莫斯科','圣彼得堡','摩尔曼斯克'];
-    let settings=trip.tripSettings;
-    let travelMap=null;
-    function addDays(day,offset){const value=new Date(day+'T00:00:00Z');value.setUTCDate(value.getUTCDate()+offset);return value.toISOString().slice(0,10)}
-    function validate(value){
-      if(!value||JSON.stringify(value.route)!==JSON.stringify(route))throw Error('行程城市设置不匹配。');
-      keys.forEach(key=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(value[key]||'')||addDays(value[key],0)!==value[key])throw Error('请填写有效日期。')});
-      if(!keys.every((key,i)=>!i||value[key]>value[keys[i-1]]))throw Error('每个跨城日期必须晚于前一段日期。');
-      if((Date.parse(value.returnDate)-Date.parse(value.startDate))/86400000>60)throw Error('当前页面支持最多 60 天的行程。');
-      return value;
-    }
-    function formSettings(){return validate({route,...Object.fromEntries(keys.map(key=>[key,document.getElementById(key).value]))})}
-    function sameSettings(a,b){return !!a&&!!b&&JSON.stringify(a.route)===JSON.stringify(b.route)&&keys.every(key=>a[key]===b[key])}
-    function durationText(minutes){return minutes>0?Math.floor(minutes/60)+'小时'+minutes%60+'分':'时长待核实'}
-    function recommendationHTML(value){
-      const segments=(value.segments||[]).map(s=>'<li>'+esc([s.from,s.to].join(' → '))+' · '+esc(s.number)+' · '+esc(s.departure)+'→'+esc(s.arrival)+' · ¥'+esc(s.price)+'</li>').join('');
-      return '<div class="transport-option"><span class="label">'+esc(value.label)+'</span><p>'+esc(value.description)+' · ¥'+esc(value.totalPrice)+' / 人 · '+durationText(value.totalDurationMinutes)+'</p><ul>'+segments+'</ul></div>';
-    }
-    function renderTransport(){
-      const snapshot=trip.transportSnapshot||{};
-      const match=sameSettings(snapshot.settings,settings);
-      document.getElementById('transport-status').textContent=match?'票务快照：'+(snapshot.generatedAt||'时间未记录')+' · '+(snapshot.summary||''):'当前日期与已发布票务快照不同，请手动更新。';
-      document.getElementById('flights').innerHTML=match?(snapshot.plans||[]).map(p=>'<article class="card"><h3>'+esc(p.label)+' · '+esc(p.date||'')+'</h3>'+((p.recommendations||[]).map(recommendationHTML).join('')||'<p>该段暂无可用方案。</p>')+(p.error?'<p>'+esc(p.error)+'</p>':'')+'</article>').join(''):'<article class="card"><p>已按新路线和日期排好游玩顺序，票价及航班等待手动查询。</p></article>';
-    }
-    function buildDays(value){
-      const days=[];
-      const cityStarts=[addDays(value.startDate,1),value.spbDate,value.murmanskDate];
-      for(let day=value.startDate;day<=value.returnDate;day=addDays(day,1)){
-        let cityIndex=day<value.spbDate?0:day<value.murmanskDate?1:2;
-        const city=trip.cities[cityIndex];
-        const offset=Math.max(0,Math.round((Date.parse(day)-Date.parse(cityStarts[cityIndex]))/86400000));
-        let theme=city.name+' · '+city.activities[offset%city.activities.length];
-        let note='按体力调整活动顺序，具体营业与预约安排出发前核对。';
-        if(day===value.startDate){theme='合肥出发 · 前往莫斯科';note='直飞或北京高铁接驳由手动查票结果决定，到达日以票面为准。'}
-        else if(day===value.spbDate){theme='莫斯科 → 圣彼得堡';note='跨城日保留接送、值机和休息时间，抵达后轻量活动。'}
-        else if(day===value.murmanskDate){theme='圣彼得堡 → 摩尔曼斯克';note='按实际航班安排市区接送，抵达后休息。'}
-        else if(day===value.returnDate){theme='摩尔曼斯克返程 → 合肥';note='按实际转机和跨天情况确认到家日期。'}
-        days.push({date:day,theme,note,weekday:['周日','周一','周二','周三','周四','周五','周六'][new Date(day+'T00:00:00Z').getUTCDay()]});
-      }
-      return days;
-    }
-    function render(){
-      const valid=keys.every(key=>settings&&settings[key]);
-      document.getElementById('tips').innerHTML=trip.tips.map(t=>'<li>'+esc(t)+'</li>').join('');
-      document.getElementById('disclaimer').textContent=trip.disclaimer;
-      document.getElementById('hotels').innerHTML=trip.hotelAreas.map(a=>'<article class="card"><h3>'+esc(a.area)+'</h3><p>'+esc(a.reason)+'</p>'+a.options.map(o=>'<strong>'+esc(o.name)+'</strong><p>'+esc(o.priceRange)+' · '+esc(o.note)+'</p>').join('')+'</article>').join('');
-      if(valid){
-        document.getElementById('hero-dates').textContent=settings.startDate+' 从合肥出发，'+settings.returnDate+' 从摩尔曼斯克返程。';
-        const days=buildDays(settings);
-        document.getElementById('trip-length').textContent=days.length+' 个行程日';
-        document.getElementById('checklist').innerHTML=renderChecklistHTML(computeReminders(settings.startDate,trip.reminders));
-        document.getElementById('timeline').innerHTML=days.map(d=>'<article class="day"><div class="day-date">'+esc(d.date)+' · '+esc(d.weekday)+'</div><h3>'+esc(d.theme)+'</h3><p class="muted">'+esc(d.note)+'</p></article>').join('');
-      }else{
-        document.getElementById('checklist').textContent='选好日期后显示准备事项和提醒日期。';
-        document.getElementById('timeline').textContent='选好日期后生成每日行程。';
-      }
-      renderTransport();
-      if(typeof L!=='undefined'){
-        if(travelMap)travelMap.remove();
-        document.getElementById('map').innerHTML='';
-        travelMap=initTravelMap('map',trip.cities.map(c=>({...c,time:''})));
-      }
-    }
-    // 浏览器保存日期仅影响本机；导出设置后，本地脚本读取相同参数生成发布快照。
-    try{const saved=JSON.parse(localStorage.getItem(storageKey));if(saved)settings=validate(saved)}catch(error){}
-    keys.forEach(key=>document.getElementById(key).value=settings[key]||'');
-    document.getElementById('startDate').addEventListener('change',()=>{
-      const start=document.getElementById('startDate').value;
-      if(!start)return;
-      [['spbDate',3],['murmanskDate',6],['returnDate',9]].forEach(([key,offset])=>{const input=document.getElementById(key);if(!input.value)input.value=addDays(start,offset)});
-    });
-    form.addEventListener('submit',event=>{
-      event.preventDefault();
-      try{settings=formSettings();try{localStorage.setItem(storageKey,JSON.stringify(settings))}catch(error){}render();status.textContent='日期已应用。需要更新票务时导出查票日期。'}
-      catch(error){status.textContent=error.message}
-    });
-    document.getElementById('export-settings').addEventListener('click',()=>{
-      try{
-        settings=formSettings();render();
-        const url=URL.createObjectURL(new Blob([JSON.stringify(settings,null,2)],{type:'application/json;charset=utf-8'}));
-        const a=document.createElement('a');a.href=url;a.download='trip-settings.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-        status.textContent='已导出 trip-settings.json；放入本地项目目录后运行 update-trip.cmd。';
-      }catch(error){status.textContent=error.message}
-    });
-    render();
+    document.getElementById('date-note').textContent=trip.dateNote;
+    document.getElementById('booking-summary').textContent='已出票 '+trip.tickets.filter(t=>t.status==='已出票').length+' 段；跨城与回国待订 '+trip.tickets.filter(t=>t.status==='待订').length+' 段。';
+    document.getElementById('timeline').innerHTML=trip.days.map(d=>'<article class="day"><div class="day-date">'+esc(d.date)+'</div><h3>'+esc(d.city)+'</h3><p>'+esc(d.plan)+'</p><p class="muted">'+esc(d.note)+'</p><p class="stay">住宿计划：'+esc(d.stay)+'</p></article>').join('');
+    document.getElementById('ticket-rows').innerHTML=trip.tickets.map(t=>'<tr><td>'+esc(t.window)+'</td><td>'+esc(t.route)+'</td><td>'+esc(t.mode)+'</td><td><span class="label '+(t.status==='已出票'?'booked':'pending')+'">'+esc(t.status)+'</span></td>'+[t.number,t.from,t.to,t.departure,t.arrival,t.price].map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('');
+    document.getElementById('extra-rows').innerHTML=trip.extras.map(t=>'<tr>'+[t.name,t.status,t.date,t.number,t.price].map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('');
+    document.getElementById('hotels').innerHTML=trip.hotels.map(h=>'<article class="card"><h3>'+esc(h.city)+'</h3><p>'+esc(h.nights)+'</p><p>'+esc(h.note)+'</p><p>酒店：<span class="hotel-blank"></span></p><p>订单：<span class="hotel-blank"></span></p></article>').join('');
+    document.getElementById('tips').innerHTML=trip.tips.map(t=>'<li>'+esc(t)+'</li>').join('');
   </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>render();</script>
+  <script>
+    // 地图只展示城市路线；地图服务无法访问时，不影响行程和订票表。
+    if(typeof L!=='undefined'){document.getElementById('map').replaceChildren();initTravelMap('map',trip.cities);}
+  </script>
 </body>
 </html>
