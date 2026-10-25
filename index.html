@@ -17,7 +17,7 @@
   </style>
 </head>
 <body>
-  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">RUSSIA / JANUARY 2027</div><h1><span>莫斯科</span> · <span>圣彼得堡</span> · <span>摩尔曼斯克</span></h1><p>1月1日抵达莫斯科，3日早上前往圣彼得堡；4日下午至5日早上前往摩尔曼斯克，8日或9日返回圣彼得堡。9日22:20起飞回国，10日经成都换机场后于19:10抵达合肥。</p><div class="hero-badges"><span class="label booked">去程 2 段、返程 2 段已出票</span><span class="label pending">跨城 3 段待订</span><span class="label">金额待补充</span></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
+  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">RUSSIA / JANUARY 2027</div><h1><span>莫斯科</span> · <span>圣彼得堡</span> · <span>摩尔曼斯克</span></h1><p>1月1日抵达莫斯科，3日早上前往圣彼得堡；4日下午至5日早上前往摩尔曼斯克，8日或9日返回圣彼得堡。9日22:20起飞回国，10日经成都换机场后于19:10抵达合肥。</p><div class="hero-badges"><span class="label booked">去程 2 段、返程 2 段已出票</span><span class="label pending">跨城 3 段待订</span><span class="label" id="known-cost">机票费用已补充</span></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
   <nav class="tabs-bar" aria-label="旅行清单分类"><div class="wrap tabs" role="tablist" aria-label="旅行清单">
     <button class="tab" type="button" role="tab" id="tab-travel" aria-controls="panel-travel" aria-selected="true" tabindex="0" data-panel="travel"><span class="tab-number">01</span>机火酒行程与费用</button>
     <button class="tab" type="button" role="tab" id="tab-packing" aria-controls="panel-packing" aria-selected="false" tabindex="-1" data-panel="packing"><span class="tab-number">02</span>携带物品清单</button>
@@ -28,8 +28,8 @@
     <section class="tab-panel" role="tabpanel" id="panel-travel" aria-labelledby="tab-travel" tabindex="0">
       <div class="wrap panel-head"><h2>机火酒行程清单＋费用清单</h2><p>机票、火车票、接驳路费和住宿按行程逐项核对，未确认的信息与金额留空。</p><a class="btn" href="行程与订票清单.md" download>下载机火酒行程与费用清单</a></div>
       <section class="section"><div class="wrap"><h2>每日行程与住宿安排</h2><p class="source-note" id="date-note"></p><p class="source-note">表格可左右滑动，跨城窗口仍保留待定范围。</p><div class="table-scroll" role="region" aria-label="每日行程与住宿表，可左右滑动" tabindex="0"><table class="itinerary-table"><thead><tr><th scope="col">日期</th><th scope="col">城市 / 路段</th><th scope="col">行程安排</th><th scope="col">住宿计划</th></tr></thead><tbody id="itinerary-rows"></tbody></table></div></div></section>
-      <section class="section" id="booking"><div class="wrap"><h2>机票与火车票</h2><p id="booking-summary"></p><p class="source-note">去程两段、返程两段均已出票，依据为你提供的两张截图。其余三段跨城交通暂列待订，具体票面信息留空。</p><div class="warning">MU591 截图有“起飞时间推迟”提示，下表按截图记录为 11:50 → 17:05，以最新航司通知为准。</div><div class="warning">返程需要换机场：1月10日11:50抵达成都天府T1，下一班17:15从成都双流T1起飞。票面间隔5小时25分，跨机场交通已单列，方式和费用待补。</div><div class="table-scroll" role="region" aria-label="交通订票清单，可左右滑动" tabindex="0"><table class="booking-table"><thead><tr><th scope="col">计划日期</th><th scope="col">路段</th><th scope="col">方式</th><th scope="col">状态</th><th scope="col">航班 / 车次</th><th scope="col">出发机场 / 车站</th><th scope="col">到达机场 / 车站</th><th scope="col">票面出发</th><th scope="col">票面到达</th><th scope="col">票价</th></tr></thead><tbody id="ticket-rows"></tbody></table></div></div></section>
-      <section class="section"><div class="wrap"><h2>机票与跨城交通费用</h2><p class="source-note">费用按整笔订单或整项支出记录，暂不计算人均分摊。去程合肥 → 上海 → 莫斯科、返程圣彼得堡 → 成都 → 合肥各按一笔订单总价记账，避免航段重复计费。成都天府 → 双流的换机场路费另计；截图未显示价格，金额留空。</p><div class="table-scroll" role="region" aria-label="跨城交通费用表，可左右滑动" tabindex="0" id="transport-costs"></div></div></section>
+      <section class="section" id="booking"><div class="wrap"><h2>机票与火车票</h2><p id="booking-summary"></p><p class="source-note">去程两段、返程两段均已出票，依据为你提供的两张截图。其余三段跨城交通暂列待订，具体票面信息留空。去返程的整单费用见下方费用表，航段票价不拆分。</p><div class="warning">MU591 截图有“起飞时间推迟”提示，下表按截图记录为 11:50 → 17:05，以最新航司通知为准。</div><div class="warning">返程需要换机场：1月10日11:50抵达成都天府T1，下一班17:15从成都双流T1起飞。票面间隔5小时25分，跨机场交通已单列，方式和费用待补。</div><div class="table-scroll" role="region" aria-label="交通订票清单，可左右滑动" tabindex="0"><table class="booking-table"><thead><tr><th scope="col">计划日期</th><th scope="col">路段</th><th scope="col">方式</th><th scope="col">状态</th><th scope="col">航班 / 车次</th><th scope="col">出发机场 / 车站</th><th scope="col">到达机场 / 车站</th><th scope="col">票面出发</th><th scope="col">票面到达</th><th scope="col">票价</th></tr></thead><tbody id="ticket-rows"></tbody></table></div></div></section>
+      <section class="section"><div class="wrap"><h2>机票与跨城交通费用</h2><p class="source-note">费用按整笔订单或整项支出记录，暂不计算人均分摊。去程合肥 → 上海 → 莫斯科、返程圣彼得堡 → 成都 → 合肥各按一笔订单总价记账，避免航段重复计费。去程订单 ¥2,024，返程订单 ¥3,021，按已出票订单金额记录。成都天府 → 双流的换机场路费及其余未知费用继续留空。</p><div class="table-scroll" role="region" aria-label="跨城交通费用表，可左右滑动" tabindex="0" id="transport-costs"></div></div></section>
       <section class="section"><div class="wrap"><h2>接驳与市内路费</h2><p class="source-note">列出需要核对的机场、车站和住宿接驳，以及市内交通。具体交通方式、是否预订、币种与金额尚未确认；如已包含在其他费用中，后续标明，避免重复记账。</p><div class="table-scroll" role="region" aria-label="接驳与市内路费表，可左右滑动" tabindex="0" id="ground-costs"></div></div></section>
       <section class="section"><div class="wrap"><h2>住宿清单与费用</h2><p class="source-note">目前没有住宿订单信息。下面的日期与晚数是计划范围，酒店、房型、实际入住及离店日期、间数和费用均留空。费用按整笔住宿订单记录。</p><div class="grid grid-2" id="hotels"></div></div></section>
       <section class="section" id="expenses"><div class="wrap"><h2>费用汇总</h2><p id="amount-status" class="source-note"></p><p class="source-note">人民币和卢布分别统计，不换算汇率。汇总只计算已填写且标明币种的金额；空白金额不按 0 元处理。条目未填齐时，显示的是已填小计。</p><div class="grid grid-2" id="expense-summary"></div></div></section>
@@ -290,11 +290,11 @@
       "window": "1月1日",
       "item": "合肥 → 上海 → 莫斯科（去程两段合计）",
       "status": "已出票",
-      "note": "按去程订单总价记一次，避免两段重复计费。",
-      "currency": "",
+      "note": "按已出票订单截图记录人民币2024元，包含去程两段，不拆分航段价格。",
+      "currency": "CNY",
       "budget": "",
-      "actual": "",
-      "paid": ""
+      "actual": 2024,
+      "paid": 2024
     },
     {
       "window": "1月3日早上",
@@ -330,11 +330,11 @@
       "window": "1月9—10日",
       "item": "圣彼得堡 → 成都 → 合肥（返程两段合计）",
       "status": "已出票",
-      "note": "按返程订单总价记一次。成都天府至双流的跨机场交通另计。",
-      "currency": "",
+      "note": "按已出票订单截图记录人民币3021元，包含返程两段；成都跨机场交通另计。",
+      "currency": "CNY",
       "budget": "",
-      "actual": "",
-      "paid": ""
+      "actual": 3021,
+      "paid": 3021
     }
   ],
   "groundCosts": [
@@ -474,7 +474,7 @@
 
   <script>
     // 最新逻辑：第一个页签展示机火酒、接驳与费用；第二至第四页签仅保留空面板。
-    // 去返程均按两段已出票航班展示，各自只合计一次订单费用；成都跨机场接驳单列，行程延长至1月10日。
+    // 最新费用按已出票订单截图记录：去程2024元、返程3021元，各记一次整单金额，航段不分摊；其他未知费用留空。
     const trip=JSON.parse(document.getElementById('trip-data').textContent);
     function esc(value){return String(value==null?'':value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
     function cells(values){return values.map(value=>'<td>'+esc(value)+'</td>').join('')}
@@ -503,6 +503,8 @@
       const row=(label,values)=>'<tr>'+cells([label,...['budget','actual','paid'].map(key=>subtotal(values,key))])+'</tr>';
       return '<table class="summary-table"><thead><tr><th scope="col">类别</th><th scope="col">预算</th><th scope="col">实际总额</th><th scope="col">已付</th></tr></thead><tbody>'+categories.map(category=>row(category,items.filter(item=>item.category===category))).join('')+'</tbody><tfoot>'+row('已填小计',items)+'</tfoot></table>';
     }
+    const knownAirfare=subtotal(trip.transportCosts.filter(item=>item.status==='已出票'&&item.currency==='CNY'),'actual');
+    document.getElementById('known-cost').textContent=knownAirfare?'已出票机票合计 ¥'+Number(knownAirfare).toLocaleString('zh-CN'):'机票金额待补充';
     const recorded=expenses.filter(item=>['budget','actual','paid'].some(key=>amount(item[key])!==null)).length;
     document.getElementById('amount-status').textContent='已有金额 '+recorded+' / '+expenses.length+' 项'+(recorded?'。':'，总费用暂留空。');
     document.getElementById('expense-summary').innerHTML=[['CNY','人民币'],['RUB','俄罗斯卢布']].map(([currency,label])=>'<article class="card"><h3>'+label+' · '+currency+'</h3><div class="table-scroll" role="region" aria-label="'+label+'费用汇总，可左右滑动" tabindex="0">'+summaryTable(currency)+'</div></article>').join('');
