@@ -4,36 +4,44 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="data:,">
-  <title>2027年1月俄罗斯行程与订票清单</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <title>2027年1月俄罗斯旅行清单</title>
   <style>
-    :root{--bg:#10151d;--panel:#18212b;--panel2:#202c37;--text:#f2f5f4;--muted:#a6b4b7;--accent:#f6b35c;--accent2:#67d3c1;--danger:#ff8f76;--line:#31414a;--shadow:0 18px 50px rgba(0,0,0,.22)}
-    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top right,#253845 0,#10151d 42%);color:var(--text);font:15px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif} a{color:inherit} .wrap{width:min(960px,calc(100% - 28px));margin:auto}.hero{position:relative;overflow:hidden;padding:42px 0 30px;border-bottom:1px solid var(--line)}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,21,29,.96) 0 52%,rgba(16,21,29,.35));pointer-events:none}.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.hero h1{font:700 clamp(30px,6vw,58px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:.02em;margin:12px 0}.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}.hero p{color:#d5dfdf;max-width:580px}.hero-image{width:100%;height:240px;object-fit:cover;display:block;border-radius:18px;box-shadow:var(--shadow);opacity:.9}.section{padding:32px 0}.section h2{font:700 28px/1.2 Georgia,serif;margin:0 0 16px}.section h3{margin:0 0 8px}.grid{display:grid;gap:14px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{background:linear-gradient(145deg,rgba(32,44,55,.98),rgba(24,33,43,.98));border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}.card p{margin:6px 0;color:var(--muted)}.label{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;background:#2b3b45;color:#d6e9e4;font-size:12px}.accent{color:var(--accent)}.danger{color:var(--danger)}.muted{color:var(--muted)}.todo-item{list-style:none;display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line)}.todo-item input{accent-color:var(--accent)}.todo-deadline{color:var(--accent);font-variant-numeric:tabular-nums}.source-note{font-size:12px;color:#91a7aa;margin-top:10px}.warning{border-left:3px solid var(--danger);padding:10px 14px;background:rgba(255,143,118,.08);color:#ffd3c7;border-radius:8px}.flight{position:relative}.flight.selected{border-color:var(--accent);box-shadow:0 0 0 1px rgba(246,179,92,.35),var(--shadow)}.flight .price{font-size:25px;font-weight:800;color:var(--accent)}.flight .route{font-weight:700}.flight .segments{margin:12px 0 0;padding-left:18px}.flight .segments li{margin:5px 0}.btn{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:8px;background:var(--accent);color:#1d1b17;text-decoration:none;font-weight:700}.hero-badges{display:flex;flex-wrap:wrap;gap:8px}.hotel-options{display:grid;gap:8px}.hotel-option{border-top:1px solid var(--line);padding-top:9px}.hotel-option strong{display:block}.photo{height:150px;border-radius:10px;overflow:hidden;background:#2c3a42;margin:-2px -2px 12px;position:relative}.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.photo span{position:absolute;inset:auto 10px 8px;color:#fff;font-weight:700;text-shadow:0 1px 4px #000}.timeline{display:grid;gap:16px}.day{border-left:2px solid var(--accent2);padding-left:18px}.day-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.day-date{color:var(--accent2);font-weight:800}.slot{margin-top:12px;display:grid;grid-template-columns:150px 1fr;gap:14px}.slot .meta{color:var(--accent);font-weight:700}.slot h3{margin:0}.slot p{margin:3px 0;color:var(--muted)}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.alternative{background:rgba(103,211,193,.08);border:1px solid rgba(103,211,193,.3);border-radius:10px;padding:10px;margin-top:10px}.meal{padding:10px 0;border-top:1px solid var(--line)}.meal:first-child{border-top:0}.meal strong{color:#f2d39c}.meal ul{margin:4px 0 0 20px;color:var(--muted)}#map{height:420px;border-radius:14px;border:1px solid var(--line);overflow:hidden;background:#25333a}.map-fallback{padding:20px;color:var(--muted)}.disclaimer{font-size:13px;color:#c3cdce}.footer{padding:28px 0 50px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
-    @media (max-width:767px){.wrap{width:min(480px,calc(100% - 22px))}.hero{padding-top:28px}.hero-inner{grid-template-columns:1fr}.hero-image{height:180px}.grid-2,.grid-3{grid-template-columns:1fr}.section{padding:24px 0}.slot{grid-template-columns:1fr;gap:4px}.slot .meta{font-size:13px}.day-head{display:block}.card{padding:15px}#map{height:330px}}
-    /* 分区背景保持在页面宽度内，宽票务表仅在自身容器中滚动。 */
-    .section:nth-of-type(even){background:rgba(255,255,255,.015)}
-    .transport-status{color:var(--muted);font-size:13px;margin:-4px 0 14px}.transport-option{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}.transport-option:first-child{border-top:0;padding-top:0;margin-top:0}
-  .date-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.date-grid label{display:grid;gap:6px}.date-grid input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font:inherit;color-scheme:dark}.btn{border:0;cursor:pointer}.source-note{overflow-wrap:anywhere}@media(max-width:600px){.date-grid{grid-template-columns:1fr}}
-
-    /* 最新行程按已出票去程与待定跨城窗口展示；空白单元格保留供后续补票面信息。 */
-    .hero-links{display:flex;gap:12px;flex-wrap:wrap}.hero-links a{font-size:14px}.table-scroll{max-width:100%;overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:12px;background:var(--panel)}table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}th,td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--panel2);color:var(--accent);font-weight:700}tbody tr:last-child td{border-bottom:0}.booking-table{min-width:1320px}.booking-table td{min-width:90px}.booking-table td:nth-child(1){width:175px}.booking-table td:nth-child(2){min-width:180px}.booking-table td:nth-child(6),.booking-table td:nth-child(7){min-width:135px}.booking-table td:empty,.extra-table td:empty{background:rgba(255,255,255,.025)}.extra-table{min-width:680px}.extra-table th:first-child{width:40%}.booked{background:rgba(103,211,193,.13);color:var(--accent2)}.pending{background:rgba(246,179,92,.12);color:var(--accent)}.day .card{box-shadow:none}.day .stay{color:var(--accent2);font-size:13px}#tips li{margin:10px 0}.hotel-blank{display:inline-block;min-width:100px;border-bottom:1px solid var(--muted)}
-    @media print{body{background:#fff;color:#222;font-size:11px}.hero{padding:12px 0}.hero:after,.hero-image,.hero-links,#map{display:none}.hero p,.card p,.muted,.source-note{color:#444}.wrap{width:100%}.section{padding:14px 0!important;margin:0!important}.card,.table-scroll{background:#fff;box-shadow:none;border-color:#bbb}.booking-table{min-width:0;font-size:8px}.booking-table td,.booking-table td:nth-child(2),.booking-table td:nth-child(6),.booking-table td:nth-child(7){min-width:0}.extra-table{min-width:0}th,td{padding:5px;border-color:#bbb}th{background:#eee;color:#222}.hero h1{font-size:26px}.day{break-inside:avoid}.btn{display:none}.warning{color:#333}.footer{padding:12px 0}}
+    :root{--bg:#10151d;--panel:#18212b;--panel2:#202c37;--text:#f2f5f4;--muted:#a6b4b7;--accent:#f6b35c;--accent2:#67d3c1;--line:#31414a;--danger:#ff8f76}
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:radial-gradient(circle at top right,#253845 0,#10151d 42%);color:var(--text);font:15px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}a{color:inherit}.wrap{width:min(1100px,calc(100% - 32px));margin:auto}.hero{padding:34px 0 28px;border-bottom:1px solid var(--line)}.hero-inner{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center}.hero h1{font-size:clamp(28px,4vw,46px);line-height:1.2;margin:10px 0}.hero h1 span{white-space:nowrap}.hero p{color:var(--muted);margin:12px 0}.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.12em}.hero-image{width:100%;height:200px;object-fit:cover;border-radius:16px}.hero-badges{display:flex;flex-wrap:wrap;gap:8px}.label{display:inline-block;border-radius:999px;padding:4px 10px;background:var(--panel2);font-size:12px;white-space:nowrap}.booked{color:var(--accent2);background:rgba(103,211,193,.12)}.pending{color:var(--accent);background:rgba(246,179,92,.12)}
+    /* 四个页签共用导航，只有第一个页签填入行程与费用；其余面板保持空白。 */
+    .tabs-bar{position:sticky;top:0;z-index:10;background:rgba(16,21,29,.97);border-bottom:1px solid var(--line)}.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:10px 0}.tab{border:1px solid transparent;border-radius:10px;padding:12px 8px;color:var(--muted);background:transparent;font:inherit;cursor:pointer}.tab[aria-selected="true"]{color:var(--accent);background:rgba(246,179,92,.1);border-color:rgba(246,179,92,.35)}.tab:focus-visible,a:focus-visible,.table-scroll:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}.tab-number{margin-right:7px;opacity:.6}.tab-panel{min-height:280px}.panel-head{padding:24px 0 4px}.panel-head h2{margin:0;font-size:26px}.panel-head p{color:var(--muted);margin:8px 0}.section{padding:24px 0}.section+.section{border-top:1px solid var(--line)}.section h2{font-size:23px;line-height:1.3;margin:0 0 12px}.section h3{font-size:18px;margin:0 0 8px}.source-note,.muted{color:var(--muted)}.source-note{font-size:13px;overflow-wrap:anywhere}.warning{padding:12px 14px;border-left:3px solid var(--danger);background:rgba(255,143,118,.07);color:#ffd3c7;border-radius:8px}.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.card{min-width:0;padding:20px;background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px}.card p{margin:8px 0}.hotel-heading{display:flex;justify-content:space-between;gap:12px}.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px;margin:18px 0 0}.detail-grid div{min-width:0}.detail-grid dt{font-size:12px;color:var(--muted)}.detail-grid dd{margin:3px 0 0;min-height:26px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.hotel-note{font-size:13px;color:var(--muted)}
+    /* 宽表仅在自己的容器内滚动，空白票面和金额不会用占位文字或零元替代。 */
+    .table-scroll{max-width:100%;overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:12px;background:var(--panel)}table{width:100%;border-collapse:collapse;font-size:14px;text-align:left}th,td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}th{font-weight:600;background:var(--panel2);color:var(--accent)}tbody tr:last-child td,tfoot tr:last-child td{border-bottom:0}td:empty{background:rgba(255,255,255,.025)}tfoot{font-weight:700;border-top:1px solid var(--line)}.itinerary-table{min-width:740px}.itinerary-table td:first-child{min-width:120px}.itinerary-table td:nth-child(2){min-width:200px}.booking-table{min-width:1320px}.booking-table td{min-width:90px}.booking-table td:nth-child(2){min-width:180px}.booking-table td:nth-child(6),.booking-table td:nth-child(7){min-width:130px}.cost-table{min-width:900px}.cost-table td:nth-child(2){min-width:240px}.cost-table td:first-child{min-width:130px}.cost-table td{min-width:85px}.summary-table{min-width:400px}.summary-table td:not(:first-child){min-width:85px}.btn{display:inline-block;margin-top:10px;padding:9px 14px;background:var(--accent);color:#1d1b17;border-radius:8px;text-decoration:none;font-weight:700}.footer{border-top:1px solid var(--line);padding:24px 0 36px;color:var(--muted);font-size:12px}
+    @media(max-width:767px){.wrap{width:calc(100% - 24px)}.hero{padding:24px 0}.hero-inner{grid-template-columns:1fr;gap:16px}.hero-image{height:150px}.hero h1{font-size:28px}.tab{font-size:12px;line-height:1.5;padding:10px 4px}.tab-number{display:block;margin:0}.grid-2{grid-template-columns:minmax(0,1fr)}.card{padding:16px}.section{padding:20px 0}.panel-head h2{font-size:23px}}
+    @media print{body{background:#fff;color:#222;font-size:11px}.wrap{width:100%}.hero{padding:8px 0}.hero-image,.tabs-bar,.btn{display:none}.hero h1{font-size:24px}.hero p,.source-note,.muted,.hotel-note,.detail-grid dt{color:#444}.section{padding:12px 0}.card,.table-scroll{background:#fff;border-color:#bbb;box-shadow:none}.table-scroll{overflow:visible}table,.booking-table,.cost-table,.itinerary-table,.summary-table{min-width:0;font-size:8px}th,td{padding:5px}th{background:#eee;color:#222}.booking-table td,.booking-table td:nth-child(2),.booking-table td:nth-child(6),.booking-table td:nth-child(7),.cost-table td,.cost-table td:nth-child(2),.itinerary-table td:first-child,.itinerary-table td:nth-child(2),.summary-table td:not(:first-child){min-width:0}.card,tr{break-inside:avoid}.warning{color:#333}.tab-panel{min-height:0}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
   </style>
 </head>
 <body>
-  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">Russia / January 2027</div><h1>莫斯科 · 圣彼得堡 · 摩尔曼斯克</h1><p>1月1日抵达莫斯科，3日早上乘高铁前往圣彼得堡；4日下午至5日早上前往摩尔曼斯克，8日或9日返回圣彼得堡，再乘飞机回国。</p><div class="hero-badges"><span class="label booked">去程 2 段已出票</span><span class="label pending">跨城 / 回国 4 段待订</span><span class="label">未订票的具体信息留空</span></div><div class="hero-links"><a class="btn" href="#booking">查看订票清单</a></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
+  <header class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">RUSSIA / JANUARY 2027</div><h1><span>莫斯科</span> · <span>圣彼得堡</span> · <span>摩尔曼斯克</span></h1><p>1月1日抵达莫斯科，3日早上前往圣彼得堡；4日下午至5日早上前往摩尔曼斯克，8日或9日返回圣彼得堡，再乘飞机回国。</p><div class="hero-badges"><span class="label booked">去程 2 段已出票</span><span class="label pending">跨城 / 回国 4 段待订</span><span class="label">金额待补充</span></div></div><img class="hero-image" src="https://img.alicdn.com/tfscom/TB1JmEeKFP7gK0jSZFjSuw5aXXa" alt="莫斯科红场" onerror="this.style.display='none'"></div></header>
+  <nav class="tabs-bar" aria-label="旅行清单分类"><div class="wrap tabs" role="tablist" aria-label="旅行清单">
+    <button class="tab" type="button" role="tab" id="tab-travel" aria-controls="panel-travel" aria-selected="true" tabindex="0" data-panel="travel"><span class="tab-number">01</span>机火酒行程与费用</button>
+    <button class="tab" type="button" role="tab" id="tab-packing" aria-controls="panel-packing" aria-selected="false" tabindex="-1" data-panel="packing"><span class="tab-number">02</span>携带物品清单</button>
+    <button class="tab" type="button" role="tab" id="tab-routes" aria-controls="panel-routes" aria-selected="false" tabindex="-1" data-panel="routes"><span class="tab-number">03</span>游玩与吃饭路线</button>
+    <button class="tab" type="button" role="tab" id="tab-special" aria-controls="panel-special" aria-selected="false" tabindex="-1" data-panel="special"><span class="tab-number">04</span>特殊事项清单</button>
+  </div></nav>
   <main>
-    <section class="section"><div class="wrap"><h2>每日行程表</h2><p class="source-note" id="date-note"></p><div id="timeline" class="timeline"></div></div></section>
-    <section class="section" id="booking"><div class="wrap"><h2>需要订哪些票</h2><p id="booking-summary"></p><p class="source-note">已出票依据为你提供的截图。其余跨城票暂列“待订”，表示目前没有提供出票凭据；如果已经购买，可补充订单后更新。空白格表示尚未提供具体信息。</p><div class="warning">MU591 的截图有“起飞时间推迟”提示。下表按截图记录为 11:50 → 17:05，以最新航司通知为准。</div><p class="source-note">表格可左右滑动；“计划日期”与“票面出发 / 到达”分开记录。</p><div class="table-scroll" role="region" aria-label="交通订票清单，可左右滑动" tabindex="0"><table class="booking-table"><thead><tr><th scope="col">计划日期</th><th scope="col">路段</th><th scope="col">方式</th><th scope="col">状态</th><th scope="col">航班 / 车次</th><th scope="col">出发机场 / 车站</th><th scope="col">到达机场 / 车站</th><th scope="col">票面出发</th><th scope="col">票面到达</th><th scope="col">票价</th></tr></thead><tbody id="ticket-rows"></tbody></table></div><p class="source-note">机票截图未显示价格，因此已出票航段的票价也留空。未订票的班次、机场或车站、票面日期和时间、价格全部留空；已确定的路线与计划窗口保留。</p><a class="btn" href="行程与订票清单.md" download>下载行程与订票清单</a></div></section>
-    <section class="section"><div class="wrap"><h2>其他可能需要预订的项目</h2><p class="source-note">以下按实际活动选择，没有提供已预订信息。</p><div class="table-scroll" role="region" aria-label="可选预订项目，可左右滑动" tabindex="0"><table class="extra-table"><thead><tr><th scope="col">项目</th><th scope="col">状态</th><th scope="col">具体日期 / 场次</th><th scope="col">项目 / 订单信息</th><th scope="col">价格</th></tr></thead><tbody id="extra-rows"></tbody></table></div></div></section>
-    <section class="section"><div class="wrap"><h2>住宿日期核对</h2><p class="source-note">住宿是否已订尚未确认。先按下面的晚数范围核对，酒店名称与订单信息留空待补。</p><div id="hotels" class="grid grid-2"></div></div></section>
-    <section class="section"><div class="wrap"><h2>先订哪几段</h2><div class="card"><ol id="tips"></ol></div></div></section>
-    <section class="section"><div class="wrap"><h2>路线地图</h2><p class="source-note">路线：合肥 → 上海 → 莫斯科 → 圣彼得堡 → 摩尔曼斯克 → 圣彼得堡 → 回国。地图展示俄罗斯三城，摩尔曼斯克游玩后返回圣彼得堡。</p><div id="map"><div class="map-fallback">地图需要联网加载，行程表和订票清单可离线阅读。</div></div></div></section>
+    <section class="tab-panel" role="tabpanel" id="panel-travel" aria-labelledby="tab-travel" tabindex="0">
+      <div class="wrap panel-head"><h2>机火酒行程清单＋费用清单</h2><p>机票、火车票、接驳路费和住宿按行程逐项核对，未确认的信息与金额留空。</p><a class="btn" href="行程与订票清单.md" download>下载机火酒行程与费用清单</a></div>
+      <section class="section"><div class="wrap"><h2>每日行程与住宿安排</h2><p class="source-note" id="date-note"></p><p class="source-note">表格可左右滑动，跨城窗口仍保留待定范围。</p><div class="table-scroll" role="region" aria-label="每日行程与住宿表，可左右滑动" tabindex="0"><table class="itinerary-table"><thead><tr><th scope="col">日期</th><th scope="col">城市 / 路段</th><th scope="col">行程安排</th><th scope="col">住宿计划</th></tr></thead><tbody id="itinerary-rows"></tbody></table></div></div></section>
+      <section class="section" id="booking"><div class="wrap"><h2>机票与火车票</h2><p id="booking-summary"></p><p class="source-note">已出票依据为你提供的截图。其余跨城票暂列待订，表示尚未提供出票信息；航班或车次、站点和票面时刻留空。</p><div class="warning">MU591 截图有“起飞时间推迟”提示，下表按截图记录为 11:50 → 17:05，以最新航司通知为准。</div><div class="table-scroll" role="region" aria-label="交通订票清单，可左右滑动" tabindex="0"><table class="booking-table"><thead><tr><th scope="col">计划日期</th><th scope="col">路段</th><th scope="col">方式</th><th scope="col">状态</th><th scope="col">航班 / 车次</th><th scope="col">出发机场 / 车站</th><th scope="col">到达机场 / 车站</th><th scope="col">票面出发</th><th scope="col">票面到达</th><th scope="col">票价</th></tr></thead><tbody id="ticket-rows"></tbody></table></div></div></section>
+      <section class="section"><div class="wrap"><h2>机票与跨城交通费用</h2><p class="source-note">费用按整笔订单或整项支出记录，暂不计算人均分摊。去程合肥 → 上海 → 莫斯科的两段机票按一笔总价记账，避免重复计费。截图未显示价格，金额先留空。</p><div class="table-scroll" role="region" aria-label="跨城交通费用表，可左右滑动" tabindex="0" id="transport-costs"></div></div></section>
+      <section class="section"><div class="wrap"><h2>接驳与市内路费</h2><p class="source-note">列出需要核对的机场、车站和住宿接驳，以及市内交通。具体交通方式、是否预订、币种与金额尚未确认；如已包含在其他费用中，后续标明，避免重复记账。</p><div class="table-scroll" role="region" aria-label="接驳与市内路费表，可左右滑动" tabindex="0" id="ground-costs"></div></div></section>
+      <section class="section"><div class="wrap"><h2>住宿清单与费用</h2><p class="source-note">目前没有住宿订单信息。下面的日期与晚数是计划范围，酒店、房型、实际入住及离店日期、间数和费用均留空。费用按整笔住宿订单记录。</p><div class="grid grid-2" id="hotels"></div></div></section>
+      <section class="section" id="expenses"><div class="wrap"><h2>费用汇总</h2><p id="amount-status" class="source-note"></p><p class="source-note">人民币和卢布分别统计，不换算汇率。汇总只计算已填写且标明币种的金额；空白金额不按 0 元处理。条目未填齐时，显示的是已填小计。</p><div class="grid grid-2" id="expense-summary"></div></div></section>
+    </section>
+    <section class="tab-panel" role="tabpanel" id="panel-packing" aria-labelledby="tab-packing" tabindex="0" hidden></section>
+    <section class="tab-panel" role="tabpanel" id="panel-routes" aria-labelledby="tab-routes" tabindex="0" hidden></section>
+    <section class="tab-panel" role="tabpanel" id="panel-special" aria-labelledby="tab-special" tabindex="0" hidden></section>
   </main>
-  <footer class="footer"><div class="wrap"><p class="disclaimer">更新于2026年10月26日。已出票信息来自用户截图，未查询实时票价、余票或景点开放安排。</p></div></footer>
+  <footer class="footer"><div class="wrap">更新于2026年10月26日。行程与出票信息按你提供的计划和截图整理，未查询实时价格或余票。</div></footer>
   <script id="trip-data" type="application/json">
 {
-  "title": "2027年1月俄罗斯行程与订票清单",
+  "title": "2027年1月俄罗斯旅行清单",
   "dateNote": "按截图“1月1日 周五”整理为2027年1月。俄罗斯境内行程按当地日期安排；航班时刻按各出发地、到达地当地时间记录。",
   "route": [
     "合肥",
@@ -189,101 +197,302 @@
       "note": "回国目的机场、中转方案与到家日期均留待确认。"
     }
   ],
-  "extras": [
-    {
-      "name": "景点门票 / 活动预约（如安排）",
-      "status": "未确认",
-      "date": "",
-      "number": "",
-      "price": ""
-    },
-    {
-      "name": "机场接送 / 市内接驳（如需提前预订）",
-      "status": "未确认",
-      "date": "",
-      "number": "",
-      "price": ""
-    },
-    {
-      "name": "回国后的国内接驳票（如需）",
-      "status": "未确认",
-      "date": "",
-      "number": "",
-      "price": ""
-    }
-  ],
   "hotels": [
     {
       "city": "莫斯科",
       "nights": "1月1日、2日",
-      "note": "1日抵达后入住，3日早上离开。"
+      "note": "1日抵达后入住，3日早上离开。",
+      "plannedNights": "2晚",
+      "status": "未确认",
+      "name": "",
+      "roomType": "",
+      "checkIn": "",
+      "checkOut": "",
+      "rooms": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
     },
     {
       "city": "圣彼得堡",
       "nights": "1月3日；4日晚是否住宿待定",
-      "note": "4日晚住宿取决于前往摩尔曼斯克的实际时间。"
+      "note": "4日晚住宿取决于前往摩尔曼斯克的实际时间。",
+      "plannedNights": "1—2晚，随离开日期确定",
+      "status": "未确认",
+      "name": "",
+      "roomType": "",
+      "checkIn": "",
+      "checkOut": "",
+      "rooms": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
     },
     {
       "city": "摩尔曼斯克",
       "nights": "4日或5日起，住至8日或9日离开前",
-      "note": "入住和离店日期均需与跨城票对应。"
+      "note": "入住和离店日期均需与跨城票对应。",
+      "plannedNights": "3—5晚，随抵离日期确定",
+      "status": "未确认",
+      "name": "",
+      "roomType": "",
+      "checkIn": "",
+      "checkOut": "",
+      "rooms": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
     },
     {
       "city": "圣彼得堡返程停留",
       "nights": "是否过夜待定",
-      "note": "按摩尔曼斯克返回时间与回国航班确定。"
+      "note": "按摩尔曼斯克返回时间与回国航班确定。",
+      "plannedNights": "是否需要住宿及晚数均待定",
+      "status": "未确认",
+      "name": "",
+      "roomType": "",
+      "checkIn": "",
+      "checkOut": "",
+      "rooms": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
     }
   ],
-  "cities": [
+  "transportCosts": [
     {
-      "name": "莫斯科",
-      "lat": 55.7558,
-      "lng": 37.6173
+      "window": "1月1日",
+      "item": "合肥 → 上海 → 莫斯科（去程两段合计）",
+      "status": "已出票",
+      "note": "按去程订单总价记一次，避免两段重复计费。",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
     },
     {
-      "name": "圣彼得堡（游玩与回国出发）",
-      "lat": 59.9343,
-      "lng": 30.3351
+      "window": "1月3日早上",
+      "item": "莫斯科 → 圣彼得堡高铁",
+      "status": "待订",
+      "note": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
     },
     {
-      "name": "摩尔曼斯克",
-      "lat": 68.9707,
-      "lng": 33.0749
+      "window": "1月4日下午—5日早上（未定）",
+      "item": "圣彼得堡 → 摩尔曼斯克",
+      "status": "待订",
+      "note": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月8日或9日（未定）",
+      "item": "摩尔曼斯克 → 圣彼得堡",
+      "status": "待订",
+      "note": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "返回圣彼得堡后，日期未定",
+      "item": "圣彼得堡 → 回国",
+      "status": "待订",
+      "note": "",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
     }
   ],
-  "tips": [
-    "优先把“摩尔曼斯克 → 圣彼得堡”和“圣彼得堡 → 回国”两段衔接好，再确定摩尔曼斯克的住宿晚数。",
-    "1月3日是早上乘车、抵达后游玩；不要把这一天按圣彼得堡完整全天计算。",
-    "4日下午至5日早上、8日或9日都是计划窗口，尚未代表实际票面时间。",
-    "若返程两段分开出票，先核对行李、改签和误机责任，并给换乘留出余量。"
+  "groundCosts": [
+    {
+      "window": "1月1日",
+      "item": "住处 → 合肥新桥机场",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月1日抵达后",
+      "item": "莫斯科机场 → 住宿",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月1—2日",
+      "item": "莫斯科市内交通",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月3日早上",
+      "item": "莫斯科住宿 → 高铁站",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月3日抵达后",
+      "item": "圣彼得堡高铁站 → 住宿",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月3—4日及返程停留",
+      "item": "圣彼得堡市内交通",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月4日或5日",
+      "item": "圣彼得堡住宿 → 跨城出发点",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月4日或5日抵达后",
+      "item": "摩尔曼斯克抵达点 → 住宿",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "摩尔曼斯克停留期间",
+      "item": "摩尔曼斯克市内交通",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "1月8日或9日",
+      "item": "摩尔曼斯克住宿 → 跨城出发点",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "返回圣彼得堡后",
+      "item": "抵达点 → 机场；如住一晚，按抵达点 → 住宿 → 机场记录",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    },
+    {
+      "window": "回国抵达后，日期未定",
+      "item": "国内抵达机场 → 住处（如需）",
+      "mode": "",
+      "status": "未确认",
+      "currency": "",
+      "budget": "",
+      "actual": "",
+      "paid": ""
+    }
   ]
 }
   </script>
-  <script>
-  function escapeHTML(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
-  function isInChinaBBox(lat,lng){return lng>=72.004&&lng<=137.8347&&lat>=0.8293&&lat<=55.8271}
-  function gcj02ToWgs84(lat,lng){if(!isInChinaBBox(lat,lng))return{lat:lat,lng:lng};return{lat:lat,lng:lng}}
-  function buildNavLink(lat,lng,label){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(lat+','+lng)}
-  function initTravelMap(id,points,opts){if(typeof L==='undefined')return null;var map=L.map(id);L.tileLayer((opts&&opts.tileUrl)||'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:(opts&&opts.attribution)||'© OpenStreetMap contributors'}).addTo(map);var coords=[];points.forEach(function(p,i){coords.push([p.lat,p.lng]);var icon=L.divIcon({className:'route-pin',html:'<span style="background:#f6b35c;color:#18212b;border-radius:50%;display:grid;place-items:center;width:28px;height:28px;font-weight:800">'+(i+1)+'</span>',iconSize:[28,28],iconAnchor:[14,14]});L.marker([p.lat,p.lng],{icon:icon}).addTo(map).bindPopup('<b>'+escapeHTML(p.name)+'</b><br>'+escapeHTML(p.time||'')+'<br><a target="_blank" href="'+buildNavLink(p.lat,p.lng,p.name)+'">打开地图</a>')});if(coords.length>1)L.polyline(coords,{dashArray:'6 8',color:'#67d3c1',weight:2}).addTo(map);map.fitBounds(coords,{padding:[24,24]});return map}
-  </script>
 
   <script>
-    // 最新逻辑：去程票面取自用户截图；4—5日和8—9日保留为计划窗口，不生成虚构班次与时刻。
-    // 采用固定行程，避免旧版浏览器保存的日期覆盖已确认的去程，也不自动查询或覆盖订票状态。
+    // 最新逻辑：第一个页签展示机火酒、接驳与费用；第二至第四页签仅保留空面板。
+    // 去程两段机票只合计一次费用；未知票面、酒店及金额保持空白，不读取旧版日期缓存。
     const trip=JSON.parse(document.getElementById('trip-data').textContent);
-    const esc=escapeHTML;
+    function esc(value){return String(value==null?'':value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+    function cells(values){return values.map(value=>'<td>'+esc(value)+'</td>').join('')}
+    function badge(status){return '<span class="label '+(status==='已出票'?'booked':'pending')+'">'+esc(status)+'</span>'}
+    function costTable(items,withMode){
+      const fields=['window','item',...(withMode?['mode']:[]),'status','currency','budget','actual','paid'];
+      const headings=['计划日期','费用项目',...(withMode?['交通方式']:[]),'状态','币种','预算金额','实际总额','已付金额'];
+      return '<table class="cost-table"><thead><tr>'+headings.map(label=>'<th scope="col">'+label+'</th>').join('')+'</tr></thead><tbody>'+items.map(item=>'<tr>'+cells(fields.map(key=>item[key]))+'</tr>').join('')+'</tbody></table>';
+    }
     document.getElementById('date-note').textContent=trip.dateNote;
     document.getElementById('booking-summary').textContent='已出票 '+trip.tickets.filter(t=>t.status==='已出票').length+' 段；跨城与回国待订 '+trip.tickets.filter(t=>t.status==='待订').length+' 段。';
-    document.getElementById('timeline').innerHTML=trip.days.map(d=>'<article class="day"><div class="day-date">'+esc(d.date)+'</div><h3>'+esc(d.city)+'</h3><p>'+esc(d.plan)+'</p><p class="muted">'+esc(d.note)+'</p><p class="stay">住宿计划：'+esc(d.stay)+'</p></article>').join('');
-    document.getElementById('ticket-rows').innerHTML=trip.tickets.map(t=>'<tr><td>'+esc(t.window)+'</td><td>'+esc(t.route)+'</td><td>'+esc(t.mode)+'</td><td><span class="label '+(t.status==='已出票'?'booked':'pending')+'">'+esc(t.status)+'</span></td>'+[t.number,t.from,t.to,t.departure,t.arrival,t.price].map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('');
-    document.getElementById('extra-rows').innerHTML=trip.extras.map(t=>'<tr>'+[t.name,t.status,t.date,t.number,t.price].map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>').join('');
-    document.getElementById('hotels').innerHTML=trip.hotels.map(h=>'<article class="card"><h3>'+esc(h.city)+'</h3><p>'+esc(h.nights)+'</p><p>'+esc(h.note)+'</p><p>酒店：<span class="hotel-blank"></span></p><p>订单：<span class="hotel-blank"></span></p></article>').join('');
-    document.getElementById('tips').innerHTML=trip.tips.map(t=>'<li>'+esc(t)+'</li>').join('');
-  </script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    // 地图只展示城市路线；地图服务无法访问时，不影响行程和订票表。
-    if(typeof L!=='undefined'){document.getElementById('map').replaceChildren();initTravelMap('map',trip.cities);}
+    document.getElementById('itinerary-rows').innerHTML=trip.days.map(d=>'<tr>'+cells([d.date,d.city,d.plan+' '+d.note,d.stay])+'</tr>').join('');
+    document.getElementById('ticket-rows').innerHTML=trip.tickets.map(t=>'<tr>'+cells([t.window,t.route,t.mode])+'<td>'+badge(t.status)+'</td>'+cells([t.number,t.from,t.to,t.departure,t.arrival,t.price])+'</tr>').join('');
+    document.getElementById('transport-costs').innerHTML=costTable(trip.transportCosts,false);
+    document.getElementById('ground-costs').innerHTML=costTable(trip.groundCosts,true);
+    const hotelFields=[['name','酒店名称'],['roomType','房型'],['checkIn','实际入住日期'],['checkOut','实际离店日期'],['rooms','间数'],['currency','币种'],['budget','预算金额'],['actual','实际总额'],['paid','已付金额']];
+    document.getElementById('hotels').innerHTML=trip.hotels.map(h=>'<article class="card hotel-card"><div class="hotel-heading"><h3>'+esc(h.city)+'</h3>'+badge(h.status)+'</div><p>'+esc(h.nights)+'</p><p class="muted">计划晚数：'+esc(h.plannedNights)+'</p><p class="hotel-note">'+esc(h.note)+'</p><dl class="detail-grid">'+hotelFields.map(([key,label])=>'<div><dt>'+label+'</dt><dd>'+esc(h[key])+'</dd></div>').join('')+'</dl></article>').join('');
+
+    // 费用只统计带币种的已填金额。未知金额返回空白，部分录入时不冒充完整总价。
+    const expenses=[...trip.transportCosts.map(x=>({...x,category:'机票与跨城交通'})),...trip.groundCosts.map(x=>({...x,category:'接驳与市内路费'})),...trip.hotels.map(x=>({...x,category:'住宿'}))];
+    function amount(value){if(value==null||String(value).trim()==='')return null;const number=Number(value);return Number.isFinite(number)&&number>=0?number:null}
+    function subtotal(items,key){const values=items.map(item=>amount(item[key])).filter(value=>value!==null);return values.length?(values.reduce((total,value)=>total+Math.round(value*100),0)/100).toFixed(2):''}
+    function summaryTable(currency){
+      const items=expenses.filter(item=>item.currency===currency);
+      const categories=['机票与跨城交通','接驳与市内路费','住宿'];
+      const row=(label,values)=>'<tr>'+cells([label,...['budget','actual','paid'].map(key=>subtotal(values,key))])+'</tr>';
+      return '<table class="summary-table"><thead><tr><th scope="col">类别</th><th scope="col">预算</th><th scope="col">实际总额</th><th scope="col">已付</th></tr></thead><tbody>'+categories.map(category=>row(category,items.filter(item=>item.category===category))).join('')+'</tbody><tfoot>'+row('已填小计',items)+'</tfoot></table>';
+    }
+    const recorded=expenses.filter(item=>['budget','actual','paid'].some(key=>amount(item[key])!==null)).length;
+    document.getElementById('amount-status').textContent='已有金额 '+recorded+' / '+expenses.length+' 项'+(recorded?'。':'，总费用暂留空。');
+    document.getElementById('expense-summary').innerHTML=[['CNY','人民币'],['RUB','俄罗斯卢布']].map(([currency,label])=>'<article class="card"><h3>'+label+' · '+currency+'</h3><div class="table-scroll" role="region" aria-label="'+label+'费用汇总，可左右滑动" tabindex="0">'+summaryTable(currency)+'</div></article>').join('');
+
+    // 页签支持点击、方向键和地址定位，切换时始终只展示一个面板。
+    const tabs=[...document.querySelectorAll('[role="tab"]')];
+    function activateTab(name,focus=false){
+      const selected=tabs.find(tab=>tab.dataset.panel===name)||tabs[0];
+      tabs.forEach(tab=>{const active=tab===selected;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;document.getElementById(tab.getAttribute('aria-controls')).hidden=!active});
+      if(focus)selected.focus();
+    }
+    tabs.forEach((tab,index)=>{
+      tab.addEventListener('click',()=>{activateTab(tab.dataset.panel);history.replaceState(null,'','#'+tab.dataset.panel)});
+      tab.addEventListener('keydown',event=>{
+        if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+        event.preventDefault();
+        const target=event.key==='Home'?0:event.key==='End'?tabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+        activateTab(tabs[target].dataset.panel,true);history.replaceState(null,'','#'+tabs[target].dataset.panel);
+      });
+    });
+    window.addEventListener('hashchange',()=>activateTab(location.hash.slice(1)));
+    activateTab(location.hash.slice(1));
   </script>
 </body>
 </html>
