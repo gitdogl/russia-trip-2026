@@ -38,8 +38,8 @@
       <section class="section" id="expenses"><div class="wrap"><h2>费用汇总</h2><p id="amount-status" class="source-note"></p><p class="source-note">人民币和卢布分别统计，不换算汇率。汇总只计算已填写且标明币种的金额；空白金额不按 0 元处理。条目未填齐时，显示的是已填小计。</p><div class="grid grid-2" id="expense-summary"></div></div></section>
     </section>
     <section class="tab-panel" role="tabpanel" id="panel-packing" aria-labelledby="tab-packing" tabindex="0" hidden>
-      <div class="wrap panel-head"><h2>携带物品清单</h2><p id="packing-note"></p><p class="source-note">“资料支持”表示有对应资料依据；“通用建议”按行程和个人习惯取舍；“视频线索”仍需按实际办理情况核对。数量与器材型号暂不预填。</p><a class="btn" href="携带物品清单.md" download>下载携带物品清单</a></div>
-      <section class="section"><div class="wrap"><div class="packing-status card"><div><strong id="packing-progress-text"></strong><p id="packing-save-note" class="source-note">勾选状态只保存在当前浏览器，不同步到其他设备。按需和抵达后取得的物品也列在清单内。</p></div><progress id="packing-progress" value="0" max="50" aria-label="携带物品核对进度"></progress></div><nav id="packing-categories" class="packing-categories" aria-label="物品分类"></nav><div id="packing-groups" class="grid packing-grid"></div></div></section>
+      <div class="wrap panel-head"><h2>携带物品清单</h2><p id="packing-note"></p><p class="source-note">“资料支持”表示有对应资料依据；“通用建议”按行程和个人习惯取舍；“视频线索”按已取得或你补充的内容记录，未独立核实处保留说明。数量与器材型号暂不预填。</p><a class="btn" href="携带物品清单.md" download>下载携带物品清单</a></div>
+      <section class="section"><div class="wrap"><div class="packing-status card"><div><strong id="packing-progress-text"></strong><p id="packing-save-note" class="source-note">勾选状态只保存在当前浏览器，不同步到其他设备。按需和抵达后取得的物品也列在清单内。</p></div><progress id="packing-progress" value="0" max="52" aria-label="携带物品核对进度"></progress></div><nav id="packing-categories" class="packing-categories" aria-label="物品分类"></nav><div id="packing-groups" class="grid packing-grid"></div></div></section>
       <section class="section"><div class="wrap"><details class="packing-review card"><summary>视频核对范围与资料来源</summary><p id="packing-read-scope" class="source-note"></p><p class="source-note">规则核查日期：2026年10月26日。入境资格、办卡条件和航空携带规定在2027年出发前还需复核；本页只整理携带物品。</p><div class="table-scroll" role="region" aria-label="六个视频的核对范围，可左右滑动" tabindex="0"><table class="packing-video-table"><thead><tr><th scope="col">视频</th><th scope="col">可核对范围</th><th scope="col">本次采用方式</th></tr></thead><tbody id="packing-videos"></tbody></table></div><ul id="packing-sources" class="packing-sources"></ul></details></div></section>
     </section>
     <section class="tab-panel" role="tabpanel" id="panel-routes" aria-labelledby="tab-routes" tabindex="0" hidden></section>
@@ -479,58 +479,78 @@
   "packing": {
     "verifiedAt": "2026-10-26",
     "note": "按2027年1月1—10日的莫斯科、圣彼得堡与摩尔曼斯克行程整理。物品数量、摄影器材型号和办卡状态尚未确认，先留空。",
-    "readScope": "六个链接均已打开；五条可读取说明或自动章节摘要，第二期未取得可核对的完整文稿。没有把这些摘要当作完整观看，也没有据此确认2027年的入境和办卡政策。",
+    "readScope": "六个链接均已打开；五条可读取说明或自动章节摘要，第二期未取得可核对的完整文稿。衣物搭配已采用你补充的视频要点“室外冷、室内热”，该段内容未独立核对完整视频。入境和办卡政策仍需另行确认。",
     "groups": [
       {
         "id": "clothing",
         "title": "衣物服饰",
-        "description": "按一月三城行程准备；摩尔曼斯克户外以保暖、防风和防滑为重点。",
+        "description": "按你补充的视频要点，采用厚外套配春秋薄长袖或短袖内搭，方便在室外与有暖气的室内之间切换。可脱卸保暖层单列；追极光等长时间户外，再按温度、风和停留时间增加保暖。",
         "items": [
           {
-            "id": "clothing-1",
-            "name": "保暖内衣裤",
-            "note": "作为贴身层，数量按换洗计划补充。",
+            "id": "clothing-3",
+            "name": "厚防风外套 / 厚羽绒服",
+            "note": "室外作为主要保暖外层，选择便于穿脱的款式；进入有暖气的室内时按体感脱下。",
             "basis": "verified",
             "sources": [
               "arctic"
             ],
-            "tag": "户外重点",
+            "tag": "日常外层",
+            "quantity": "",
+            "model": ""
+          },
+          {
+            "id": "clothing-12",
+            "name": "春秋薄长袖或短袖内搭",
+            "note": "按你补充的视频要点准备，进入有暖气的室内后可脱去厚外套穿着；具体款式和数量待补。",
+            "basis": "video",
+            "sources": [],
+            "tag": "用户补充的视频要点",
+            "quantity": "",
+            "model": ""
+          },
+          {
+            "id": "clothing-13",
+            "name": "日常春秋长裤",
+            "note": "作为室内和市区日常搭配；户外停留较久时，再按风寒情况增加保暖外层。",
+            "basis": "suggestion",
+            "sources": [],
+            "tag": "日常搭配",
             "quantity": "",
             "model": ""
           },
           {
             "id": "clothing-2",
-            "name": "抓绒或羊毛中层",
-            "note": "与外套搭配，方便按室内外情况增减。",
+            "name": "可脱卸抓绒或羊毛中层",
+            "note": "用于摩尔曼斯克长时间户外或风寒明显时加穿，室内按体感脱下。",
             "basis": "verified",
             "sources": [
               "arctic"
             ],
-            "tag": "",
+            "tag": "户外按需加层",
             "quantity": "",
             "model": ""
           },
           {
-            "id": "clothing-3",
-            "name": "防风保暖外套",
-            "note": "厚羽绒服或保暖外套按本人已有装备选择。",
+            "id": "clothing-1",
+            "name": "保暖内衣裤（长时间户外按需）",
+            "note": "追极光等长时间户外时，按气温和个人怕冷程度加穿；市区频繁进出有暖气的室内时按需搭配。",
             "basis": "verified",
             "sources": [
               "arctic"
             ],
-            "tag": "户外重点",
+            "tag": "长时间户外",
             "quantity": "",
             "model": ""
           },
           {
             "id": "clothing-4",
-            "name": "保暖长裤",
-            "note": "户外停留时准备保暖、防风的裤装。",
+            "name": "户外保暖长裤 / 外穿保暖裤",
+            "note": "长时间户外时加强腿部保暖；如需频繁进出室内，可选择方便增减的外穿层。",
             "basis": "verified",
             "sources": [
               "arctic"
             ],
-            "tag": "",
+            "tag": "长时间户外",
             "quantity": "",
             "model": ""
           },
@@ -549,7 +569,7 @@
           {
             "id": "clothing-6",
             "name": "厚袜及备用袜",
-            "note": "准备可更换的干袜，数量待补。",
+            "note": "户外备厚袜和可更换的干袜；室内按个人习惯搭配日常袜。",
             "basis": "verified",
             "sources": [
               "arctic"
@@ -1218,7 +1238,7 @@
     document.getElementById('expense-summary').innerHTML=[['CNY','人民币'],['RUB','俄罗斯卢布']].map(([currency,label])=>'<article class="card"><h3>'+label+' · '+currency+'</h3><div class="table-scroll" role="region" aria-label="'+label+'费用汇总，可左右滑动" tabindex="0">'+summaryTable(currency)+'</div></article>').join('');
 
 
-    // 携带清单分八类；只按物品ID保存布尔勾选值，不保存证件号码、卡号等个人信息。
+    // 携带清单分八类；衣物按室内外切换分日常薄内搭与户外加层，沿用旧物品ID保留本机勾选。
     const packing=trip.packing;
     const packingItems=packing.groups.flatMap(group=>group.items);
     const packingKey='russia-packing-2027-v1';
