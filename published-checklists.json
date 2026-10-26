@@ -1,0 +1,1144 @@
+{
+  "format": "russia-trip-checklists",
+  "version": 1,
+  "collections": {
+    "days": [
+      {
+        "id": "days-1",
+        "date": "1月1日 · 周五",
+        "city": "合肥 → 上海 → 莫斯科",
+        "plan": "07:30 合肥起飞，08:50 抵达上海浦东；11:50 从浦东起飞，17:05 抵达莫斯科谢列梅捷沃机场 C 航站楼。",
+        "note": "去程两段已出票。落地后安排入境、取行李、进城和入住，晚上以休息为主。",
+        "stay": "莫斯科"
+      },
+      {
+        "id": "days-2",
+        "date": "1月2日 · 周六",
+        "city": "莫斯科",
+        "plan": "莫斯科游玩一天。",
+        "note": "具体景点与入内预约另行安排。",
+        "stay": "莫斯科"
+      },
+      {
+        "id": "days-3",
+        "date": "1月3日 · 周日",
+        "city": "莫斯科 → 圣彼得堡",
+        "plan": "早上乘高铁前往圣彼得堡，抵达后在市区游玩。",
+        "note": "高铁未提供订单，车次、车站与时刻留空。当天可游玩多久取决于列车抵达时间。",
+        "stay": "圣彼得堡"
+      },
+      {
+        "id": "days-4",
+        "date": "1月4日 · 周一",
+        "city": "圣彼得堡 / 前往摩尔曼斯克",
+        "plan": "前往摩尔曼斯克的计划窗口为4日下午至5日早上，具体安排未定。",
+        "note": "如果4日出发，白天按剩余时间活动；交通方式、出发及抵达时刻均待确定。",
+        "stay": "按实际跨城时间确定"
+      },
+      {
+        "id": "days-5",
+        "date": "1月5日 · 周二",
+        "city": "摩尔曼斯克 / 抵达日",
+        "plan": "如果5日早上抵达，先入住或寄存行李，再安排活动；如果4日已到，则继续游玩。",
+        "note": "抵达当天根据交通与休息情况安排活动。",
+        "stay": "摩尔曼斯克"
+      },
+      {
+        "id": "days-6",
+        "date": "1月6日 · 周三",
+        "city": "摩尔曼斯克",
+        "plan": "摩尔曼斯克游玩。",
+        "note": "具体活动、接送与预约另行安排。",
+        "stay": "摩尔曼斯克"
+      },
+      {
+        "id": "days-7",
+        "date": "1月7日 · 周四",
+        "city": "摩尔曼斯克",
+        "plan": "摩尔曼斯克游玩。",
+        "note": "保留自由活动与休息时间。",
+        "stay": "摩尔曼斯克"
+      },
+      {
+        "id": "days-8",
+        "date": "1月8日 · 周五",
+        "city": "摩尔曼斯克 / 返回圣彼得堡",
+        "plan": "方案一：今天返回圣彼得堡；方案二：继续在摩尔曼斯克游玩，9日再返回。",
+        "note": "回国航班已定为9日22:20从圣彼得堡普尔科夫T1起飞，需先确定摩尔曼斯克返回的交通衔接。",
+        "stay": "8日返回则按需住圣彼得堡；9日返回则住摩尔曼斯克"
+      },
+      {
+        "id": "days-9",
+        "date": "1月9日 · 周六",
+        "city": "圣彼得堡 → 成都",
+        "plan": "如果8日未返回，今天先从摩尔曼斯克前往圣彼得堡；22:20从普尔科夫T1乘3U3816飞往成都。",
+        "note": "1月10日11:50抵达成都天府T1。摩尔曼斯克 → 圣彼得堡的交通仍待订，需衔接这班回国飞机。",
+        "stay": "机上"
+      },
+      {
+        "id": "days-10",
+        "date": "1月10日 · 周日",
+        "city": "成都天府 → 成都双流 → 合肥",
+        "plan": "11:50抵达成都天府T1，随后前往成都双流T1；17:15乘3U8321起飞，19:10抵达合肥新桥。",
+        "note": "两班之间票面间隔5小时25分，需安排跨机场交通，并核对行李提取和后续值机要求。",
+        "stay": "返回合肥"
+      }
+    ],
+    "tickets": [
+      {
+        "id": "tickets-1",
+        "window": "1月1日",
+        "route": "合肥 → 上海",
+        "mode": "飞机",
+        "status": "已出票",
+        "number": "MU6582",
+        "from": "合肥新桥",
+        "to": "上海浦东 T1",
+        "departure": "1月1日 07:30",
+        "arrival": "1月1日 08:50",
+        "price": "",
+        "note": "来源：用户提供的出票截图。"
+      },
+      {
+        "id": "tickets-2",
+        "window": "1月1日",
+        "route": "上海 → 莫斯科",
+        "mode": "飞机",
+        "status": "已出票",
+        "number": "MU591",
+        "from": "上海浦东 T1",
+        "to": "莫斯科谢列梅捷沃 C",
+        "departure": "1月1日 11:50",
+        "arrival": "1月1日 17:05",
+        "price": "",
+        "note": "截图有起飞时间推迟提示，以上时刻按截图记录，以最新航司通知为准。"
+      },
+      {
+        "id": "tickets-3",
+        "window": "1月3日早上",
+        "route": "莫斯科 → 圣彼得堡",
+        "mode": "高铁",
+        "status": "待订",
+        "number": "",
+        "from": "",
+        "to": "",
+        "departure": "",
+        "arrival": "",
+        "price": "",
+        "note": "早上出发是行程计划，具体车次与车站尚未提供。"
+      },
+      {
+        "id": "tickets-4",
+        "window": "1月4日下午—5日早上（未定）",
+        "route": "圣彼得堡 → 摩尔曼斯克",
+        "mode": "",
+        "status": "待订",
+        "number": "",
+        "from": "",
+        "to": "",
+        "departure": "",
+        "arrival": "",
+        "price": "",
+        "note": "交通方式及具体出行时间未定。"
+      },
+      {
+        "id": "tickets-5",
+        "window": "1月8日或9日（未定）",
+        "route": "摩尔曼斯克 → 圣彼得堡",
+        "mode": "",
+        "status": "待订",
+        "number": "",
+        "from": "",
+        "to": "",
+        "departure": "",
+        "arrival": "",
+        "price": "",
+        "note": "先确定返回哪一天，再填写实际票面信息。"
+      },
+      {
+        "id": "tickets-6",
+        "window": "1月9日",
+        "route": "圣彼得堡 → 成都",
+        "mode": "飞机",
+        "status": "已出票",
+        "number": "3U3816",
+        "from": "圣彼得堡普尔科夫 T1",
+        "to": "成都天府 T1",
+        "departure": "1月9日 22:20",
+        "arrival": "1月10日 11:50",
+        "price": "",
+        "note": "来源：用户提供的返程出票截图；日期与时刻均按当地时间记录。"
+      },
+      {
+        "id": "tickets-7",
+        "window": "1月10日",
+        "route": "成都 → 合肥",
+        "mode": "飞机",
+        "status": "已出票",
+        "number": "3U8321",
+        "from": "成都双流 T1",
+        "to": "合肥新桥",
+        "departure": "1月10日 17:15",
+        "arrival": "1月10日 19:10",
+        "price": "",
+        "note": "来源：用户提供的返程出票截图；从成都双流起飞，需要由成都天府换机场。"
+      }
+    ],
+    "transportCosts": [
+      {
+        "id": "transportCosts-1",
+        "window": "1月1日",
+        "item": "合肥 → 上海 → 莫斯科（去程两段合计）",
+        "status": "已出票",
+        "currency": "CNY",
+        "budget": "",
+        "actual": "2024",
+        "paid": "2024",
+        "note": "按已出票订单截图记录人民币2024元，包含去程两段，不拆分航段价格。"
+      },
+      {
+        "id": "transportCosts-2",
+        "window": "1月3日早上",
+        "item": "莫斯科 → 圣彼得堡高铁",
+        "status": "待订",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "transportCosts-3",
+        "window": "1月4日下午—5日早上（未定）",
+        "item": "圣彼得堡 → 摩尔曼斯克",
+        "status": "待订",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "transportCosts-4",
+        "window": "1月8日或9日（未定）",
+        "item": "摩尔曼斯克 → 圣彼得堡",
+        "status": "待订",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "transportCosts-5",
+        "window": "1月9—10日",
+        "item": "圣彼得堡 → 成都 → 合肥（返程两段合计）",
+        "status": "已出票",
+        "currency": "CNY",
+        "budget": "",
+        "actual": "3021",
+        "paid": "3021",
+        "note": "按已出票订单截图记录人民币3021元，包含返程两段；成都跨机场交通另计。"
+      }
+    ],
+    "groundCosts": [
+      {
+        "id": "groundCosts-1",
+        "window": "1月1日",
+        "item": "住处 → 合肥新桥机场",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-2",
+        "window": "1月1日抵达后",
+        "item": "莫斯科机场 → 住宿",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-3",
+        "window": "1月1—2日",
+        "item": "莫斯科市内交通",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-4",
+        "window": "1月3日早上",
+        "item": "莫斯科住宿 → 高铁站",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-5",
+        "window": "1月3日抵达后",
+        "item": "圣彼得堡高铁站 → 住宿",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-6",
+        "window": "1月3—4日及返程停留",
+        "item": "圣彼得堡市内交通",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-7",
+        "window": "1月4日或5日",
+        "item": "圣彼得堡住宿 → 跨城出发点",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-8",
+        "window": "1月4日或5日抵达后",
+        "item": "摩尔曼斯克抵达点 → 住宿",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-9",
+        "window": "摩尔曼斯克停留期间",
+        "item": "摩尔曼斯克市内交通",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-10",
+        "window": "1月8日或9日",
+        "item": "摩尔曼斯克住宿 → 跨城出发点",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-11",
+        "window": "1月8日或9日，回国前",
+        "item": "圣彼得堡抵达点 → 普尔科夫机场T1；如过夜，按抵达点 → 住宿 → 机场记录",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-12",
+        "window": "1月10日，11:50抵达后至17:15起飞前",
+        "item": "成都天府机场T1 → 成都双流机场T1（跨机场换乘）",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      },
+      {
+        "id": "groundCosts-13",
+        "window": "1月10日19:10抵达后",
+        "item": "合肥新桥机场 → 住处（如需）",
+        "mode": "",
+        "status": "未确认",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": ""
+      }
+    ],
+    "hotels": [
+      {
+        "id": "hotels-1",
+        "city": "莫斯科",
+        "nights": "1月1日、2日",
+        "plannedNights": "2晚",
+        "status": "未确认",
+        "name": "",
+        "roomType": "",
+        "checkIn": "",
+        "checkOut": "",
+        "rooms": "",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": "1日抵达后入住，3日早上离开。"
+      },
+      {
+        "id": "hotels-2",
+        "city": "圣彼得堡",
+        "nights": "1月3日；4日晚是否住宿待定",
+        "plannedNights": "1—2晚，随离开日期确定",
+        "status": "未确认",
+        "name": "",
+        "roomType": "",
+        "checkIn": "",
+        "checkOut": "",
+        "rooms": "",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": "4日晚住宿取决于前往摩尔曼斯克的实际时间。"
+      },
+      {
+        "id": "hotels-3",
+        "city": "摩尔曼斯克",
+        "nights": "4日或5日起，住至8日或9日离开前",
+        "plannedNights": "3—5晚，随抵离日期确定",
+        "status": "未确认",
+        "name": "",
+        "roomType": "",
+        "checkIn": "",
+        "checkOut": "",
+        "rooms": "",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": "入住和离店日期均需与跨城票对应。"
+      },
+      {
+        "id": "hotels-4",
+        "city": "圣彼得堡返程停留",
+        "nights": "1月8日晚是否住宿待定",
+        "plannedNights": "0—1晚，随8日或9日返回圣彼得堡确定",
+        "status": "未确认",
+        "name": "",
+        "roomType": "",
+        "checkIn": "",
+        "checkOut": "",
+        "rooms": "",
+        "currency": "",
+        "budget": "",
+        "actual": "",
+        "paid": "",
+        "note": "9日22:20已确定起飞回国；若8日返回圣彼得堡，再核对8日晚住宿。"
+      }
+    ],
+    "packingGroups": [
+      {
+        "id": "clothing",
+        "title": "衣物服饰",
+        "description": "按你补充的视频要点，采用厚外套配春秋薄长袖或短袖内搭，方便在室外与有暖气的室内之间切换。可脱卸保暖层单列；追极光等长时间户外，再按温度、风和停留时间增加保暖。"
+      },
+      {
+        "id": "daily",
+        "title": "生活用品",
+        "description": "日常用品按个人习惯和酒店供应情况补齐。"
+      },
+      {
+        "id": "camera",
+        "title": "摄影器材",
+        "description": "通用拍摄建议；机身、镜头、电池和存储卡型号尚未提供。"
+      },
+      {
+        "id": "originals",
+        "title": "证件原件",
+        "description": "只核对原件是否随身，复印件和旅行凭证放在纸质文件类。"
+      },
+      {
+        "id": "electronics",
+        "title": "电子配件",
+        "description": "通信和供电配件按现有设备配套；不预设已购买电话卡。"
+      },
+      {
+        "id": "health",
+        "title": "药品健康",
+        "description": "不预设个人病史，不列具体药名或剂量；按本人需要准备。"
+      },
+      {
+        "id": "payment",
+        "title": "支付财务",
+        "description": "核对已持有的支付工具，金额、卡种和办理状态待补。"
+      },
+      {
+        "id": "supplies",
+        "title": "出行补给+纸质文件",
+        "description": "随身补给与备份文件；抵达后取得的凭证另标时间。"
+      }
+    ],
+    "packingItems": [
+      {
+        "id": "clothing-3",
+        "groupId": "clothing",
+        "name": "厚防风外套 / 厚羽绒服",
+        "quantity": "",
+        "model": "",
+        "tag": "日常外层",
+        "note": "室外作为主要保暖外层，选择便于穿脱的款式；进入有暖气的室内时按体感脱下。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-12",
+        "groupId": "clothing",
+        "name": "春秋薄长袖或短袖内搭",
+        "quantity": "",
+        "model": "",
+        "tag": "用户补充的视频要点",
+        "note": "按你补充的视频要点准备，进入有暖气的室内后可脱去厚外套穿着；具体款式和数量待补。",
+        "basis": "video",
+        "sources": []
+      },
+      {
+        "id": "clothing-13",
+        "groupId": "clothing",
+        "name": "日常春秋长裤",
+        "quantity": "",
+        "model": "",
+        "tag": "日常搭配",
+        "note": "作为室内和市区日常搭配；户外停留较久时，再按风寒情况增加保暖外层。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "clothing-2",
+        "groupId": "clothing",
+        "name": "可脱卸抓绒或羊毛中层",
+        "quantity": "",
+        "model": "",
+        "tag": "户外按需加层",
+        "note": "用于摩尔曼斯克长时间户外或风寒明显时加穿，室内按体感脱下。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-1",
+        "groupId": "clothing",
+        "name": "保暖内衣裤（长时间户外按需）",
+        "quantity": "",
+        "model": "",
+        "tag": "长时间户外",
+        "note": "追极光等长时间户外时，按气温和个人怕冷程度加穿；市区频繁进出有暖气的室内时按需搭配。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-4",
+        "groupId": "clothing",
+        "name": "户外保暖长裤 / 外穿保暖裤",
+        "quantity": "",
+        "model": "",
+        "tag": "长时间户外",
+        "note": "长时间户外时加强腿部保暖；如需频繁进出室内，可选择方便增减的外穿层。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-5",
+        "groupId": "clothing",
+        "name": "保暖防滑冬靴",
+        "quantity": "",
+        "model": "",
+        "tag": "户外重点",
+        "note": "鞋底抓地、鞋内保暖；具体尺码和型号待补。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-6",
+        "groupId": "clothing",
+        "name": "厚袜及备用袜",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "户外备厚袜和可更换的干袜；室内按个人习惯搭配日常袜。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-7",
+        "groupId": "clothing",
+        "name": "护耳帽",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "覆盖耳部，按本人装备选择。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-8",
+        "groupId": "clothing",
+        "name": "围脖或面罩",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "户外按风雪情况使用。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-9",
+        "groupId": "clothing",
+        "name": "保暖手套与薄操作手套",
+        "quantity": "",
+        "model": "",
+        "tag": "按需搭配",
+        "note": "外层保暖；需要操作手机或相机时再搭配薄手套。",
+        "basis": "suggestion",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "clothing-10",
+        "groupId": "clothing",
+        "name": "日常内衣与换洗衣物",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "数量按10日行程和洗衣安排确定。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "clothing-11",
+        "groupId": "clothing",
+        "name": "拖鞋或室内便鞋",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "先核对住宿提供的用品，再决定是否携带。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "daily-1",
+        "groupId": "daily",
+        "name": "牙刷、牙膏与个人洗漱用品",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "液体如放随身包，按实际航段安检要求核对容量。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "daily-2",
+        "groupId": "daily",
+        "name": "毛巾或便携浴巾",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "先确认酒店供应及个人使用习惯。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "daily-3",
+        "groupId": "daily",
+        "name": "润唇膏、保湿霜与护手霜",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "按本人习惯准备，容量待补。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "daily-4",
+        "groupId": "daily",
+        "name": "纸巾与湿巾",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "按个人使用量准备。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "daily-5",
+        "groupId": "daily",
+        "name": "梳子、剃须等个人用品",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "仅列本人会使用的物品。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "daily-6",
+        "groupId": "daily",
+        "name": "洗衣袋、收纳袋与垃圾袋",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "用于分开干湿衣物及整理行李。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "camera-1",
+        "groupId": "camera",
+        "name": "相机、常用镜头与相机包",
+        "quantity": "",
+        "model": "",
+        "tag": "按摄影安排",
+        "note": "机型和镜头待补，先核对器材说明书的工作温度。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "camera-2",
+        "groupId": "camera",
+        "name": "备用相机电池与保护盒",
+        "quantity": "",
+        "model": "",
+        "tag": "随身",
+        "note": "备用锂电池随身携带，端子分别绝缘；户外备用电池放内层保暖处。",
+        "basis": "verified",
+        "sources": [
+          "cea",
+          "nikon"
+        ]
+      },
+      {
+        "id": "camera-3",
+        "groupId": "camera",
+        "name": "相机充电器及配套线",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "按实际电池和机身接口配套。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "camera-4",
+        "groupId": "camera",
+        "name": "存储卡、卡盒与读卡器",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "先确认容量、可用空间及备份方式。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "camera-5",
+        "groupId": "camera",
+        "name": "三脚架与快装板",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "如计划拍极光或夜景，再决定携带；尺寸按航司行李要求核对。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "camera-6",
+        "groupId": "camera",
+        "name": "快门线或遥控器",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "只有器材支持、拍摄需要时再带。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "camera-7",
+        "groupId": "camera",
+        "name": "镜头布、气吹与遮光罩",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "擦拭和防雪按器材说明操作。",
+        "basis": "verified",
+        "sources": [
+          "nikon"
+        ]
+      },
+      {
+        "id": "camera-8",
+        "groupId": "camera",
+        "name": "防雪罩及可密封器材袋",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "从冷户外进入暖室前先装袋密封，待器材回温后再取出。",
+        "basis": "verified",
+        "sources": [
+          "nikon",
+          "condensation"
+        ]
+      },
+      {
+        "id": "originals-1",
+        "groupId": "originals",
+        "name": "护照原件",
+        "quantity": "",
+        "model": "",
+        "tag": "随身",
+        "note": "随身妥善保管，并在出发前核对有效性及入境资格。",
+        "basis": "verified",
+        "sources": [
+          "consulate"
+        ]
+      },
+      {
+        "id": "originals-2",
+        "groupId": "originals",
+        "name": "居民身份证原件",
+        "quantity": "",
+        "model": "",
+        "tag": "随身",
+        "note": "国内航段及备用身份核验按本人实际需要准备。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "electronics-1",
+        "groupId": "electronics",
+        "name": "手机与充电器、数据线",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "按手机接口准备，先确认能正常充电。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "electronics-2",
+        "groupId": "electronics",
+        "name": "合规充电宝",
+        "quantity": "",
+        "model": "",
+        "tag": "随身核对",
+        "note": "建议选额定能量不超过100Wh、标识清晰的产品；国内段核对3C及召回情况。随身携带，不托运；登机前复核各航司规则。",
+        "basis": "verified",
+        "sources": [
+          "caac",
+          "cea",
+          "sichuan"
+        ]
+      },
+      {
+        "id": "electronics-3",
+        "groupId": "electronics",
+        "name": "欧标两圆脚转换插头",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "按酒店插座及设备输入规格核对；转换插头不代替电压转换。",
+        "basis": "verified",
+        "sources": [
+          "plug"
+        ]
+      },
+      {
+        "id": "electronics-4",
+        "groupId": "electronics",
+        "name": "耳机",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "按个人使用习惯准备。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "electronics-5",
+        "groupId": "electronics",
+        "name": "已购买的通信卡及取卡针",
+        "quantity": "",
+        "model": "",
+        "tag": "如适用",
+        "note": "只有已确定通信方案时才补入卡种；开通与办理流程暂不在本页填写。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "electronics-6",
+        "groupId": "electronics",
+        "name": "备用设备及其充电线",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "如已有备用手机或其他设备，再决定是否携带。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "health-1",
+        "groupId": "health",
+        "name": "个人常用药",
+        "quantity": "",
+        "model": "",
+        "tag": "按本人需要",
+        "note": "按本人需要准备，保留原包装及说明；处方药另核对携入规定，并准备相应处方。",
+        "basis": "verified",
+        "sources": [
+          "consulate"
+        ]
+      },
+      {
+        "id": "health-2",
+        "groupId": "health",
+        "name": "创可贴等简单敷料",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "按个人需要准备轻便用品。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "health-3",
+        "groupId": "health",
+        "name": "备用眼镜及护理用品",
+        "quantity": "",
+        "model": "",
+        "tag": "如适用",
+        "note": "仅在本人使用眼镜或隐形眼镜时准备。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "health-4",
+        "groupId": "health",
+        "name": "口罩等个人防护用品",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "按本人需要和出发时要求准备。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "payment-1",
+        "groupId": "payment",
+        "name": "已持有的支付卡",
+        "quantity": "",
+        "model": "",
+        "tag": "卡种待补",
+        "note": "卡种与境外可用性需按实际卡片确认。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "payment-2",
+        "groupId": "payment",
+        "name": "已办理的YooMoney实体卡",
+        "quantity": "",
+        "model": "",
+        "tag": "如已办理",
+        "note": "只在已办理时核对携带；视频中的办卡和使用经验尚不能代替当前服务条款。",
+        "basis": "video",
+        "sources": []
+      },
+      {
+        "id": "payment-3",
+        "groupId": "payment",
+        "name": "备用现金",
+        "quantity": "",
+        "model": "",
+        "tag": "金额待补",
+        "note": "币种和金额尚未提供，按实际准备情况补充；换汇选择正规渠道。",
+        "basis": "verified",
+        "sources": [
+          "consulate"
+        ]
+      },
+      {
+        "id": "payment-4",
+        "groupId": "payment",
+        "name": "零钱包与卡片收纳",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "按需分开收纳，避免卡片和现金散落。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "supplies-1",
+        "groupId": "supplies",
+        "name": "保温杯或便携水杯",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "摩尔曼斯克户外活动时按需准备保温饮水用品。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "supplies-2",
+        "groupId": "supplies",
+        "name": "暖贴",
+        "quantity": "",
+        "model": "",
+        "tag": "按需",
+        "note": "按需准备，使用和存放按产品说明。",
+        "basis": "verified",
+        "sources": [
+          "arctic"
+        ]
+      },
+      {
+        "id": "supplies-3",
+        "groupId": "supplies",
+        "name": "随身小背包与防水收纳袋",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "用于装当天用品和纸质文件。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "supplies-4",
+        "groupId": "supplies",
+        "name": "护照、身份证复印件及离线扫描件",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "准备备用副本，具体份数待补。",
+        "basis": "verified",
+        "sources": [
+          "consulate"
+        ]
+      },
+      {
+        "id": "supplies-5",
+        "groupId": "supplies",
+        "name": "备用纸质证件照",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "尺寸与张数待补。",
+        "basis": "verified",
+        "sources": [
+          "consulate"
+        ]
+      },
+      {
+        "id": "supplies-6",
+        "groupId": "supplies",
+        "name": "机票行程单、酒店订单及俄文地址",
+        "quantity": "",
+        "model": "",
+        "tag": "",
+        "note": "保留离线版本，按需打印地址和联系人信息。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "supplies-7",
+        "groupId": "supplies",
+        "name": "保险单及适用的入境文件",
+        "quantity": "",
+        "model": "",
+        "tag": "如适用",
+        "note": "如已购买保险，留存保单和联络方式；签证或批准文件按本人适用情况准备。",
+        "basis": "suggestion",
+        "sources": []
+      },
+      {
+        "id": "supplies-8",
+        "groupId": "supplies",
+        "name": "入境移民卡原件（小白条）",
+        "quantity": "",
+        "model": "",
+        "tag": "抵达后",
+        "note": "抵俄后取得，妥善保管。",
+        "basis": "verified",
+        "sources": [
+          "consulate"
+        ]
+      },
+      {
+        "id": "supplies-9",
+        "groupId": "supplies",
+        "name": "酒店居留登记凭证原件",
+        "quantity": "",
+        "model": "",
+        "tag": "入住后",
+        "note": "入住后核对取得和保存情况，作为旅途中需收好的文件。",
+        "basis": "verified",
+        "sources": [
+          "consulate"
+        ]
+      }
+    ],
+    "activities": [],
+    "specialItems": []
+  },
+  "checked": {},
+  "publishedAt": "2026-10-26T10:18:04.300Z",
+  "publishedBy": "gitdogl"
+}
