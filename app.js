@@ -1,5 +1,5 @@
 /*
- * 四个页签共用清单编辑器：条目与分类可增删改，本机保存，删除可撤销。
+ * 四个页签按表格逐行展示，新增和编辑均在行内完成；仅备份导入保留确认框。
  * 只保存相对发布数据的改动，保留既有物品勾选，导出/导入完整备份。
  * 费用按订单记录，人民币和卢布分别重算；空金额保持空白。
  */
@@ -31,7 +31,7 @@
   let state = emptyState();
   let undoState = null;
   let brokenStorage = '';
-  let editor = null;
+  const drafts = new Map();
   let pendingImport = null;
 
   function normalize(key, value) {
@@ -128,10 +128,31 @@
   function cells(values) { return values.map(value => '<td>'+esc(value)+'</td>').join(''); }
   function badge(status) { return status ? '<span class="label '+(['已出票','已确定','已预订','已完成'].includes(status)?'booked':'pending')+'">'+esc(status)+'</span>' : ''; }
   function emptyRow(count) { return '<tr><td colspan="'+count+'" class="source-note">暂无条目，可点击上方按钮新建。</td></tr>'; }
-  function costTable(key,withMode) {
-    const fields = ['window','item',...(withMode?['mode']:[]),'status','currency','budget','actual','paid','note'];
-    const headings = ['计划日期','费用项目',...(withMode?['交通方式']:[]),'状态','币种','预算金额','实际总额','已付金额','备注','操作'];
-    return '<table class="cost-table"><thead><tr>'+headings.map(label=>'<th scope="col">'+label+'</th>').join('')+'</tr></thead><tbody>'+(rows(key).map(row=>'<tr>'+cells(fields.map(f=>row[f]))+'<td>'+actions(key,row)+'</td></tr>').join('') || emptyRow(headings.length))+'</tbody></table>';
+  function draftFor(key,id) { return [...drafts.values()].find(draft=>draft.key===key && draft.id===id); }
+  function control(f,value,token) {
+    const common=' data-field="'+f.key+'" aria-label="'+esc(f.label)+'" placeholder="'+esc(f.label)+'"'+(f.required?' required':'');
+    if (f.type==='textarea') return '<textarea'+common+' rows="2">'+esc(value)+'</textarea>';
+    if (['select','group'].includes(f.type)) {
+      const options=f.type==='group'?rows('packingGroups').map(group=>[group.id,group.title]):f.options.map(option=>[option,option]);
+      if (value && !options.some(([id])=>id===value)) options.push([value,value]);
+      return '<select'+common+'><option value="">请选择</option>'+options.map(([id,label])=>'<option value="'+esc(id)+'"'+(id===value?' selected':'')+'>'+esc(label)+'</option>').join('')+'</select>';
+    }
+    return '<input'+common+' type="'+(['money','integer'].includes(f.type)?'number':f.type==='url'?'url':'text')+'" value="'+esc(value)+'"'+(['money','integer'].includes(f.type)?' min="0" step="'+(f.type==='money'?'0.01':'1')+'"':'')+'>';
+  }
+  function draftActions(draft) {
+    return '<div class="row-actions"><button type="button" class="small-btn inline-save" data-inline-save="'+draft.token+'">保存</button><button type="button" class="small-btn" data-inline-cancel="'+draft.token+'">取消</button></div><p class="inline-error" role="alert">'+esc(draft.error || '')+'</p>';
+  }
+  function draftRow(draft,fields=schemas[draft.key].fields) {
+    return '<tr class="inline-row" data-inline-token="'+draft.token+'">'+fields.map(f=>'<td>'+control(f,draft.values[f.key] || '',draft.token)+'</td>').join('')+'<td class="operation-cell">'+draftActions(draft)+'</td></tr>';
+  }
+  function tableHTML(key,className='list-table') {
+    const fields=schemas[key].fields;
+    const body=rows(key).map(row=>{
+      const draft=draftFor(key,row.id);
+      if (draft) return draftRow(draft);
+      return '<tr>'+fields.map(f=>'<td>'+(f.key==='link'?safeLink(row[f.key]):esc(row[f.key]))+'</td>').join('')+'<td class="operation-cell">'+actions(key,row)+'</td></tr>';
+    }).join('')+[...drafts.values()].filter(draft=>draft.key===key&&!draft.id).map(draft=>draftRow(draft)).join('');
+    return '<table class="'+className+' editable-table"><thead><tr>'+fields.map(f=>'<th scope="col">'+f.label+'</th>').join('')+'<th scope="col" class="operation-cell">操作</th></tr></thead><tbody>'+(body || emptyRow(fields.length+1))+'</tbody></table>';
   }
   function amount(value) { return value === '' || value == null ? null : Number(value); }
   function subtotal(items,key) {
@@ -154,12 +175,11 @@
     $('hero-pending-status').textContent = '待订 '+pending+' 段';
     $('booking-summary').textContent = '共 '+tickets.length+' 段；已出票 '+booked+' 段；待订 '+pending+' 段。';
     $('date-note').textContent = trip.dateNote;
-    $('itinerary-rows').innerHTML = rows('days').map(row=>'<tr>'+cells([row.date,row.city,[row.plan,row.note].filter(Boolean).join(' '),row.stay])+'<td>'+actions('days',row)+'</td></tr>').join('') || emptyRow(5);
-    $('ticket-rows').innerHTML = tickets.map(row=>'<tr>'+cells([row.window,row.route,row.mode])+'<td>'+badge(row.status)+'</td>'+cells([row.number,row.from,row.to,row.departure,row.arrival,row.price,row.note])+'<td>'+actions('tickets',row)+'</td></tr>').join('') || emptyRow(12);
-    $('transport-costs').innerHTML = costTable('transportCosts',false);
-    $('ground-costs').innerHTML = costTable('groundCosts',true);
-    const hotelFields = schemas.hotels.fields.filter(f=>!['city','nights','plannedNights','status','note'].includes(f.key));
-    $('hotels').innerHTML = rows('hotels').map(row=>'<article class="card hotel-card"><div class="hotel-heading"><h3>'+esc(row.city)+'</h3>'+badge(row.status)+'</div><p>'+esc(row.nights)+'</p><p class="muted">计划晚数：'+esc(row.plannedNights)+'</p><p class="hotel-note">'+esc(row.note)+'</p><dl class="detail-grid">'+hotelFields.map(f=>'<div><dt>'+f.label+'</dt><dd>'+esc(row[f.key])+'</dd></div>').join('')+'</dl>'+actions('hotels',row)+'</article>').join('') || '<p class="source-note">暂无住宿，可点击上方按钮新建。</p>';
+    $('itinerary-table').innerHTML=tableHTML('days','itinerary-table');
+    $('ticket-table').innerHTML=tableHTML('tickets','booking-table');
+    $('transport-costs').innerHTML=tableHTML('transportCosts','cost-table');
+    $('ground-costs').innerHTML=tableHTML('groundCosts','cost-table');
+    $('hotels').innerHTML=tableHTML('hotels','hotel-table');
     const expenses = expenseRows();
     const recorded = expenses.filter(row=>['budget','actual','paid'].some(key=>row[key] !== '')).length;
     $('amount-status').textContent = '已有金额 '+recorded+' / '+expenses.length+' 项。';
@@ -171,15 +191,28 @@
     const source = trip.packing.sources.find(row=>row.id===id);
     return source ? '<a class="packing-reference" href="'+esc(source.url)+'" target="_blank" rel="noopener noreferrer">'+esc(source.title)+'</a>' : '';
   }
+  function packingRow(item,draft) {
+    const labels={verified:'资料支持',suggestion:'通用建议',video:'视频线索',user:'自行填写'};
+    const value=draft?draft.values:item;
+    const input=key=>control(schemas.packingItems.fields.find(f=>f.key===key),value[key] || '',draft.token);
+    const checkbox='<input type="checkbox"'+(item?' data-packing-item="'+esc(item.id)+'" aria-label="'+esc(item.name)+'"'+(state.checked[item.id]===true?' checked':''):' disabled aria-label="新物品保存后可勾选"')+'>';
+    const name=draft?input('name')+'<label class="inline-sub-label">所属分类'+input('groupId')+'</label>':esc(item.name);
+    const note=draft?input('note')+'<label class="inline-sub-label">提示标签'+input('tag')+'</label>':esc(item.note);
+    const basis=item?'<div class="packing-meta"><span class="packing-tag '+esc(item.basis)+'">'+esc(labels[item.basis])+'</span>'+(item.tag?'<span class="packing-tag">'+esc(item.tag)+'</span>':'')+item.sources.map(sourceLink).join('')+'</div>':'<span class="packing-tag user">自行填写</span>';
+    return '<tr'+(draft?' class="inline-row" data-inline-token="'+draft.token+'"':'')+'><td class="check-cell">'+checkbox+'</td><td>'+name+'</td><td>'+(draft?input('quantity'):esc(item.quantity))+'</td><td>'+(draft?input('model'):esc(item.model))+'</td><td class="note-cell">'+note+'</td><td>'+basis+'</td><td class="operation-cell">'+(draft?draftActions(draft):actions('packingItems',item))+'</td></tr>';
+  }
   function renderPacking() {
     const groups = rows('packingGroups');
     const items = rows('packingItems');
-    const labels = {verified:'资料支持',suggestion:'通用建议',video:'视频线索',user:'自行填写'};
     $('packing-categories').innerHTML = groups.map(group=>'<button type="button" data-packing-scroll="'+esc(group.id)+'">'+esc(group.title)+'</button>').join('');
     $('packing-groups').innerHTML = groups.map(group=>{
       const list = items.filter(item=>item.groupId===group.id);
-      return '<article class="card packing-card" id="packing-'+esc(group.id)+'"><div class="packing-card-head"><h3>'+esc(group.title)+'</h3><span>'+list.filter(item=>state.checked[item.id]===true).length+' / '+list.length+'</span></div><p class="source-note">'+esc(group.description)+'</p><div class="row-actions"><button type="button" class="small-btn" data-create="packingItems" data-group="'+esc(group.id)+'">新增物品</button>'+actions('packingGroups',group)+'</div><ul class="packing-items">'+list.map(item=>'<li class="packing-item"><input type="checkbox" id="pack-'+esc(item.id)+'" data-packing-item="'+esc(item.id)+'"'+(state.checked[item.id]===true?' checked':'')+'><div><label for="pack-'+esc(item.id)+'">'+esc(item.name)+'</label><p>'+esc(item.note)+'</p>'+((item.quantity||item.model)?'<p class="packing-spec">'+esc([item.quantity?'数量：'+item.quantity:'',item.model?'型号：'+item.model:''].filter(Boolean).join(' · '))+'</p>':'')+'<div class="packing-meta"><span class="packing-tag '+esc(item.basis)+'">'+esc(labels[item.basis])+'</span>'+(item.tag?'<span class="packing-tag">'+esc(item.tag)+'</span>':'')+item.sources.map(sourceLink).join('')+'</div>'+actions('packingItems',item)+'</div></li>').join('')+'</ul></article>';
-    }).join('') || '<p class="source-note">暂无分类，可先新建物品分类。</p>';
+      const groupDraft=draftFor('packingGroups',group.id);
+      const groupEditor=groupDraft?'<div class="table-scroll"><table class="category-table"><thead><tr><th>分类名称</th><th>分类说明</th><th class="operation-cell">操作</th></tr></thead><tbody>'+draftRow(groupDraft)+'</tbody></table></div>':'';
+      const body=list.map(item=>packingRow(item,draftFor('packingItems',item.id))).join('')+[...drafts.values()].filter(draft=>draft.key==='packingItems'&&!draft.id&&draft.displayGroup===group.id).map(draft=>packingRow(null,draft)).join('');
+      return '<article class="card packing-card" id="packing-'+esc(group.id)+'"><div class="packing-card-head"><h3>'+esc(group.title)+'</h3><span>'+list.filter(item=>state.checked[item.id]===true).length+' / '+list.length+'</span></div><p class="source-note">'+esc(group.description)+'</p><div class="row-actions"><button type="button" class="small-btn" data-create="packingItems" data-group="'+esc(group.id)+'">新增物品</button>'+actions('packingGroups',group)+'</div>'+groupEditor+'<div class="table-scroll" tabindex="0" role="region" aria-label="'+esc(group.title)+'物品表，可左右滑动"><table class="packing-table editable-table"><colgroup><col class="check-col"><col class="name-col"><col class="quantity-col"><col class="model-col"><col class="note-col"><col class="basis-col"><col class="action-col"></colgroup><thead><tr><th>勾选</th><th>物品名称</th><th>数量</th><th>型号 / 规格</th><th>说明</th><th>依据 / 标签</th><th class="operation-cell">操作</th></tr></thead><tbody>'+(body || emptyRow(7))+'</tbody></table></div></article>';
+    }).join('')+[...drafts.values()].filter(draft=>draft.key==='packingGroups'&&!draft.id).map(draft=>'<article class="card packing-card"><h3>新建分类</h3><div class="table-scroll"><table class="category-table"><thead><tr><th>分类名称</th><th>分类说明</th><th class="operation-cell">操作</th></tr></thead><tbody>'+draftRow(draft)+'</tbody></table></div></article>').join('');
+    if (!groups.length && ![...drafts.values()].some(draft=>draft.key==='packingGroups')) $('packing-groups').innerHTML='<p class="source-note">暂无分类，可先新建物品分类。</p>';
     const checked = items.filter(item=>state.checked[item.id]===true).length;
     $('packing-progress-text').textContent = '已勾选 '+checked+' / '+items.length+' 项';
     $('packing-progress').max = Math.max(items.length,1);
@@ -187,33 +220,55 @@
   }
   function safeLink(url) { return /^https?:\/\//i.test(url) ? '<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">打开参考链接</a>' : ''; }
   function renderCustom(key,target) {
-    $(target).innerHTML = rows(key).map(row=>'<article class="card editable-card"><div class="hotel-heading"><h3>'+esc(row.name)+'</h3>'+badge(row.status || row.kind)+'</div><dl class="detail-grid">'+schemas[key].fields.filter(f=>!['name','link','status','kind'].includes(f.key)).map(f=>'<div><dt>'+f.label+'</dt><dd>'+esc(row[f.key])+'</dd></div>').join('')+'</dl><p>'+safeLink(row.link)+'</p>'+actions(key,row)+'</article>').join('');
+    $(target).innerHTML=tableHTML(key);
   }
   function render() { renderTravel(); renderPacking(); renderCustom('activities','activity-items'); renderCustom('specialItems','special-items'); }
 
-  // 编辑框按清单类型展示字段，保存前验证；编辑来源内容后改为“自行填写”。
-  function openEditor(key,id='',groupId='') {
-    const row = id ? rows(key).find(value=>value.id===id) : {};
+  // 新增和编辑直接落在表格行中；未保存行彼此独立，其他操作重绘时保留已输入的值。
+  function focusDraft(token) {
+    const row=document.querySelector('[data-inline-token="'+token+'"]');
     if (!row) return;
-    if (key==='packingItems' && !rows('packingGroups').length) { announce('请先新建物品分类。'); return; }
-    editor = {key,id};
-    pendingImport = null;
-    $('editor-title').textContent = (id?'编辑':'新建')+schemas[key].label;
-    $('editor-error').textContent = '';
-    $('editor-submit').textContent = '保存';
-    $('editor-fields').innerHTML = schemas[key].fields.map(f=>{
-      let value = row[f.key] || (f.key==='groupId'?groupId:'');
-      const common = ' name="'+f.key+'" id="edit-'+f.key+'" aria-label="'+esc(f.label)+'"'+(f.required?' required':'');
-      let control;
-      if (f.type==='textarea') control='<textarea'+common+' rows="3">'+esc(value)+'</textarea>';
-      else if (['select','group'].includes(f.type)) {
-        const options = f.type==='group' ? rows('packingGroups').map(group=>[group.id,group.title]) : f.options.map(option=>[option,option]);
-        if (value && !options.some(([id])=>id===value)) options.push([value,value]);
-        control='<select'+common+'><option value="">请选择</option>'+options.map(([id,label])=>'<option value="'+esc(id)+'"'+(id===value?' selected':'')+'>'+esc(label)+'</option>').join('')+'</select>';
-      } else control='<input'+common+' type="'+(['money','integer'].includes(f.type)?'number':f.type==='url'?'url':'text')+'" value="'+esc(value)+'"'+(['money','integer'].includes(f.type)?' min="0" step="'+(f.type==='money'?'0.01':'1')+'"':'')+'>';
-      return '<label class="editor-field '+(f.type==='textarea'?'wide':'')+'" for="edit-'+f.key+'"><span>'+f.label+(f.required?' *':'')+'</span>'+control+'</label>';
-    }).join('');
-    $('item-editor').showModal();
+    row.scrollIntoView({block:'center',inline:'nearest'});
+    const input=row.querySelector('[data-field="name"],[data-field="title"]') || row.querySelector('[data-field]');
+    input?.focus({preventScroll:true});
+    input?.scrollIntoView({block:'nearest',inline:'nearest'});
+  }
+  function openEditor(key,id='',groupId='') {
+    const old=id?rows(key).find(row=>row.id===id):{};
+    if (!old) return;
+    if (key==='packingItems'&&!rows('packingGroups').length) { announce('请先新建并保存物品分类。'); return; }
+    const existing=id?draftFor(key,id):null;
+    if (existing) { focusDraft(existing.token); return; }
+    const token='draft-'+crypto.randomUUID();
+    const values={...old,...Object.fromEntries(schemas[key].fields.map(f=>[f.key,old[f.key] || '']))};
+    const displayGroup=key==='packingItems'?(old.groupId || groupId || rows('packingGroups')[0].id):'';
+    if (key==='packingItems'&&!id) values.groupId=displayGroup;
+    drafts.set(token,{token,key,id,values,displayGroup,error:''});
+    render();
+    focusDraft(token);
+  }
+  function saveInline(token) {
+    const draft=drafts.get(token);
+    if (!draft) return;
+    try {
+      const element=document.querySelector('[data-inline-token="'+token+'"]');
+      element.querySelectorAll('[data-field]').forEach(input=>{
+        if (input.validity.badInput) throw Error('请检查'+input.getAttribute('aria-label')+'的格式。');
+        draft.values[input.dataset.field]=input.value;
+      });
+      const {key,id}=draft;
+      const old=id?rows(key).find(row=>row.id===id):{};
+      const row=normalize(key,{...old,...draft.values,id:id || 'user-'+crypto.randomUUID()});
+      if (key==='packingItems'&&(!id || row.name!==old.name || row.note!==old.note)) { row.basis='user'; row.sources=[]; }
+      const next=clone(state);
+      setRecord(next,key,row);
+      drafts.delete(token);
+      commit(next,(id?'已更新':'已新建')+'“'+titleOf(row)+'”。');
+    } catch (error) {
+      draft.error=error.message;
+      drafts.set(token,draft);
+      render();
+    }
   }
   function setRecord(next,key,row) {
     const base = defaults[key].find(value=>value.id===row.id);
@@ -238,6 +293,7 @@
   function deleteRecord(key,id) {
     const row = rows(key).find(value=>value.id===id);
     if (!row) return;
+    if ([...drafts.values()].some(draft=>(draft.key===key&&draft.id===id)||(key==='packingGroups'&&draft.key==='packingItems'&&draft.displayGroup===id))) { announce('请先保存或取消该分类中正在编辑的行。'); return; }
     const next = clone(state);
     let extra = '';
     if (key==='packingGroups') {
@@ -248,27 +304,37 @@
     removeRecord(next,key,id);
     commit(next,'已删除“'+titleOf(row)+'”'+extra+'，可点击撤销。');
   }
+  // 弹框仅用于备份导入确认，清单新增与编辑不再使用弹框。
   $('editor-form').addEventListener('submit',event=>{
     event.preventDefault();
-    try {
-      if (pendingImport) { commit(pendingImport,'备份已导入，可撤销本次导入。',true); pendingImport=null; $('item-editor').close(); return; }
-      const {key,id} = editor;
-      const old = id ? rows(key).find(row=>row.id===id) : {};
-      const values = Object.fromEntries(new FormData(event.target));
-      const row = normalize(key,{...old,...values,id:id || 'user-'+crypto.randomUUID()});
-      if (key==='packingItems' && (!id || row.name!==old.name || row.note!==old.note)) { row.basis='user'; row.sources=[]; }
-      const next = clone(state);
-      setRecord(next,key,row);
-      commit(next,(id?'已更新':'已新建')+'“'+titleOf(row)+'”。');
-      $('item-editor').close();
-    } catch (error) { $('editor-error').textContent=error.message; }
+    if (!pendingImport) return;
+    try { commit(pendingImport,'备份已导入，可撤销本次导入。',true); pendingImport=null; $('item-editor').close(); }
+    catch (error) { $('editor-error').textContent=error.message; }
   });
   $('editor-cancel').addEventListener('click',()=>$('item-editor').close());
-  $('item-editor').addEventListener('close',()=>{ editor=null; pendingImport=null; });
+  $('item-editor').addEventListener('close',()=>{ pendingImport=null; });
+  function captureDraft(event) {
+    const input=event.target.closest('[data-field]');
+    const element=input?.closest('[data-inline-token]');
+    const draft=element?drafts.get(element.dataset.inlineToken):null;
+    if (!draft) return;
+    draft.values[input.dataset.field]=input.value;
+    draft.error='';
+    const error=element.querySelector('.inline-error');if (error) error.textContent='';
+  }
+  document.addEventListener('input',captureDraft);
+  document.addEventListener('change',captureDraft);
+  document.addEventListener('keydown',event=>{
+    if (event.isComposing || event.keyCode===229) return;
+    const row=event.target.closest('[data-inline-token]');
+    if (row&&event.key==='Enter'&&(event.target.matches('input') || (event.target.matches('textarea')&&event.ctrlKey))) { event.preventDefault();saveInline(row.dataset.inlineToken); }
+  });
   document.addEventListener('click',event=>{
     const button = event.target.closest('button');
     if (!button) return;
     try {
+      if (button.dataset.inlineSave) saveInline(button.dataset.inlineSave);
+      if (button.dataset.inlineCancel) { drafts.delete(button.dataset.inlineCancel);render(); }
       if (button.dataset.create) openEditor(button.dataset.create,'',button.dataset.group || '');
       if (button.dataset.edit) openEditor(button.dataset.edit,button.dataset.id);
       if (button.dataset.delete) deleteRecord(button.dataset.delete,button.dataset.id);
@@ -283,6 +349,7 @@
   });
   $('undo-change').addEventListener('click',()=>{
     if (!undoState) return;
+    if (drafts.size) { announce('请先保存或取消表格中正在编辑的行，再撤销其他修改。'); return; }
     try {
       const previous=clone(undoState);
       commit(previous,'已撤销上一次修改。');
@@ -303,12 +370,13 @@
     if (brokenStorage) { downloadFile('清单原始数据备份.txt',brokenStorage,'text/plain;charset=utf-8'); return; }
     const backup={format:'russia-trip-checklists',version:1,exportedAt:new Date().toISOString(),collections:collections(),checked:state.checked};
     downloadFile('俄罗斯旅行清单备份.json',JSON.stringify(backup,null,2),'application/json;charset=utf-8');
-    announce('已导出当前清单备份。');
+    announce('已导出已保存的清单备份。');
   });
   $('import-backup').addEventListener('click',()=>$('backup-file').click());
   $('backup-file').addEventListener('change',async event=>{
     try {
       const file=event.target.files[0]; if (!file) return;
+      if (drafts.size) throw Error('请先保存或取消表格中正在编辑的行。');
       if (file.size>2*1024*1024) throw Error('备份文件不能超过2MB。');
       const backup=JSON.parse(await file.text());
       if (backup.format!=='russia-trip-checklists' || backup.version!==1 || !backup.collections) throw Error('请选择本页导出的清单JSON备份。');
@@ -325,7 +393,6 @@
       });
       imported.packingItems.forEach(item=>{ if (backup.checked?.[item.id]===true) next.checked[item.id]=true; });
       pendingImport=next;
-      editor=null;
       $('editor-title').textContent='导入清单备份';
       $('editor-error').textContent='';
       $('editor-fields').innerHTML='<p class="wide">导入会替换当前浏览器的清单和勾选状态。建议先导出当前内容；导入后可撤销本次替换。</p><ul class="wide">'+keys.map(key=>'<li>'+schemas[key].label+'：'+imported[key].length+' 项</li>').join('')+'</ul>';
@@ -364,7 +431,7 @@
   }
   document.querySelectorAll('[data-download-list]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();exportDocument(link.dataset.downloadList);}));
 
-  $('packing-note').textContent='可按分类新建、编辑和删除物品，填写数量、型号与说明；勾选表示已核对装包。';
+  $('packing-note').textContent='每项物品占表格一行；新增和编辑直接在行内填写，点击保存后刷新仍保留。操作按钮位于每行最右侧，表格较宽时可左右滑动。';
   $('packing-read-scope').textContent=trip.packing.readScope;
   $('packing-videos').innerHTML=trip.packing.videos.map(video=>'<tr><td><a href="'+esc(video.url)+'" target="_blank" rel="noopener noreferrer">'+esc(video.title)+'</a></td>'+cells([video.status,video.finding])+'</tr>').join('');
   $('packing-sources').innerHTML=trip.packing.sources.map(source=>'<li><a href="'+esc(source.url)+'" target="_blank" rel="noopener noreferrer">'+esc(source.title)+'</a><p>'+esc(source.scope)+'</p></li>').join('');
