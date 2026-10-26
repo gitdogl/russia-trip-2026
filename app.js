@@ -1,9 +1,9 @@
 /*
  * 四个页签按表格逐行展示，新增和编辑均在行内完成；仅备份导入保留确认框。
- * 只保存相对发布数据的改动，保留既有物品勾选，导出/导入完整备份。
+ * 本机保存相对云端基线的改动；显式发布前统一校验草稿，成功后切换基线。
  * 费用按订单记录，人民币和卢布分别重算；空金额保持空白。
  */
-(() => {
+(async () => {
   'use strict';
   const trip = JSON.parse(document.getElementById('trip-data').textContent);
   const storageKey = 'russia-trip-editor-v1';
@@ -33,6 +33,7 @@
   let brokenStorage = '';
   const drafts = new Map();
   let pendingImport = null;
+  let publishing = false;
 
   function normalize(key, value) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw Error('清单项格式不正确。');
@@ -52,7 +53,7 @@
   const rawDefaults = Object.fromEntries(['days','tickets','transportCosts','groundCosts','hotels','activities','specialItems'].map(key => [key, trip[key] || []]));
   rawDefaults.packingGroups = trip.packing.groups.map(({id,title,description}) => ({id,title,description}));
   rawDefaults.packingItems = trip.packing.groups.flatMap(group => group.items.map(item => ({...item, groupId:group.id})));
-  const defaults = Object.fromEntries(keys.map(key => [key, rawDefaults[key].map(row => normalize(key,row))]));
+  let defaults = Object.fromEntries(keys.map(key => [key, rawDefaults[key].map(row => normalize(key,row))]));
 
   // 默认内容与本机改动按稳定ID合并，网站更新不会覆盖已经编辑的字段。
   function rows(key, value = state) {
@@ -93,10 +94,22 @@
     validateCollections(collections(value));
     return value;
   }
+  // 先载入云端基线，再叠加本机改动；有未发布修改时仍使用原基线。
+  let baseChecked = {};
+  if (window.tripPublisher) {
+    const base = await window.tripPublisher.loadBase({format:'russia-trip-checklists',version:1,collections:clone(defaults),checked:{}});
+    try {
+      const loaded = Object.fromEntries(keys.map(key=>[key,base.snapshot.collections[key].map(row=>normalize(key,row))]));
+      validateCollections(loaded);
+      defaults = loaded;
+      baseChecked = base.snapshot.checked || {};
+    } catch (error) { $('cloud-status').textContent='云端清单格式异常，暂用内置清单；请先导出备份。'; }
+  }
+  state.checked = clone(baseChecked);
   try {
     const saved = localStorage.getItem(storageKey);
     if (saved) {
-      try { state = readState(saved); } catch (error) { brokenStorage = saved; }
+      try { state = readState(saved); state.checked = {...baseChecked,...state.checked}; } catch (error) { brokenStorage = saved; }
     } else {
       const old = JSON.parse(localStorage.getItem(oldPackingKey) || '{}');
       defaults.packingItems.forEach(item => { if (old?.[item.id] === true) state.checked[item.id] = true; });
@@ -109,6 +122,7 @@
     $('undo-notice').hidden = !undoState;
   }
   function commit(next, message, allowBroken = false) {
+    if (publishing) throw Error('正在发布，请等待提交结果。');
     if (brokenStorage && !allowBroken) throw Error('本机数据读取异常。请先导出原始备份，再导入有效备份。');
     validateCollections(collections(next));
     next.updatedAt = new Date().toISOString();
@@ -234,6 +248,7 @@
     input?.scrollIntoView({block:'nearest',inline:'nearest'});
   }
   function openEditor(key,id='',groupId='') {
+    if (publishing) return;
     const old=id?rows(key).find(row=>row.id===id):{};
     if (!old) return;
     if (key==='packingItems'&&!rows('packingGroups').length) { announce('请先新建并保存物品分类。'); return; }
@@ -247,19 +262,50 @@
     render();
     focusDraft(token);
   }
+  // 行内保存和发布共用取值规则，避免发布漏掉仍在输入的字段。
+  function draftRecord(draft) {
+    const element=document.querySelector('[data-inline-token="'+draft.token+'"]');
+    element?.querySelectorAll('[data-field]').forEach(input=>{
+      if (input.validity.badInput) throw Error('请检查'+input.getAttribute('aria-label')+'的格式。');
+      draft.values[input.dataset.field]=input.value;
+    });
+    const {key,id}=draft;
+    const old=id?rows(key).find(row=>row.id===id):{};
+    const row=normalize(key,{...old,...draft.values,id:id || 'user-'+crypto.randomUUID()});
+    if (key==='packingItems'&&(!id || row.name!==old.name || row.note!==old.note)) { row.basis='user'; row.sources=[]; }
+    return row;
+  }
+  // 所有草稿先整体校验再一次保存；任一行无效时保留全部输入。
+  function prepareSnapshot() {
+    if (brokenStorage) throw Error('本机数据读取异常，请先导出原始备份。');
+    if (drafts.size) {
+      const next=clone(state);
+      const savedDrafts=new Map(drafts);
+      try {
+        drafts.forEach(draft=>setRecord(next,draft.key,draftRecord(draft)));
+        validateCollections(collections(next));
+        drafts.clear();
+        commit(next,'已保存表格中正在编辑的行。');
+      } catch(error) {
+        savedDrafts.forEach((draft,token)=>drafts.set(token,draft));
+        render();
+        throw error;
+      }
+    }
+    const checked={};
+    rows('packingItems').forEach(item=>{if(state.checked[item.id]===true) checked[item.id]=true;});
+    return {format:'russia-trip-checklists',version:1,collections:collections(),checked};
+  }
+  function setPublishing(value) {
+    publishing=value;
+    document.querySelectorAll('[data-create],[data-edit],[data-delete],[data-inline-save],[data-inline-cancel],[data-field],input[data-packing-item],#import-backup,#undo-change,#undo-notice').forEach(input=>{input.disabled=value;});
+  }
   function saveInline(token) {
     const draft=drafts.get(token);
     if (!draft) return;
     try {
-      const element=document.querySelector('[data-inline-token="'+token+'"]');
-      element.querySelectorAll('[data-field]').forEach(input=>{
-        if (input.validity.badInput) throw Error('请检查'+input.getAttribute('aria-label')+'的格式。');
-        draft.values[input.dataset.field]=input.value;
-      });
       const {key,id}=draft;
-      const old=id?rows(key).find(row=>row.id===id):{};
-      const row=normalize(key,{...old,...draft.values,id:id || 'user-'+crypto.randomUUID()});
-      if (key==='packingItems'&&(!id || row.name!==old.name || row.note!==old.note)) { row.basis='user'; row.sources=[]; }
+      const row=draftRecord(draft);
       const next=clone(state);
       setRecord(next,key,row);
       drafts.delete(token);
@@ -453,5 +499,6 @@
   window.addEventListener('hashchange',()=>activateTab(location.hash.slice(1)));
   render();
   activateTab(location.hash.slice(1));
+  window.tripPublisher?.attachEditor({prepareSnapshot,setPublishing,hasDrafts:()=>drafts.size>0});
   if (brokenStorage) announce('本机数据读取异常，原始内容已保留。请先导出备份，再导入有效备份。');
 })();
