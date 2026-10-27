@@ -9,6 +9,8 @@ GITHUB_OWNER = "gitdogl"
 GITHUB_REPO = "russia-trip-2026"
 GITHUB_BRANCH = "main"
 GITHUB_OWNER_ID = "50171096"
+# 额外发布白名单：填写GitHub数字用户ID，以英文逗号分隔；留空时仅所有者可发布。
+GITHUB_PUBLISHER_IDS = ""
 FRONTEND_URL = "https://gitdogl.github.io/russia-trip-2026/"
 
 [observability]

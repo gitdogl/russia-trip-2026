@@ -1,6 +1,7 @@
 /*
- * 旅行清单发布接口：只允许仓库所有者登录，只写固定仓库中的清单JSON。
+ * 旅行清单发布接口：允许仓库所有者和白名单用户登录，只写固定仓库中的清单JSON。
  * GitHub App私钥与会话签名密钥由Workers Secrets提供，不返回给浏览器。
+ * 登录与每次发布均按GitHub用户ID核对当前白名单；移除用户后旧会话也失去权限。
  * 写入前比较文件SHA；版本冲突时拒绝覆盖，重复内容不重复提交。
  */
 const FILE = 'published-checklists.json';
@@ -21,6 +22,12 @@ const required = {days:['date','city'],tickets:['route'],transportCosts:['item']
 let tokenCache = null;
 
 function fail(status,message) { throw Object.assign(new Error(message),{status}); }
+// 所有者始终保留权限；额外名单为空时只允许所有者，按ID匹配避免用户名变更或复用。
+function requirePublisher(uid,env) {
+  const id=String(uid??'');
+  const allowed=[String(env.GITHUB_OWNER_ID||''),...String(env.GITHUB_PUBLISHER_IDS||'').split(',').map(value=>value.trim())];
+  if(!/^[1-9]\d*$/.test(id)||!allowed.includes(id)) fail(403,'当前账号不在发布白名单中，请联系页面所有者添加。');
+}
 function base64(bytes) {
   let text=''; for(let i=0;i<bytes.length;i+=8192) text+=String.fromCharCode(...bytes.subarray(i,i+8192));
   return btoa(text);
@@ -148,7 +155,7 @@ async function authCallback(request,env) {
   const token=await response.json();
   if(!response.ok||!token.access_token) fail(401,'GitHub授权未完成，请重试。');
   const user=await github('/user',env,token.access_token);
-  if(String(user?.id)!==String(env.GITHUB_OWNER_ID)) fail(403,'只有旅行仓库所有者可以发布清单。');
+  requirePublisher(user?.id,env);
   const session=await sign({purpose:'session',uid:String(user.id),login:user.login,exp:now()+8*3600},env);
   const target=new URL(env.FRONTEND_URL);
   target.hash=flow.tab+'&publish_session='+session;
@@ -168,7 +175,7 @@ export async function handle(request,env) {
     const authorization=request.headers.get('Authorization')||'';
     if(!authorization.startsWith('Bearer ')) fail(401,'请先登录GitHub。');
     const session=await verify(authorization.slice(7),env,'session');
-    if(session.uid!==String(env.GITHUB_OWNER_ID)) fail(403,'当前账号没有发布权限。');
+    requirePublisher(session.uid,env);
     const body=await readBody(request);const snapshot=validateSnapshot(body.snapshot);
     const remote=await readRemote(env);
     if(remote.snapshot&&canonical(validateSnapshot(remote.snapshot))===canonical(snapshot)) return json({ok:true,sha:remote.sha,publishedAt:remote.snapshot.publishedAt,alreadyPublished:true},200,env,origin);

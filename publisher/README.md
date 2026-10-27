@@ -17,13 +17,23 @@ Worker配置在 wrangler.toml。GitHub App仅安装到旅行仓库，权限为Co
 
 register-app.mjs 是本机一次性登记助手。它只监听127.0.0.1，接收GitHub App登记结果并将密钥写入指定的仓库外目录；日常发布不依赖该助手。
 
+## 发布白名单
+
+所有者 GITHUB_OWNER_ID 始终保留发布权限。额外名单在 wrangler.toml 的 GITHUB_PUBLISHER_IDS 中配置，初始为空，多个GitHub数字用户ID用英文逗号分隔。这里填写用户ID，不填写用户名或仓库ID。
+
+可通过 GitHub公开用户接口 https://api.github.com/users/用户名 查看返回的 id。核对 login 确为目标账号，再将数字 id 填入名单。使用稳定ID可避免用户名变更或被他人复用后影响授权。
+
+修改配置并重新部署Worker后生效。登录回调与每次发布都会核对当前名单；移除后，用户之前取得的8小时会话也会被拒绝。空名单不开放给所有人，仍只允许所有者。浏览器传来的身份不能替代服务端校验。
+
+名单中的用户在博客用自己的GitHub账号登录即可，无需仓库协作者、Cloudflare或应用管理权限。GitHub App仍只写固定清单文件；版本冲突检查继续生效。
+
 ## 请求与版本
 
 - GET /health：服务配置状态。
 - GET /auth/start：GitHub OAuth登录入口，使用state、浏览器Cookie和PKCE。
 - GET /auth/callback：校验GitHub账号并返回8小时发布会话。
 - GET /snapshot：返回当前文件SHA与清单内容。
-- POST /publish：提交 expectedSha 和 snapshot，需Bearer发布会话，且账号为仓库所有者。
+- POST /publish：提交 expectedSha 和 snapshot，需Bearer发布会话，且账号为仓库所有者或当前白名单用户。
 
 清单格式沿用网页JSON备份。后端重新校验九类数据、金额、分类关联与大小限制。与当前云端内容一致时直接成功；内容不同且SHA过期时返回409，不执行覆盖。
 

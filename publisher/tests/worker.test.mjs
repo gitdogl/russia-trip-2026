@@ -1,5 +1,5 @@
 /*
- * 发布接口验证：权限、OAuth状态、清单校验、冲突保护与重复提交。
+ * 发布接口验证：所有者与白名单授权、移除后的旧会话、OAuth、清单及冲突保护。
  * 使用临时密钥和模拟GitHub响应，不读取或输出真实凭据。
  */
 import {test} from 'node:test';
@@ -61,4 +61,46 @@ test('版本冲突拒绝写入，成功提交固定文件，相同内容不重�
   const first=await send('old');assert.equal(first.status,200);assert.equal((await first.json()).sha,'new');assert.equal(puts,1);
   const second=await send('old');assert.equal(second.status,200);assert.equal((await second.json()).alreadyPublished,true);assert.equal(puts,1);
  }finally{globalThis.fetch=original;}
+});
+
+test('白名单允许其他用户登录并发布，移除后同一会话失效',async()=>{
+ const original=globalThis.fetch;
+ const allowed={...env,GITHUB_PUBLISHER_IDS:' 77, 88, , invalid '};
+ let writes=0;
+ const remote=empty();
+ try {
+  const start=await handle(new Request('https://worker.example/auth/start?tab=packing'),allowed);
+  const location=new URL(start.headers.get('Location')),cookie=start.headers.get('Set-Cookie').split(';')[0];
+  const callback=()=>new Request('https://worker.example/auth/callback?code=test&state='+location.searchParams.get('state'),{headers:{Cookie:cookie}});
+  globalThis.fetch=async(url,options={})=>{
+   if(String(url).includes('/login/oauth/access_token')) return new Response(JSON.stringify({access_token:'temporary'}));
+   if(new URL(url).pathname==='/user') return new Response(JSON.stringify({id:77,login:'collaborator'}));
+   if(String(url).endsWith('/installation')) return new Response(JSON.stringify({id:1}));
+   if(String(url).endsWith('/access_tokens')) return new Response(JSON.stringify({token:'installation',expires_at:new Date(Date.now()+3600000).toISOString()}));
+   if(options.method==='PUT') writes++;
+   return new Response(JSON.stringify({sha:'current',content:Buffer.from(JSON.stringify(remote)).toString('base64')}));
+  };
+  const login=await handle(callback(),allowed);
+  assert.equal(login.status,302);
+  const session=new URLSearchParams(new URL(login.headers.get('Location')).hash.split('&').slice(1).join('&')).get('publish_session');
+  assert.ok(session);
+  const send=()=>req('/publish',{headers:{Origin:'https://example.github.io',Authorization:'Bearer '+session}});
+  const result=await handle(send(),allowed);
+  assert.equal(result.status,200);assert.equal((await result.json()).alreadyPublished,true);
+  assert.equal((await handle(send(),{...allowed,GITHUB_PUBLISHER_IDS:''})).status,403);
+  assert.equal((await handle(callback(),{...allowed,GITHUB_PUBLISHER_IDS:''})).status,403);
+  assert.equal(writes,0);
+ } finally {globalThis.fetch=original;}
+});
+test('空名单与缺少配置仅保留所有者，非法或近似ID不放行',async()=>{
+ for(const list of ['',undefined,'7,770,invalid']) {
+  const config={...env,GITHUB_PUBLISHER_IDS:list};
+  const response=await handle(req('/publish',{headers:{Origin:'https://example.github.io',Authorization:'Bearer '+sign('77')}}),config);
+  assert.equal(response.status,403);
+ }
+ for(const id of ['','undefined','invalid',' 77','077']) {
+  const config={...env,GITHUB_PUBLISHER_IDS:'77'};
+  const response=await handle(req('/publish',{headers:{Origin:'https://example.github.io',Authorization:'Bearer '+sign(id)}}),config);
+  assert.equal(response.status,403);
+ }
 });
