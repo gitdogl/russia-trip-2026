@@ -708,43 +708,41 @@
       {
         "id": "camera-3",
         "groupId": "camera",
-        "name": "相机充电器及配套线",
+        "name": "相机电池充电器及配套线",
         "quantity": "1套",
         "model": "",
         "tag": "",
         "note": "按实际电池和机身接口配套。",
-        "basis": "suggestion",
+        "basis": "user",
         "sources": []
       },
       {
         "id": "camera-4",
         "groupId": "camera",
-        "name": "存储卡、卡盒与读卡器",
+        "name": "存储卡与读卡器",
         "quantity": "各1",
         "model": "",
         "tag": "",
         "note": "先确认容量、可用空间及备份方式。",
-        "basis": "suggestion",
+        "basis": "user",
         "sources": []
       },
       {
         "id": "camera-7",
         "groupId": "camera",
-        "name": "镜头布、气吹与遮光罩",
+        "name": "保养工具",
         "quantity": "1套",
         "model": "",
         "tag": "",
         "note": "擦拭和防雪按器材说明操作。",
-        "basis": "verified",
-        "sources": [
-          "nikon"
-        ]
+        "basis": "user",
+        "sources": []
       },
       {
         "id": "camera-8",
         "groupId": "camera",
         "name": "设备保暖贴",
-        "quantity": "10",
+        "quantity": "20",
         "model": "",
         "tag": "",
         "note": "从冷户外进入暖室前先装袋密封，待器材回温后再取出。",
@@ -778,12 +776,12 @@
       {
         "id": "electronics-1",
         "groupId": "electronics",
-        "name": "手机与充电器、数据线",
+        "name": "手机与充电数据线",
         "quantity": "各1",
         "model": "",
         "tag": "",
-        "note": "按手机接口准备，先确认能正常充电。",
-        "basis": "suggestion",
+        "note": "数据线目前的不能带，新的没买",
+        "basis": "user",
         "sources": []
       },
       {
@@ -839,15 +837,13 @@
       {
         "id": "health-1",
         "groupId": "health",
-        "name": "个人常用药",
-        "quantity": "1",
+        "name": "长效晕车药",
+        "quantity": "10",
         "model": "",
         "tag": "按本人需要",
         "note": "按本人需要准备，保留原包装及说明；处方药另核对携入规定，并准备相应处方。",
-        "basis": "verified",
-        "sources": [
-          "consulate"
-        ]
+        "basis": "user",
+        "sources": []
       },
       {
         "id": "health-2",
@@ -861,36 +857,14 @@
         "sources": []
       },
       {
-        "id": "health-4",
-        "groupId": "health",
-        "name": "口罩等个人防护用品",
-        "quantity": "",
-        "model": "",
-        "tag": "按需",
-        "note": "按本人需要和出发时要求准备。",
-        "basis": "suggestion",
-        "sources": []
-      },
-      {
-        "id": "payment-1",
-        "groupId": "payment",
-        "name": "已持有的支付卡",
-        "quantity": "",
-        "model": "",
-        "tag": "卡种待补",
-        "note": "卡种与境外可用性需按实际卡片确认。",
-        "basis": "suggestion",
-        "sources": []
-      },
-      {
         "id": "payment-2",
         "groupId": "payment",
         "name": "已办理的YooMoney实体卡",
         "quantity": "",
         "model": "",
         "tag": "如已办理",
-        "note": "只在已办理时核对携带；视频中的办卡和使用经验尚不能代替当前服务条款。",
-        "basis": "video",
+        "note": "账号已注册，需要现场办理",
+        "basis": "user",
         "sources": []
       },
       {
@@ -1014,12 +988,85 @@
         "sources": [
           "consulate"
         ]
+      },
+      {
+        "id": "user-907152bc-4ddd-4517-b254-9b7a22b6f816",
+        "groupId": "clothing",
+        "name": "雪套",
+        "quantity": "1双",
+        "model": "",
+        "tag": "",
+        "note": "",
+        "basis": "user",
+        "sources": []
+      },
+      {
+        "id": "user-67b9e0b3-de41-47a6-bead-693289fa1f25",
+        "groupId": "clothing",
+        "name": "发热鞋垫",
+        "quantity": "10",
+        "model": "",
+        "tag": "",
+        "note": "",
+        "basis": "user",
+        "sources": []
+      },
+      {
+        "id": "user-900ed76e-206e-4338-9228-47a837c9e726",
+        "groupId": "originals",
+        "name": "护照保护套",
+        "quantity": "1",
+        "model": "",
+        "tag": "",
+        "note": "",
+        "basis": "user",
+        "sources": []
+      },
+      {
+        "id": "user-5bcddc35-844f-418e-8c5c-d65925dee6cc",
+        "groupId": "clothing",
+        "name": "超厚羊毛裤中间层",
+        "quantity": "1",
+        "model": "",
+        "tag": "",
+        "note": "",
+        "basis": "user",
+        "sources": []
       }
     ],
     "activities": [],
     "specialItems": []
   },
-  "checked": {},
-  "publishedAt": "2026-11-09T09:09:03.639Z",
+  "checked": {
+    "clothing-3": true,
+    "clothing-12": true,
+    "clothing-2": true,
+    "clothing-4": true,
+    "clothing-5": true,
+    "clothing-6": true,
+    "clothing-7": true,
+    "clothing-8": true,
+    "clothing-9": true,
+    "daily-3": true,
+    "daily-5": true,
+    "camera-1": true,
+    "camera-2": true,
+    "camera-3": true,
+    "camera-4": true,
+    "camera-7": true,
+    "camera-8": true,
+    "originals-1": true,
+    "originals-2": true,
+    "electronics-2": true,
+    "electronics-3": true,
+    "electronics-4": true,
+    "electronics-5": true,
+    "health-1": true,
+    "user-907152bc-4ddd-4517-b254-9b7a22b6f816": true,
+    "user-67b9e0b3-de41-47a6-bead-693289fa1f25": true,
+    "user-900ed76e-206e-4338-9228-47a837c9e726": true,
+    "user-5bcddc35-844f-418e-8c5c-d65925dee6cc": true
+  },
+  "publishedAt": "2026-11-09T09:30:23.037Z",
   "publishedBy": "gitdogl"
 }
